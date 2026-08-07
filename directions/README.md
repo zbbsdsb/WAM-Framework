@@ -29,4 +29,11 @@ WAM's own philosophy: no bluffing, verification before commitment. To keep the p
 
 ## Current directions
 
-- `architecture/` — the architecture proposal (M1, critical path): what WAM is, its components, and the first vertical slice.
+- `global-route/` — (author) WAM as a global orchestration entity, inspired by Hermes Agent. Critical path.
+- `substrate/` — WAM as a state substrate: library + CLI for the state model, no agent of its own. Critical path.
+- `agent-plugin/` — WAM embedded in an existing agent (skill / MCP) implementing the six-step protocol. Critical path.
+- `weight-first/` — lead with the original contribution: goal DAG + critical-path computation + unknown registry. Critical path.
+
+## Archived
+
+- `architecture/` — superseded 2026-08-07 by the four competing directions above.
