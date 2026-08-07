@@ -37,6 +37,20 @@ Every collaboration (whether initiated by human or AI) follows:
 5. **Verify** — Provide evidence; if infeasible, say so honestly.
 6. **Write** — Update state / goals / log / decisions.
 
+## Development Governance: Directions and the Promotion Gate
+
+Established 2026-08-07. To keep the project from drifting off course, the project's own development follows a three-tier structure:
+
+| Tier | Where it lives | Trust level |
+|---|---|---|
+| Evidence | `docs/research/` | Sourced facts, verifiable — permanent |
+| Proposals | `directions/<name>/` | Ideas, drafts, prototypes — NOT trusted |
+| Decisions & constitutions | `docs/` (this file), `workspace/` (decisions.md, goals.md) | Verified — official |
+
+Hard rule: **nothing moves from `directions/` into the official structure without passing the promotion gate** — a decision recorded in `workspace/decisions.md`, evidence cited (artifact path / command output / test result), and the artifact relocated, with the direction folder archived to `directions/archive/`.
+
+See `directions/README.md` for the full lifecycle.
+
 ## Boundaries
 
 - This document is not the final definition. When practice exposes problems, revise the protocol here first, then the implementation.

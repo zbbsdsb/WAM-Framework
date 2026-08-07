@@ -12,8 +12,9 @@
 ## M1 架构草案与第一个切片（current next milestone）
 
 - [x] Targeted survey: ecosystem / memory & state / unknown & weight — Weight: critical path — Progress: done — Evidence: docs/research/*
+- [x] Establish directions/ folders + promotion gate (three tiers: evidence / proposals / decisions) — Weight: critical path — Progress: done — Evidence: directions/README.md, docs/01-foundation.md §Development Governance
 - [ ] Design conversation: who it's for / first demo / v1 boundaries — Weight: critical path — Progress: in progress — Next step: user confirms or overrides the 3 proposed defaults
-- [ ] Architecture draft docs/02-architecture.md — Weight: critical path — Progress: not started — Next step: after the design conversation
+- [ ] Architecture draft directions/architecture/proposal.md — Weight: critical path — Progress: not started — Next step: after the design conversation; promotion gate: verified by the first vertical slice, then promoted to docs/02-architecture.md
 - [ ] First vertical slice (as defined by the architecture draft) — Weight: critical path — Progress: not started
 
 ## Scheduled follow-ups (not expanded before M1)

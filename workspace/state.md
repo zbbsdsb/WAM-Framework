@@ -7,6 +7,7 @@
 - WAM (Wait a Minute): an agent framework, philosophy recorded in idea.md.
 - Core diagnosis: fourfold deficiency (constructiveness, continuity, verifiability, weight judgment) + state desync; the response is the 1% foundation, the sage and the doer, and six response principles.
 - Project stage: founded 2026-08-06, M0 foundation complete (state model + collaboration protocol, see docs/01-foundation.md).
+- Development governance: unverified work lives in directions/, promoted only after verification (three tiers: evidence / proposals / decisions).
 - Tech stack undecided, and not needed yet — the foundation is collaboration state, not code.
 
 ## Unknown
