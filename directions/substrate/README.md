@@ -17,9 +17,48 @@ WAM's minimal useful form is a **state substrate**: a small library + CLI that i
 - docs/research/02-memory-and-state.md: layering is consensus; "human-shared state" is unresearched — this is the blank space.
 - M0 experience: the four files + six-step protocol have already carried WAM through 4 sessions without any runtime.
 
+## Architecture
+
+```mermaid
+flowchart LR
+    subgraph WS["workspace/ — shared state (four files)"]
+        ST["state.md<br/>situation: known / unknown / unknown-unknowns"]
+        GL["goals.md<br/>weighted goal tree"]
+        LG["log.md<br/>append-only progress"]
+        DC["decisions.md<br/>judgment trail"]
+    end
+
+    subgraph SUB["wam substrate — library + CLI"]
+        VAL["wam state check<br/>validation"]
+        QRY["wam goal next<br/>queries"]
+        APP["wam log append<br/>hooks"]
+        PROTO["six-step protocol hooks<br/>read → wait → judge → do → verify → write"]
+    end
+
+    subgraph HOST["host agents"]
+        PC["prompt contract"]
+        SK["skill"]
+        MCP["MCP server"]
+    end
+
+    HUMAN["human<br/>reads & writes directly"]
+
+    HUMAN <--> WS
+    VAL <--> WS
+    QRY <--> WS
+    APP --> WS
+    PROTO --> VAL
+    PROTO --> QRY
+    PROTO --> APP
+    PC --> PROTO
+    SK --> PROTO
+    MCP --> PROTO
+```
+
 ## Work log
 
 - 2026-08-07: opened.
+- 2026-08-07: architecture diagram added (mermaid).
 
 ## Next step
 
