@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="WAM — Wait a Minute. An agent framework that stops, looks at the whole situation, and only then takes the next step.">
+<title>WAM — Wait a Minute</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4EEDC; --paper-2:#EAE1C8; --ink:#211D17; --muted:#6E6658;
+    --line:#C7BCA0; --orange:#E8501E; --teal:#0F6E66; --amber:#F0A92E; --red:#C7352B;
+    --mono:'Space Mono','Noto Sans SC','Microsoft YaHei',monospace;
+    --display:'Bungee','Noto Sans SC','Microsoft YaHei',sans-serif;
+    --shadow:4px 4px 0 var(--ink);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--mono);line-height:1.65;font-size:16px;}
+  ::selection{background:var(--orange);color:var(--paper);}
+  .container{max-width:1040px;margin:0 auto;padding:0 24px;}
+
+  /* ---------- hazard stripes ---------- */
+  .hazard{height:14px;background:repeating-linear-gradient(-45deg,var(--ink) 0 14px,var(--amber) 14px 28px);}
+
+  /* ---------- top bar ---------- */
+  .topbar{border-bottom:2px solid var(--ink);background:var(--paper);position:sticky;top:0;z-index:50;}
+  .topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0;}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);}
+  .brand svg{width:30px;height:30px;flex:none;}
+  .brand-name{font-family:var(--display);font-size:22px;letter-spacing:1px;}
+  .topbar-right{display:flex;align-items:center;gap:12px;}
+  .lang-toggle{display:flex;border:2px solid var(--ink);background:var(--paper-2);}
+  .lang-toggle button{font-family:var(--mono);font-weight:700;font-size:13px;padding:10px 14px;background:transparent;border:none;cursor:pointer;color:var(--muted);min-height:44px;}
+  .lang-toggle button.active{background:var(--ink);color:var(--paper);}
+  .gh-link{font-weight:700;font-size:13px;color:var(--ink);text-decoration:none;border:2px solid var(--ink);padding:10px 14px;min-height:44px;display:inline-flex;align-items:center;background:var(--paper);}
+  .gh-link:hover{background:var(--orange);color:var(--paper);box-shadow:var(--shadow);transform:translate(-2px,-2px);}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;overflow:hidden;border-bottom:2px solid var(--ink);
+    background-image:radial-gradient(var(--line) 1.2px, transparent 1.2px);background-size:22px 22px;}
+  .hero-inner{position:relative;padding:72px 0 64px;display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:center;}
+  .hero-kicker{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:2px;color:var(--teal);border:2px solid var(--teal);padding:6px 12px;margin-bottom:22px;}
+  .hero-kicker svg{width:16px;height:16px;}
+  .hero h1{font-family:var(--display);font-size:clamp(44px,7vw,84px);line-height:1.02;text-transform:uppercase;letter-spacing:1px;}
+  .hero h1 .dot{color:var(--orange);}
+  .hero .tagline{margin-top:20px;font-size:17px;max-width:52ch;color:var(--ink);}
+  .hero .cta{margin-top:30px;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-weight:700;font-size:15px;text-decoration:none;color:var(--paper);background:var(--ink);border:2px solid var(--ink);padding:14px 22px;box-shadow:var(--shadow);}
+  .hero .cta:hover{background:var(--orange);border-color:var(--orange);transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink);}
+
+  /* atom */
+  .atom{justify-self:center;width:min(300px,70vw);aspect-ratio:1;position:relative;}
+  .atom .nucleus{position:absolute;inset:0;margin:auto;width:26px;height:26px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 6px rgba(232,80,30,.18);z-index:2;}
+  .orbit-wrap{position:absolute;inset:0;}
+  .orbit-wrap.a{transform:rotate(0deg);} .orbit-wrap.b{transform:rotate(60deg);} .orbit-wrap.c{transform:rotate(120deg);}
+  .orbit{position:absolute;inset:0;width:100%;height:38%;top:31%;border:2px solid var(--teal);border-radius:50%;}
+  .orbit::before{content:"";position:absolute;right:-7px;top:50%;width:13px;height:13px;border-radius:50%;background:var(--amber);transform:translateY(-50%);}
+  .orbit-wrap.a .orbit{animation:spin 7s linear infinite;}
+  .orbit-wrap.b .orbit{animation:spin 9s linear infinite reverse;}
+  .orbit-wrap.c .orbit{animation:spin 11s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  @media (prefers-reduced-motion:reduce){.orbit{animation:none !important;}}
+
+  /* ---------- sections ---------- */
+  section{padding:64px 0;border-bottom:2px solid var(--ink);}
+  .section-tag{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:3px;color:var(--red);border:2px solid var(--red);padding:6px 12px;}
+  .section-tag svg{width:15px;height:15px;}
+  h2.section-title{font-family:var(--display);font-size:clamp(26px,3.6vw,40px);margin-top:18px;text-transform:uppercase;letter-spacing:.5px;}
+  .section-sub{margin-top:10px;color:var(--muted);max-width:70ch;}
+
+  /* ---------- defects ---------- */
+  .defects{list-style:none;margin-top:36px;display:grid;gap:0;border:2px solid var(--ink);}
+  .defects li{display:grid;grid-template-columns:84px 1fr;gap:20px;padding:26px 28px;border-bottom:2px solid var(--ink);background:var(--paper);}
+  .defects li:last-child{border-bottom:none;}
+  .defects li:nth-child(odd){background:var(--paper-2);}
+  .defects .num{font-family:var(--display);font-size:34px;color:var(--orange);line-height:1;}
+  .defects h3{font-family:var(--display);font-size:20px;letter-spacing:.5px;margin-bottom:6px;text-transform:uppercase;}
+  .defects p{color:var(--ink);}
+  .defects .zh-sub{display:block;color:var(--muted);font-size:14px;}
+
+  .callout{margin-top:36px;background:var(--ink);color:var(--paper);border-left:10px solid var(--orange);padding:26px 30px;font-size:16.5px;box-shadow:var(--shadow);}
+  .callout strong{color:var(--amber);}
+
+  /* ---------- philosophy ---------- */
+  .philosophy-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:36px;}
+  .panel{border:2px solid var(--ink);padding:28px;position:relative;background:var(--paper);}
+  .panel.sage{border-top:10px solid var(--teal);}
+  .panel.doer{border-top:10px solid var(--orange);}
+  .panel .role{font-size:13px;font-weight:700;letter-spacing:3px;margin-bottom:14px;}
+  .panel.sage .role{color:var(--teal);}
+  .panel.doer .role{color:var(--orange);}
+  .panel h3{font-family:var(--display);font-size:24px;text-transform:uppercase;margin-bottom:10px;}
+  .panel p{font-size:15.5px;}
+  .panel .zh-sub{display:block;color:var(--muted);font-size:14px;margin-top:8px;}
+
+  .one-pct{margin-top:40px;display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:center;border:2px dashed var(--ink);padding:30px 34px;background:var(--paper-2);position:relative;}
+  .one-pct .big{font-family:var(--display);font-size:clamp(64px,9vw,110px);line-height:.9;color:var(--orange);-webkit-text-stroke:2px var(--ink);}
+  .one-pct .text{font-size:16.5px;}
+  .one-pct .text strong{display:block;font-size:19px;margin-bottom:6px;}
+  .starburst{position:absolute;top:-26px;right:28px;width:52px;height:52px;color:var(--amber);}
+
+  /* ---------- principles ---------- */
+  .principles{list-style:none;margin-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .principles li{border:2px solid var(--ink);background:var(--paper);padding:20px 22px;display:flex;gap:16px;box-shadow:3px 3px 0 var(--line);}
+  .principles .idx{font-family:var(--display);font-size:22px;color:var(--teal);flex:none;}
+  .principles h3{font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+  .principles p{font-size:14px;color:var(--muted);margin-top:4px;}
+  .principles .zh-sub{display:block;}
+
+  /* ---------- status ---------- */
+  .status-block{border:2px solid var(--ink);background:var(--ink);color:var(--paper);margin-top:36px;box-shadow:var(--shadow);}
+  .status-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 22px;border-bottom:2px solid var(--paper-2);}
+  .status-head .led{width:12px;height:12px;border-radius:50%;background:var(--amber);box-shadow:0 0 10px var(--amber);animation:blink 1.6s steps(2) infinite;}
+  @keyframes blink{50%{opacity:.25;}}
+  .status-head .st{font-weight:700;letter-spacing:2px;font-size:14px;}
+  .status-body{padding:8px 0;}
+  .dir-row{display:grid;grid-template-columns:150px 1fr auto;gap:16px;align-items:baseline;padding:14px 22px;border-bottom:1px solid var(--paper-2);}
+  .dir-row:last-child{border-bottom:none;}
+  .dir-row .name{font-family:var(--display);font-size:15px;color:var(--amber);}
+  .dir-row .desc{font-size:14px;color:var(--paper);}
+  .dir-row .w{font-size:12px;font-weight:700;letter-spacing:1px;color:var(--teal);border:1px solid var(--teal);padding:3px 8px;white-space:nowrap;}
+  .status-foot{padding:14px 22px;font-size:14px;border-top:1px solid var(--paper-2);color:var(--paper);}
+
+  /* ---------- footer ---------- */
+  footer{padding:48px 0 0;background:var(--ink);color:var(--paper);}
+  .footer-inner{display:flex;flex-direction:column;gap:18px;align-items:center;text-align:center;padding-bottom:40px;}
+  .footer-inner .trefoil{width:56px;height:56px;color:var(--amber);}
+  .footer-quote{font-size:15px;font-style:italic;color:var(--paper-2);max-width:56ch;}
+  .footer-meta{font-size:13px;color:var(--muted);}
+  .footer-meta a{color:var(--orange);text-decoration:none;}
+  .footer-meta a:hover{text-decoration:underline;}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:840px){
+    .hero-inner{grid-template-columns:1fr;padding:48px 0;}
+    .atom{order:-1;width:min(240px,60vw);}
+    .philosophy-grid{grid-template-columns:1fr;}
+    .principles{grid-template-columns:1fr;}
+    .dir-row{grid-template-columns:1fr;gap:4px;}
+    .defects li{grid-template-columns:1fr;gap:10px;padding:20px;}
+    .one-pct{grid-template-columns:1fr;gap:12px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hazard"></div>
+
+<header class="topbar">
+  <div class="container topbar-inner">
+    <a class="brand" href="#top" aria-label="WAM home">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <g fill="currentColor">
+          <path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z"/>
+          <path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(120 50 50)"/>
+          <path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(240 50 50)"/>
+        </g>
+        <circle cx="50" cy="50" r="7" fill="var(--orange)"/>
+      </svg>
+      <span class="brand-name">WAM</span>
+    </a>
+    <div class="topbar-right">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button id="lang-en" type="button" onclick="setLang('en')">EN</button>
+        <button id="lang-zh" type="button" onclick="setLang('zh')">中文</button>
+      </div>
+      <a class="gh-link" href="https://github.com/zbbsdsb/WAM-Framework" target="_blank" rel="noopener" data-en="SOURCE ↗" data-zh="源码 ↗">SOURCE ↗</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" style="border-bottom:none;">
+    <div class="container hero-inner">
+      <div>
+        <span class="hero-kicker">
+          <svg viewBox="0 0 100 100" aria-hidden="true"><g fill="currentColor"><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z"/><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(120 50 50)"/><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(240 50 50)"/></g><circle cx="50" cy="50" r="7" fill="var(--orange)"/></svg>
+          <span data-en="AGENT FRAMEWORK — EST. 2026" data-zh="智能体框架 — 成立于 2026">AGENT FRAMEWORK — EST. 2026</span>
+        </span>
+        <h1 data-en="Wait a Minute<span class=&quot;dot&quot;>.</span>" data-zh="等一下<span class=&quot;dot&quot;>。</span>">Wait a Minute<span class="dot">.</span></h1>
+        <p class="tagline" data-en="An agent framework that stops, looks at the whole situation, and then — and only then — takes the next step." data-zh="一个智能体框架：先停下来，看清整个局面，然后——只有然后——才迈出下一步。">An agent framework that stops, looks at the whole situation, and then — and only then — takes the next step.</p>
+        <a class="cta" href="#problem" data-en="READ THE MANIFESTO ↓" data-zh="阅读宣言 ↓">READ THE MANIFESTO ↓</a>
+      </div>
+      <div class="atom" aria-hidden="true">
+        <div class="orbit-wrap a"><div class="orbit"></div></div>
+        <div class="orbit-wrap b"><div class="orbit"></div></div>
+        <div class="orbit-wrap c"><div class="orbit"></div></div>
+        <div class="nucleus"></div>
+      </div>
+    </div>
+  </section>
+  <div class="hazard"></div>
+
+  <!-- ============ PROBLEM ============ -->
+  <section id="problem">
+    <div class="container">
+      <span class="section-tag">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><g fill="currentColor"><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z"/><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(120 50 50)"/><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(240 50 50)"/></g><circle cx="50" cy="50" r="7" fill="var(--orange)"/></svg>
+        <span data-en="THE PROBLEM" data-zh="问题">THE PROBLEM</span>
+      </span>
+      <h2 class="section-title" data-en="Four structural defects" data-zh="四重结构性缺陷">Four structural defects</h2>
+      <p class="section-sub" data-en="Current agent frameworks answer within the conversation, but never beyond it. One question in, one answer out — an infinite extension of Q&amp;A that is not collaboration." data-zh="现有框架在对话内部回答，却从未超越对话。一问一答的无限延伸，看起来像协作，其实不是。">Current agent frameworks answer within the conversation, but never beyond it. One question in, one answer out — an infinite extension of Q&amp;A that is not collaboration.</p>
+
+      <ol class="defects">
+        <li>
+          <span class="num">01</span>
+          <div>
+            <h3 data-en="Constructiveness" data-zh="建构性">Constructiveness</h3>
+            <p data-en="Responses react to the latest message; they do not build toward a goal. The agent responds — it does not construct." data-zh="回答停留在单次对话的反应层面，缺乏对目标的逐步构建。它不“建设”，它只是“回应”。">Responses react to the latest message; they do not build toward a goal. The agent responds — it does not construct.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">02</span>
+          <div>
+            <h3 data-en="Continuity" data-zh="连续性">Continuity</h3>
+            <p data-en="Every conversation starts from zero. Break the rhythm once, and complex projects collapse. Humans re-align through communication; agents simply lose the thread." data-zh="每次对话几乎从零开始。节奏被打乱后，复杂项目的后续推进基本泡汤。人类可以通过沟通重新对齐，AI 却做不到。">Every conversation starts from zero. Break the rhythm once, and complex projects collapse. Humans re-align through communication; agents simply lose the thread.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">03</span>
+          <div>
+            <h3 data-en="Verifiability" data-zh="真实可行性">Verifiability</h3>
+            <p data-en="Output sounds reasonable but does not hold up under scrutiny. Even “check the paper” cannot be trusted — let alone turning unknown-unknowns into known-unknowns." data-zh="输出听起来合理，但经不起推敲。连“查论文”都难以保证准确，更不用说在设计复杂项目时把未知的未知转化为已知的未知。">Output sounds reasonable but does not hold up under scrutiny. Even “check the paper” cannot be trusted — let alone turning unknown-unknowns into known-unknowns.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">04</span>
+          <div>
+            <h3 data-en="Weight judgment" data-zh="对权重的判断">Weight judgment</h3>
+            <p data-en="The agent cannot tell what matters: critical path, nice-to-have, or noise. It treats everything as equally important — and grasps at everything." data-zh="AI 无法区分重要程度的差别：关键路径、锦上添花、还是噪音。它对所有输入一视同仁，于是抓不住重点。">The agent cannot tell what matters: critical path, nice-to-have, or noise. It treats everything as equally important — and grasps at everything.</p>
+          </div>
+        </li>
+      </ol>
+
+      <div class="callout">
+        <p><strong data-en="STATE DESYNC" data-zh="状态不同步">STATE DESYNC</strong>
+        <span data-en=" — beneath all four lies this. The human carries context, intent, and the weight of every decision; the AI carries none of it. This is not a prompt-engineering problem. It is a structural defect of the framework." data-zh="——潜藏在四者之下。人带着上下文、意图的分量、每个决策背后的权衡；AI 什么都不知道。这不是提示工程能解决的问题。这是框架层面的结构性缺陷。"> — beneath all four lies this. The human carries context, intent, and the weight of every decision; the AI carries none of it. This is not a prompt-engineering problem. It is a structural defect of the framework.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PHILOSOPHY ============ -->
+  <section id="philosophy">
+    <div class="container">
+      <span class="section-tag">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><g fill="currentColor"><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z"/><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(120 50 50)"/><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(240 50 50)"/></g><circle cx="50" cy="50" r="7" fill="var(--orange)"/></svg>
+        <span data-en="THE PHILOSOPHY" data-zh="哲学">THE PHILOSOPHY</span>
+      </span>
+      <h2 class="section-title" data-en="The sage and the doer" data-zh="智者与实干家">The sage and the doer</h2>
+      <p class="section-sub" data-en="A deepest sage with the hands of a pragmatic doer. One entity — however many agents run beneath it." data-zh="最深邃的智者，拥有一双实事求是的实干家的手。无论底层是几个智能体，呈现给用户的始终是同一个实体。">A deepest sage with the hands of a pragmatic doer. One entity — however many agents run beneath it.</p>
+
+      <div class="philosophy-grid">
+        <div class="panel sage">
+          <div class="role" data-en="THE SAGE — THINKS" data-zh="智者——负责思考">THE SAGE — THINKS</div>
+          <h3 data-en="Sees the whole situation" data-zh="看到整个局面">Sees the whole situation</h3>
+          <p data-en="It traverses possibilities instead of preset shortcuts. It knows when to be fast and when to be slow. It senses the boundary between what we know and what we don't. It is sensitive to weight." data-zh="它遍历所有可能性，而不是预设捷径。它知道何时该快、何时该慢。它感知“我们知道什么”和“我们不知道什么”之间的边界。它对权重保持敏感。">It traverses possibilities instead of preset shortcuts. It knows when to be fast and when to be slow. It senses the boundary between what we know and what we don't. It is sensitive to weight.</p>
+        </div>
+        <div class="panel doer">
+          <div class="role" data-en="THE DOER — ACTS" data-zh="实干家——负责行动">THE DOER — ACTS</div>
+          <h3 data-en="Takes verifiable steps" data-zh="只做可验证的一步">Takes verifiable steps</h3>
+          <p data-en="It pushes when feasible and admits when not — no bluffing, no forcing. It focuses on the most important 1% and leaves continuable progress behind, never an empty promise." data-zh="可行就推进，不可行就承认——不糊弄，不硬推。它只聚焦当前最重要的 1%，每一步都留下可延续的进展，而不是一张空头支票。">It pushes when feasible and admits when not — no bluffing, no forcing. It focuses on the most important 1% and leaves continuable progress behind, never an empty promise.</p>
+        </div>
+      </div>
+
+      <div class="one-pct">
+        <svg class="starburst" viewBox="0 0 100 100" aria-hidden="true">
+          <polygon points="50,2 61,32 91,21 74,49 100,61 70,66 78,96 52,78 28,98 31,67 2,62 27,49 8,21 39,32" fill="currentColor"/>
+        </svg>
+        <div class="big">1%</div>
+        <div class="text">
+          <strong data-en="We build the bottom 1% of the foundation — and build it solidly." data-zh="只做底座的 1%，但把这 1% 做扎实。">We build the bottom 1% of the foundation — and build it solidly.</strong>
+          <span data-en="No 100% shell. State sync, goal construction, progress continuity, uncertainty management — answered before any feature list." data-zh="不做 100% 的空壳。状态如何同步、目标如何构建、进展如何延续、不确定性如何管理——在任何一个功能清单之前，先回答这些。">No 100% shell. State sync, goal construction, progress continuity, uncertainty management — answered before any feature list.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRINCIPLES ============ -->
+  <section id="principles">
+    <div class="container">
+      <span class="section-tag">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><g fill="currentColor"><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z"/><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(120 50 50)"/><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(240 50 50)"/></g><circle cx="50" cy="50" r="7" fill="var(--orange)"/></svg>
+        <span data-en="RESPONSE" data-zh="回应">RESPONSE</span>
+      </span>
+      <h2 class="section-title" data-en="Six principles" data-zh="六条原则">Six principles</h2>
+      <ul class="principles">
+        <li><span class="idx">1</span><div><h3 data-en="Slow down to speed up" data-zh="慢下来，才能快起来">Slow down to speed up</h3><p data-en="Establish the state before taking the next step." data-zh="先搞清楚状态，再迈出下一步。">Establish the state before taking the next step.</p></div></li>
+        <li><span class="idx">2</span><div><h3 data-en="No bluffing" data-zh="不糊弄">No bluffing</h3><p data-en="Acknowledge real difficulty — then work through it together." data-zh="承认真正的困难，然后和用户一起研究。">Acknowledge real difficulty — then work through it together.</p></div></li>
+        <li><span class="idx">3</span><div><h3 data-en="A directional 1%" data-zh="做有方向的 1%">A directional 1%</h3><p data-en="Every step moves toward the goal, however small." data-zh="每一步都向目标靠近，即使步伐很小。">Every step moves toward the goal, however small.</p></div></li>
+        <li><span class="idx">4</span><div><h3 data-en="Weight-sensitive" data-zh="对权重敏感">Weight-sensitive</h3><p data-en="Hold the critical path; ignore the noise." data-zh="抓住关键路径，忽略噪音。">Hold the critical path; ignore the noise.</p></div></li>
+        <li><span class="idx">5</span><div><h3 data-en="Honest" data-zh="实事求是">Honest</h3><p data-en="If it works, push. If it doesn't, say so. Honesty beats polish." data-zh="可行就推进，不可行就承认。诚实比完美更重要。">If it works, push. If it doesn't, say so. Honesty beats polish.</p></div></li>
+        <li><span class="idx">6</span><div><h3 data-en="Stay in sync" data-zh="保持同步">Stay in sync</h3><p data-en="Keeping human and agent aligned is the framework's core duty." data-zh="让人和 AI 的状态始终对齐，是框架的核心职责。">Keeping human and agent aligned is the framework's core duty.</p></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ STATUS ============ -->
+  <section id="status">
+    <div class="container">
+      <span class="section-tag">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><g fill="currentColor"><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z"/><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(120 50 50)"/><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(240 50 50)"/></g><circle cx="50" cy="50" r="7" fill="var(--orange)"/></svg>
+        <span data-en="SYSTEM STATUS" data-zh="系统状态">SYSTEM STATUS</span>
+      </span>
+      <h2 class="section-title" data-en="M1 — direction competition" data-zh="M1 — 方向竞争">M1 — direction competition</h2>
+      <p class="section-sub" data-en="Four feasible approaches are competing. The first whose vertical slice passes the promotion gate defines the architecture; the rest archive or merge." data-zh="四个可行方案正在竞争。第一个通过晋升门（验证过的垂直切片）的定义架构，其余归档或合并。">Four feasible approaches are competing. The first whose vertical slice passes the promotion gate defines the architecture; the rest archive or merge.</p>
+
+      <div class="status-block">
+        <div class="status-head">
+          <span class="st" data-en="ACTIVE DIRECTIONS" data-zh="进行中的方向">ACTIVE DIRECTIONS</span>
+          <span class="led" aria-hidden="true"></span>
+        </div>
+        <div class="status-body">
+          <div class="dir-row"><span class="name">global-route</span><span class="desc" data-en="Global orchestration entity — state awareness, confidence gate, spawned processes, continuous flow. (author)" data-zh="全局编排实体——状态感知、置信度门、派生进程、交互流延续。（作者）">Global orchestration entity — state awareness, confidence gate, spawned processes, continuous flow. (author)</span><span class="w">CRITICAL</span></div>
+          <div class="dir-row"><span class="name">substrate</span><span class="desc" data-en="State substrate — a small library + CLI for the four-file state model, adoptable by any agent." data-zh="状态基板——四文件状态模型的小库 + CLI，任何 agent 都可采纳。">State substrate — a small library + CLI for the four-file state model, adoptable by any agent.</span><span class="w">CRITICAL</span></div>
+          <div class="dir-row"><span class="name">agent-plugin</span><span class="desc" data-en="Six-step protocol embedded in existing agents (skill / MCP server)." data-zh="六步协议嵌入现有 agent（skill / MCP server）。">Six-step protocol embedded in existing agents (skill / MCP server).</span><span class="w">CRITICAL</span></div>
+          <div class="dir-row"><span class="name">weight-first</span><span class="desc" data-en="Goal DAG + critical-path computation + unknown-unknown registry — the original contribution." data-zh="目标 DAG + 关键路径计算 + 未知清单——原创贡献点。">Goal DAG + critical-path computation + unknown-unknown registry — the original contribution.</span><span class="w">CRITICAL</span></div>
+        </div>
+        <div class="status-foot" data-en="Convergence rule: first verified vertical slice wins. Everything unverified lives in directions/ until it passes the promotion gate." data-zh="收敛规则：第一个验证过的垂直切片胜出。未验证的一切都待在 directions/，直到通过晋升门。">Convergence rule: first verified vertical slice wins. Everything unverified lives in directions/ until it passes the promotion gate.</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="hazard" style="margin-bottom:40px;"></div>
+  <div class="container footer-inner">
+    <svg class="trefoil" viewBox="0 0 100 100" aria-hidden="true">
+      <g fill="currentColor">
+        <path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z"/>
+        <path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(120 50 50)"/>
+        <path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(240 50 50)"/>
+      </g>
+      <circle cx="50" cy="50" r="7" fill="var(--orange)"/>
+    </svg>
+    <p class="footer-quote" data-en="“Wait a Minute” is a reminder, a posture, a design philosophy — a comment written before every line of code." data-zh="“Wait a Minute” 是一个提醒，一种姿态，一种设计哲学——写在每一行代码前面的注释。">“Wait a Minute” is a reminder, a posture, a design philosophy — a comment written before every line of code.</p>
+    <p class="footer-meta">WAM — Wait a Minute · <span data-en="by" data-zh="作者">by</span> ceaserzhao (zbbsdsb) · <a href="https://github.com/zbbsdsb/WAM-Framework" target="_blank" rel="noopener" data-en="source on GitHub" data-zh="源码在 GitHub">source on GitHub</a></p>
+  </div>
+</footer>
+
+<script>
+  var KEY = 'wam-lang';
+  var lang = localStorage.getItem(KEY);
+  if (!lang) lang = (navigator.language || 'en').toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en';
+
+  function applyLang(l) {
+    document.documentElement.lang = l === 'zh' ? 'zh-CN' : 'en';
+    document.querySelectorAll('[data-en]').forEach(function (el) {
+      var t = el.getAttribute('data-' + l);
+      if (t !== null) el.innerHTML = t;
+    });
+    document.title = l === 'zh' ? 'WAM — 等一下。' : 'WAM — Wait a Minute';
+    document.getElementById('lang-en').classList.toggle('active', l === 'en');
+    document.getElementById('lang-zh').classList.toggle('active', l === 'zh');
+    localStorage.setItem(KEY, l);
+  }
+  function setLang(l) { applyLang(l); }
+  applyLang(lang);
+</script>
+</body>
+</html>
