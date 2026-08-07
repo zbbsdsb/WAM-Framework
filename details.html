@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="WAM — Wait a Minute. The archive: full philosophy, foundation protocol, competing directions, research, live project state.">
+<title>WAM — Details 详情</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="hazard"></div>
+
+<header class="topbar">
+  <div class="container topbar-inner">
+    <a class="brand" href="index.html" aria-label="WAM home">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <g fill="currentColor">
+          <path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z"/>
+          <path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(120 50 50)"/>
+          <path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(240 50 50)"/>
+        </g>
+        <circle cx="50" cy="50" r="7" fill="var(--orange)"/>
+      </svg>
+      <span class="brand-name">WAM</span>
+    </a>
+    <div class="topbar-right">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button id="lang-en" type="button" onclick="setLang('en')">EN</button>
+        <button id="lang-zh" type="button" onclick="setLang('zh')">中文</button>
+      </div>
+      <a class="nav-link" href="index.html" data-en="MANIFESTO 宣言" data-zh="宣言 MANIFESTO">MANIFESTO 宣言</a>
+      <a class="gh-link" href="https://github.com/zbbsdsb/WAM-Framework" target="_blank" rel="noopener" data-en="SOURCE ↗" data-zh="源码 ↗">SOURCE ↗</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ ARCHIVE HERO ============ -->
+  <section class="details-hero">
+    <div class="giant" aria-hidden="true">档案</div>
+    <div class="container">
+      <span class="section-tag">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><g fill="currentColor"><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z"/><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(120 50 50)"/><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(240 50 50)"/></g><circle cx="50" cy="50" r="7" fill="var(--orange)"/></svg><svg class="star-ic" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,6 60,38 94,38 66,59 77,92 50,71 23,92 34,59 6,38 40,38" fill="currentColor"/></svg>
+        <span data-en="THE ARCHIVE" data-zh="档案室">THE ARCHIVE</span>
+      </span>
+      <h1 data-en="Details" data-zh="详情">Details</h1>
+      <p class="tagline" data-en="Everything behind the manifesto: the full philosophy, the foundation protocol, the competing directions, the research, and the live project state." data-zh="宣言背后的全部：完整哲学、地基协议、竞争中的方向、研究简报、项目实时状态。">Everything behind the manifesto: the full philosophy, the foundation protocol, the competing directions, the research, and the live project state.</p>
+    </div>
+  </section>
+  <div class="hazard"></div>
+
+  <!-- ============ 01 PHILOSOPHY ============ -->
+  <section id="doc-philosophy" class="doc-section">
+    <div class="container">
+      <span class="section-tag">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><g fill="currentColor"><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z"/><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(120 50 50)"/><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(240 50 50)"/></g><circle cx="50" cy="50" r="7" fill="var(--orange)"/></svg><svg class="star-ic" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,6 60,38 94,38 66,59 77,92 50,71 23,92 34,59 6,38 40,38" fill="currentColor"/></svg>
+        <span data-en="THE PHILOSOPHY" data-zh="哲学">THE PHILOSOPHY</span>
+      </span>
+      <h2 class="section-title" data-en="The full idea" data-zh="完整理念">The full idea</h2>
+      <p class="section-sub" data-en="The complete text behind the manifesto — four structural defects, state desync, the 1% foundation, the sage and the doer, and the six response principles." data-zh="宣言背后的完整文本——四重结构性缺陷、状态不同步、1% 底座、智者与实干家、六条回应原则。">The complete text behind the manifesto — four structural defects, state desync, the 1% foundation, the sage and the doer, and the six response principles.</p>
+
+      <div class="doc-body">
+        <h3 data-en="The fourfold deficiency" data-zh="四重缺失">The fourfold deficiency</h3>
+        <p data-en="Current agent frameworks answer almost entirely within the confines of the conversation. You ask in one paragraph, it answers in one paragraph — this looks like collaboration, but is essentially an infinite extension of question-and-answer. A true assistant should perceive what is known, what is unknown, and what is unknown-unknown." data-zh="当前智能体框架在回答时几乎只局限于对话内部。你用一段话问它，它用一段话回你——这看起来像协作，但本质上只是'一问一答'的无限延伸。真正的助手应该能感知到当前局面中哪些是已知的、哪些是未知的、哪些是未知的未知。">Current agent frameworks answer almost entirely within the confines of the conversation. You ask in one paragraph, it answers in one paragraph — this looks like collaboration, but is essentially an infinite extension of question-and-answer. A true assistant should perceive what is known, what is unknown, and what is unknown-unknown.</p>
+        <ol>
+          <li><strong data-en="Constructiveness" data-zh="建构性">Constructiveness</strong> — <span data-en="Answers remain at the level of reaction to a single conversation, lacking the ability to build toward a goal step by step. It does not construct; it merely responds." data-zh="回答停留在单次对话的反应层面，缺乏对目标的逐步构建能力。它不'建设'，它只是'回应'。">Answers remain at the level of reaction to a single conversation, lacking the ability to build toward a goal step by step. It does not construct; it merely responds.</span></li>
+          <li><strong data-en="Continuity" data-zh="连续性">Continuity</strong> — <span data-en="Every conversation starts almost from zero. Once the rhythm is broken, follow-up work on complex projects basically collapses. Humans re-align through communication; AI seems unable to." data-zh="每次对话几乎从零开始。节奏被打乱后，复杂项目的后续推进基本直接泡汤。人类合作中可以通过沟通重新对齐，但 AI 似乎做不到这一点。">Every conversation starts almost from zero. Once the rhythm is broken, follow-up work on complex projects basically collapses. Humans re-align through communication; AI seems unable to.</span></li>
+          <li><strong data-en="Verifiability" data-zh="真实可行性">Verifiability</strong> — <span data-en="Output sounds reasonable but does not hold up under scrutiny. Even a basic task like checking a paper struggles to guarantee accuracy, let alone converting unknown-unknowns into known-unknowns in complex design." data-zh="输出听起来合理，但经不起推敲。连'查论文'这种基础任务都难以保证准确，更不用说在设计复杂项目时把未知的未知转化为已知的未知。">Output sounds reasonable but does not hold up under scrutiny. Even a basic task like checking a paper struggles to guarantee accuracy, let alone converting unknown-unknowns into known-unknowns in complex design.</span></li>
+          <li><strong data-en="Weight judgment" data-zh="对权重的判断">Weight judgment</strong> — <span data-en="AI cannot distinguish importance. Some tasks are on the critical path, some are nice-to-have, some are noise. The framework offers no cognitive tool for this — so the agent grasps at everything." data-zh="AI 无法区分重要程度的差别。有的任务在关键路径上，有的只是锦上添花，有的纯粹是噪音。框架没有提供'权重判断'这一认知操作的工具，于是它抓不住重点。">AI cannot distinguish importance. Some tasks are on the critical path, some are nice-to-have, some are noise. The framework offers no cognitive tool for this — so the agent grasps at everything.</span></li>
+        </ol>
+
+        <h3 data-en="State desync" data-zh="状态不同步">State desync</h3>
+        <p data-en="In real collaboration, the states of human and AI are almost always out of sync. The user knows their context, the weight of their intentions, and the trade-offs behind every decision; the AI knows none of it. In human teams, misalignment is repaired by talking it out; in AI collaboration, one interruption is enough to invalidate the rest of the project. This is not a prompt-engineering problem — it is a structural defect at the framework level." data-zh="在真实协作中，人与 AI 的状态几乎总是不同步的。用户知道自己的上下文、意图的重量级、每一个决策背后的权衡；AI 什么都不知道。在人类合作中，即使不同步也可以通过沟通逐步扭转；但 AI 的节奏稍有干扰，复杂项目的后续对话就基本作废了。这不是提示工程能解决的问题，这是框架层面的结构性缺陷。">In real collaboration, the states of human and AI are almost always out of sync. The user knows their context, the weight of their intentions, and the trade-offs behind every decision; the AI knows none of it. In human teams, misalignment is repaired by talking it out; in AI collaboration, one interruption is enough to invalidate the rest of the project. This is not a prompt-engineering problem — it is a structural defect at the framework level.</p>
+
+        <h3 data-en="The 1% foundation" data-zh="1% 底座">The 1% foundation</h3>
+        <p data-en="We are not building a 100% shell. There are already too many all-capable frameworks that do nothing deeply. WAM builds only the bottom 1% of the foundation — and builds it solidly. The foundation is not a feature list; it is a fundamental answer to how an agent collaborates with a human: how state is synchronized, how goals are constructed, how progress continues, how uncertainty is managed." data-zh="我们不求搭建一个 100% 的空壳。那个看起来什么都能做、实际上什么都做不深的'全能框架'已经太多了。WAM 只做底座的 1%，但把这 1% 做扎实。这个底座不是功能列表，而是对'智能体如何与人类协作'这一问题的根本性回答：状态如何同步、目标如何构建、进展如何延续、不确定性如何管理。">We are not building a 100% shell. There are already too many all-capable frameworks that do nothing deeply. WAM builds only the bottom 1% of the foundation — and builds it solidly. The foundation is not a feature list; it is a fundamental answer to how an agent collaborates with a human: how state is synchronized, how goals are constructed, how progress continues, how uncertainty is managed.</p>
+
+        <h3 data-en="The sage and the doer" data-zh="智者与实干家">The sage and the doer</h3>
+        <p data-en="The architectural vision: a deepest sage with the hands of a pragmatic doer. The sage sees the whole situation, traverses all possibilities, knows when to be fast and when to be slow, senses the boundary between what we know and what we don't, and is sensitive to weight. The doer takes only verifiable steps, pushes when feasible and admits when not, focuses on the most important 1% and leaves continuable progress — never an empty promise. Whether one agent or many run beneath, the user faces a single, unified, constructive collaboration entity." data-zh="架构愿景：最深邃的智者，拥有一双实事求是的实干家的手。智者看到整个局面，遍历所有可能性，知道何时该快、何时该慢，感知已知与未知之间的边界，对权重保持敏感。实干家只做可验证的一步，可行就推进、不可行就承认，只聚焦当前最重要的 1%，每一步都留下可延续的进展——而不是一张空头支票。无论底层是几个智能体，呈现给用户的应该是一个统一的、全局的、建设性的协作实体。">The architectural vision: a deepest sage with the hands of a pragmatic doer. The sage sees the whole situation, traverses all possibilities, knows when to be fast and when to be slow, senses the boundary between what we know and what we don't, and is sensitive to weight. The doer takes only verifiable steps, pushes when feasible and admits when not, focuses on the most important 1% and leaves continuable progress — never an empty promise. Whether one agent or many run beneath, the user faces a single, unified, constructive collaboration entity.</p>
+
+        <h3 data-en="Six response principles" data-zh="六条回应原则">Six response principles</h3>
+        <ul>
+          <li><strong data-en="Slow down to speed up." data-zh="慢下来，才能快起来。">Slow down to speed up.</strong> <span data-en="Establish the state first, then take the next step." data-zh="先搞清楚状态，再迈出下一步。">Establish the state first, then take the next step.</span></li>
+          <li><strong data-en="No bluffing." data-zh="不糊弄。">No bluffing.</strong> <span data-en="Acknowledge real difficulty, then work through it together." data-zh="面对真正困难的问题，承认困难，然后和用户一起研究。">Acknowledge real difficulty, then work through it together.</span></li>
+          <li><strong data-en="A directional 1%." data-zh="做有方向的 1%。">A directional 1%.</strong> <span data-en="Every step moves toward the goal, however small." data-zh="每一步都向目标靠近，即使步伐很小。">Every step moves toward the goal, however small.</span></li>
+          <li><strong data-en="Weight-sensitive." data-zh="对权重敏感。">Weight-sensitive.</strong> <span data-en="Hold the critical path; ignore the noise." data-zh="抓住关键路径，忽略噪音，不做面面俱到的无用功。">Hold the critical path; ignore the noise.</span></li>
+          <li><strong data-en="Pragmatic and honest." data-zh="实事求是。">Pragmatic and honest.</strong> <span data-en="Push when feasible, admit when not. Honesty beats perfection." data-zh="可行就推进，不可行就承认。诚实比完美更重要。">Push when feasible, admit when not. Honesty beats perfection.</span></li>
+          <li><strong data-en="Stay in sync." data-zh="保持同步。">Stay in sync.</strong> <span data-en="Alignment is the framework's core duty." data-zh="让 AI 和用户的状态始终对齐，是框架的核心职责。">Alignment is the framework's core duty.</span></li>
+        </ul>
+
+        <p class="doc-quote" data-en="“Wait a Minute” is a reminder, a posture, a design philosophy — a comment written before every line of code. When the model tends to quickly generate a plausible-looking output, WAM says: wait. Do we really understand the situation? If not, don't rush to answer. Go figure it out first." data-zh="'Wait a Minute' 是一个提醒，一种姿态，一种设计哲学——写在每一行代码前面的注释。当模型倾向于快速生成一个看似合理的输出时，WAM 说：等等。我们真的理解当前局面吗？如果不理解，那就先别急着回答，先去弄清楚。">“Wait a Minute” is a reminder, a posture, a design philosophy — a comment written before every line of code. When the model tends to quickly generate a plausible-looking output, WAM says: wait. Do we really understand the situation? If not, don't rush to answer. Go figure it out first.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 FOUNDATION ============ -->
+  <section id="doc-foundation" class="doc-section">
+    <div class="container">
+      <span class="section-tag">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><g fill="currentColor"><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z"/><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(120 50 50)"/><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(240 50 50)"/></g><circle cx="50" cy="50" r="7" fill="var(--orange)"/></svg><svg class="star-ic" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,6 60,38 94,38 66,59 77,92 50,71 23,92 34,59 6,38 40,38" fill="currentColor"/></svg>
+        <span data-en="THE FOUNDATION" data-zh="地基">THE FOUNDATION</span>
+      </span>
+      <h2 class="section-title" data-en="State model & protocol" data-zh="状态模型与协议">State model &amp; protocol</h2>
+      <p class="section-sub" data-en="The thesis: the foundation of WAM is not code, but the state shared between human and AI." data-zh="命题：WAM 的地基不是代码，而是人与 AI 共享的状态。">The thesis: the foundation of WAM is not code, but the state shared between human and AI.</p>
+
+      <div class="doc-body">
+        <h3 data-en="The state model — four files" data-zh="状态模型——四个文件">The state model — four files</h3>
+        <p data-en="All collaboration state lives under workspace/, versioned as Markdown + git — both human and AI can read and write directly; every step can be diffed and rolled back." data-zh="所有协作状态放在仓库根目录的 workspace/ 下，Markdown + git 版本化——人和 AI 都能直接读写，每一步都可 diff、可回滚。">All collaboration state lives under workspace/, versioned as Markdown + git — both human and AI can read and write directly; every step can be diffed and rolled back.</p>
+        <table class="doc-table">
+          <tr><th data-en="File" data-zh="文件">File</th><th data-en="Question it answers" data-zh="回答的问题">Question it answers</th><th data-en="Deficiency" data-zh="对应的缺失">Deficiency</th></tr>
+          <tr><td>workspace/state.md</td><td data-en="How is state synchronized? What is the current situation?" data-zh="状态如何同步？当前局面是什么？">How is state synchronized? What is the current situation?</td><td data-en="State desync" data-zh="状态不同步">State desync</td></tr>
+          <tr><td>workspace/goals.md</td><td data-en="How are goals constructed? What matters?" data-zh="目标如何构建？什么重要？">How are goals constructed? What matters?</td><td data-en="Constructiveness + weight judgment" data-zh="建构性 + 权重判断">Constructiveness + weight judgment</td></tr>
+          <tr><td>workspace/log.md</td><td data-en="How does progress continue?" data-zh="进展如何延续？">How does progress continue?</td><td data-en="Continuity" data-zh="连续性">Continuity</td></tr>
+          <tr><td>workspace/decisions.md</td><td data-en="How are judgments recorded?" data-zh="判断如何留痕？">How are judgments recorded?</td><td data-en="Weight judgment + pragmatism" data-zh="权重判断 + 实事求是">Weight judgment + pragmatism</td></tr>
+        </table>
+
+        <h3 data-en="Hard rules" data-zh="硬规则">Hard rules</h3>
+        <ol>
+          <li data-en="Read state.md and goals.md at the start of every session; write log.md at the end — even one line." data-zh="会话开始先读 state.md 和 goals.md；会话结束必须写 log.md——哪怕一行。">Read state.md and goals.md at the start of every session; write log.md at the end — even one line.</li>
+          <li data-en="Every 'done' must carry evidence: artifact path, command output, test result. No evidence = not done." data-zh="一切'完成'必须有证据：产物路径、命令输出、测试结果。没有证据 = 未完成。">Every “done” must carry evidence: artifact path, command output, test result. No evidence = not done.</li>
+          <li data-en="Every goal carries one of three weight tiers: critical path / enhancement / noise. Noise is not elaborated, not scheduled." data-zh="目标必须有权重三档：关键路径 / 增强 / 噪音。噪音不展开、不排期。">Every goal carries one of three weight tiers: critical path / enhancement / noise. Noise is not elaborated, not scheduled.</li>
+          <li data-en="Unknown-unknowns must be explicitly listed, never feigned knowledge." data-zh="未知的未知必须显式列出，不装作知道。">Unknown-unknowns must be explicitly listed, never feigned knowledge.</li>
+        </ol>
+
+        <h3 data-en="The collaboration protocol — six steps" data-zh="协作协议——六步">The collaboration protocol — six steps</h3>
+        <ol>
+          <li><strong data-en="Read" data-zh="读">Read</strong> — <span data-en="Load the situation, the goals and weights, and the tail of the progress log." data-zh="加载局面、目标与权重、进展流水尾部。">Load the situation, the goals and weights, and the tail of the progress log.</span></li>
+          <li><strong data-en="Wait" data-zh="停">Wait</strong> — <span data-en="Wait a Minute: is the goal clear? Is the situation understood? Should this step really be taken?" data-zh="等一下：目标清楚吗？局面理解了吗？这一步真的该做吗？">Wait a Minute: is the goal clear? Is the situation understood? Should this step really be taken?</span></li>
+          <li><strong data-en="Judge" data-zh="判">Judge</strong> — <span data-en="What is the highest-weight step right now? Critical path first; never do noise." data-zh="当前权重最高的一步是什么？关键路径优先，不做噪音。">What is the highest-weight step right now? Critical path first; never do noise.</span></li>
+          <li><strong data-en="Do" data-zh="做">Do</strong> — <span data-en="Take exactly one verifiable step." data-zh="只做这一个可验证的步骤。">Take exactly one verifiable step.</span></li>
+          <li><strong data-en="Verify" data-zh="验">Verify</strong> — <span data-en="Provide evidence; if infeasible, say so honestly." data-zh="给出证据；不可行就如实说不可行。">Provide evidence; if infeasible, say so honestly.</span></li>
+          <li><strong data-en="Write" data-zh="写">Write</strong> — <span data-en="Update state / goals / log / decisions." data-zh="更新 state / goals / log / decisions。">Update state / goals / log / decisions.</span></li>
+        </ol>
+
+        <h3 data-en="Development governance" data-zh="开发治理">Development governance</h3>
+        <p data-en="To keep the project from drifting off course, unverified work lives in directions/ until it passes the promotion gate." data-zh="为防止项目偏离方向，未验证的工作都待在 directions/，直到通过晋升门。">To keep the project from drifting off course, unverified work lives in directions/ until it passes the promotion gate.</p>
+        <table class="doc-table">
+          <tr><th data-en="Tier" data-zh="层级">Tier</th><th data-en="Where it lives" data-zh="位置">Where it lives</th><th data-en="Trust level" data-zh="信任度">Trust level</th></tr>
+          <tr><td data-en="Evidence" data-zh="证据">Evidence</td><td>docs/research/</td><td data-en="Sourced facts, verifiable — permanent" data-zh="有来源的事实，可溯源——永久保留">Sourced facts, verifiable — permanent</td></tr>
+          <tr><td data-en="Proposals" data-zh="提案">Proposals</td><td>directions/&lt;name&gt;/</td><td data-en="Ideas, drafts, prototypes — NOT trusted" data-zh="想法、草稿、原型——不受信任">Ideas, drafts, prototypes — NOT trusted</td></tr>
+          <tr><td data-en="Decisions & constitutions" data-zh="决策与宪法">Decisions &amp; constitutions</td><td>docs/, workspace/</td><td data-en="Verified — official" data-zh="已验证——正式">Verified — official</td></tr>
+        </table>
+        <p data-en="Promotion requires ALL of: a decision recorded in workspace/decisions.md (reason, alternatives, weight judgment); evidence cited (artifact path / command output / test result); the artifact relocated; the direction folder archived to directions/archive/. A failed direction is archived the same way — with the failure recorded." data-zh="晋升必须同时满足：workspace/decisions.md 记录了决策（理由 + 替代方案 + 权重判断）；有证据引用（产物路径 / 命令输出 / 测试结果）；产物搬到正式位置；方向文件夹归档到 directions/archive/。验证失败的方向同样归档——连同失败记录。">Promotion requires ALL of: a decision recorded in workspace/decisions.md (reason, alternatives, weight judgment); evidence cited (artifact path / command output / test result); the artifact relocated; the direction folder archived to directions/archive/. A failed direction is archived the same way — with the failure recorded.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 DIRECTIONS ============ -->
+  <section id="doc-directions" class="doc-section">
+    <div class="container">
+      <span class="section-tag">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><g fill="currentColor"><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z"/><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(120 50 50)"/><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(240 50 50)"/></g><circle cx="50" cy="50" r="7" fill="var(--orange)"/></svg><svg class="star-ic" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,6 60,38 94,38 66,59 77,92 50,71 23,92 34,59 6,38 40,38" fill="currentColor"/></svg>
+        <span data-en="THE DIRECTIONS" data-zh="方向">THE DIRECTIONS</span>
+      </span>
+      <h2 class="section-title" data-en="Four competing approaches" data-zh="四个竞争方案">Four competing approaches</h2>
+      <p class="section-sub" data-en="M1 — the first direction whose vertical slice passes the promotion gate defines the architecture; the rest archive or merge." data-zh="M1——第一个通过晋升门（验证过的垂直切片）的方向定义架构，其余归档或合并。">M1 — the first direction whose vertical slice passes the promotion gate defines the architecture; the rest archive or merge.</p>
+
+      <div class="dir-grid">
+        <div class="dir-card">
+          <span class="dir-name">global-route</span><span class="dir-weight">CRITICAL</span>
+          <h4 data-en="Hypothesis" data-zh="假设">Hypothesis</h4>
+          <p data-en="WAM is a global orchestration entity (pattern: Hermes Agent): global state awareness, a high-confidence gate, spawned new processes, continuous interaction flow, continuous refinement. The deliverable is the engine plus the folder — not just an engine." data-zh="WAM 是一个全局编排实体（模式参照：Hermes Agent）：全局状态感知、高置信度门、派生新进程、交互流延续、精益求精。交付物是引擎加文件夹——不只是引擎。">WAM is a global orchestration entity (pattern: Hermes Agent): global state awareness, a high-confidence gate, spawned new processes, continuous interaction flow, continuous refinement. The deliverable is the engine plus the folder — not just an engine.</p>
+          <h4 data-en="Would be falsified by" data-zh="证伪条件">Would be falsified by</h4>
+          <p data-en="The resume-and-continue demo can be built faster on an existing agent platform; or engine-level state awareness cannot be kept synchronized without a heavyweight runtime." data-zh="恢复-继续 demo 能在现有 agent 平台上更快做出；或引擎级状态感知无法在不成为重型运行时的前提下保持同步。">The resume-and-continue demo can be built faster on an existing agent platform; or engine-level state awareness cannot be kept synchronized without a heavyweight runtime.</p>
+        </div>
+        <div class="dir-card">
+          <span class="dir-name">substrate</span><span class="dir-weight">CRITICAL</span>
+          <h4 data-en="Hypothesis" data-zh="假设">Hypothesis</h4>
+          <p data-en="WAM's minimal useful form is a state substrate: a small library + CLI implementing the four-file state model, with no agent of its own — adoptable by any agent (prompt contract, skill, or MCP server)." data-zh="WAM 的最小有用形态是状态基板：实现四文件状态模型的小库 + CLI，没有自主 agent——任何 agent 都能采纳（prompt 契约、skill 或 MCP server）。">WAM's minimal useful form is a state substrate: a small library + CLI implementing the four-file state model, with no agent of its own — adoptable by any agent (prompt contract, skill, or MCP server).</p>
+          <h4 data-en="Would be falsified by" data-zh="证伪条件">Would be falsified by</h4>
+          <p data-en="A substrate without an attached agent turns out to be a markdown formatter; or protocol hooks are ignored by host agents and the state rots." data-zh="没有 agent 附着的基板只是 markdown 格式化器；或宿主 agent 无视协议钩子，状态腐烂。">A substrate without an attached agent turns out to be a markdown formatter; or protocol hooks are ignored by host agents and the state rots.</p>
+        </div>
+        <div class="dir-card">
+          <span class="dir-name">agent-plugin</span><span class="dir-weight">CRITICAL</span>
+          <h4 data-en="Hypothesis" data-zh="假设">Hypothesis</h4>
+          <p data-en="The fastest verified path is embedding WAM inside an existing agent as a skill/plugin (e.g. a Hermes skill or MCP server) implementing the six-step protocol over workspace/." data-zh="最快的验证路径是把 WAM 嵌入现有 agent（如 Hermes skill 或 MCP server）作为实现六步协议的技能/插件。">The fastest verified path is embedding WAM inside an existing agent as a skill/plugin (e.g. a Hermes skill or MCP server) implementing the six-step protocol over workspace/.</p>
+          <h4 data-en="Would be falsified by" data-zh="证伪条件">Would be falsified by</h4>
+          <p data-en="The host agent skips protocol steps (soft enforcement) so the state files rot; or the value is not distinguishable from the host's native memory." data-zh="宿主 agent 跳过协议步骤（软执行），状态文件腐烂；或价值与宿主原生记忆无法区分。">The host agent skips protocol steps (soft enforcement) so the state files rot; or the value is not distinguishable from the host's native memory.</p>
+        </div>
+        <div class="dir-card">
+          <span class="dir-name">weight-first</span><span class="dir-weight">CRITICAL</span>
+          <h4 data-en="Hypothesis" data-zh="假设">Hypothesis</h4>
+          <p data-en="Lead with the original contribution: the weight model — goals as a DAG with critical-path computation and an unknown-unknown registry, engine-agnostic. CPM-in-agents has no dedicated literature; weight judgment is absent from every framework." data-zh="主打原创贡献：权重模型——目标 DAG + 关键路径计算 + 未知清单，引擎无关。关键路径法在 agent 领域没有专门文献；权重判断在所有框架中缺席。">Lead with the original contribution: the weight model — goals as a DAG with critical-path computation and an unknown-unknown registry, engine-agnostic. CPM-in-agents has no dedicated literature; weight judgment is absent from every framework.</p>
+          <h4 data-en="Would be falsified by" data-zh="证伪条件">Would be falsified by</h4>
+          <p data-en="The computed critical path adds no decision value over a flat todo list; or the annotation burden kills adoption." data-zh="算出的关键路径不比扁平 todo 更有决策价值；或标注负担杀死采用率。">The computed critical path adds no decision value over a flat todo list; or the annotation burden kills adoption.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 RESEARCH ============ -->
+  <section id="doc-research" class="doc-section">
+    <div class="container">
+      <span class="section-tag">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><g fill="currentColor"><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z"/><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(120 50 50)"/><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(240 50 50)"/></g><circle cx="50" cy="50" r="7" fill="var(--orange)"/></svg><svg class="star-ic" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,6 60,38 94,38 66,59 77,92 50,71 23,92 34,59 6,38 40,38" fill="currentColor"/></svg>
+        <span data-en="THE RESEARCH" data-zh="研究">THE RESEARCH</span>
+      </span>
+      <h2 class="section-title" data-en="Targeted survey findings" data-zh="定向调研结论">Targeted survey findings</h2>
+      <p class="section-sub" data-en="Three parallel research briefs, sources verified via arXiv API and official documentation (2026-08-07). Full briefs: docs/research/." data-zh="三份并行研究简报，来源经 arXiv API 与官方文档核实（2026-08-07）。完整简报：docs/research/。">Three parallel research briefs, sources verified via arXiv API and official documentation (2026-08-07). Full briefs: docs/research/.</p>
+
+      <div class="doc-body">
+        <h3 data-en="01 — Ecosystem survey" data-zh="01 — 生态调研">01 — Ecosystem survey</h3>
+        <ul>
+          <li data-en="No framework offers human-readable, human-editable, cross-session shared state. Memory is kv checkpoints (LangGraph), prompt files (CLAUDE.md), or model self-written notes (Letta)." data-zh="没有任何框架提供人类可读、可编辑、跨会话的共享状态。记忆要么是 kv 检查点（LangGraph）、提示词文件（CLAUDE.md）、要么是模型自写笔记（Letta）。">No framework offers human-readable, human-editable, cross-session shared state. Memory is kv checkpoints (LangGraph), prompt files (CLAUDE.md), or model self-written notes (Letta).</li>
+          <li data-en="No weight judgment: only CrewAI infers importance at save time; no critical-path/enhancement/noise tiers anywhere." data-zh="权重判断全缺席：只有 CrewAI 在保存时让 LLM 推断 importance；关键路径/增强/噪音分层无处可寻。">No weight judgment: only CrewAI infers importance at save time; no critical-path/enhancement/noise tiers anywhere.</li>
+          <li data-en="Verification is an industry-wide gap — Anthropic's own docs admit unverified 'done' is an illusion." data-zh="验证是全行业缺口——Anthropic 官方文档也承认未验证的'完成'是假象。">Verification is an industry-wide gap — Anthropic's own docs admit unverified “done” is an illusion.</li>
+          <li data-en="Planning artifacts are one-shot (CrewAI replans per round; Aider architect) — no living goal object with progress." data-zh="规划工件都是一次性的（CrewAI 每轮重规划；Aider architect）——没有带进度的活的目标对象。">Planning artifacts are one-shot (CrewAI replans per round; Aider architect) — no living goal object with progress.</li>
+        </ul>
+
+        <h3 data-en="02 — Memory & state architectures" data-zh="02 — 记忆与状态架构">02 — Memory &amp; state architectures</h3>
+        <ul>
+          <li data-en="Layering is consensus: CoALA's four memory classes (working/episodic/semantic/procedural) map naturally onto state/goals/log/decisions." data-zh="分层是共识：CoALA 的四类记忆（工作/情景/语义/程序性）自然映射到 state/goals/log/decisions。">Layering is consensus: CoALA's four memory classes (working/episodic/semantic/procedural) map naturally onto state/goals/log/decisions.</li>
+          <li data-en="Reflection and compression paths are validated (Generative Agents' reflection; MemGPT's memory-pressure paging)." data-zh="反思与压缩路径已被验证（Generative Agents 的反思；MemGPT 的记忆压力分页）。">Reflection and compression paths are validated (Generative Agents' reflection; MemGPT's memory-pressure paging).</li>
+          <li data-en="Known failure modes: memory drift, hallucinated memory, retrieval misses, staleness — no unified invalidation mechanism." data-zh="已知失效模式：记忆漂移、幻觉记忆、检索遗漏、陈旧性——没有统一的失效机制。">Known failure modes: memory drift, hallucinated memory, retrieval misses, staleness — no unified invalidation mechanism.</li>
+          <li data-en="Human-shared state is unresearched: all memory systems are agent-internal. This is WAM's blank space." data-zh="人机共享状态无人研究：现有记忆系统全部面向智能体自身。这是 WAM 的空白空间。">Human-shared state is unresearched: all memory systems are agent-internal. This is WAM's blank space.</li>
+        </ul>
+
+        <h3 data-en="03 — Unknown-unknowns & weight judgment" data-zh="03 — 未知的未知与权重判断">03 — Unknown-unknowns &amp; weight judgment</h3>
+        <ul>
+          <li data-en="Smithson's ignorance quadrant (known / known-unknown / unknown-unknown) is exactly the vocabulary state.md's three sections already use." data-zh="Smithson 的无知四象限（已知 / 已知的未知 / 未知的未知）正是 state.md 三区已经在用的词汇。">Smithson's ignorance quadrant (known / known-unknown / unknown-unknown) is exactly the vocabulary state.md's three sections already use.</li>
+          <li data-en="Confidence can be cross-checked across three channels: token probability, semantic entropy (Kuhn 2023), verbalized confidence (Lin 2022; Tian 2023). Verbalized confidence is systematically overconfident (ADVICE)." data-zh="置信度可三通道交叉校验：token 概率、语义熵（Kuhn 2023）、口头化置信度（Lin 2022; Tian 2023）。口头化置信度系统性过度自信（ADVICE）。">Confidence can be cross-checked across three channels: token probability, semantic entropy (Kuhn 2023), verbalized confidence (Lin 2022; Tian 2023). Verbalized confidence is systematically overconfident (ADVICE).</li>
+          <li data-en="CPM (critical path method) in LLM agent planning has no dedicated literature — WAM's clearest original contribution." data-zh="关键路径法在 LLM agent 规划中没有专门文献——WAM 最干净的原创点。">CPM (critical path method) in LLM agent planning has no dedicated literature — WAM's clearest original contribution.</li>
+          <li data-en="Open problem: unsupervised detection of unknown-unknowns is essentially unsolved — the explicit registry + human-in-the-loop is the honest answer." data-zh="开放问题：未知的未知的自动检测基本无解——显式清单 + 人在环中才是诚实的答案。">Open problem: unsupervised detection of unknown-unknowns is essentially unsolved — the explicit registry + human-in-the-loop is the honest answer.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 STATUS ============ -->
+  <section id="doc-status" class="doc-section">
+    <div class="container">
+      <span class="section-tag">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><g fill="currentColor"><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z"/><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(120 50 50)"/><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(240 50 50)"/></g><circle cx="50" cy="50" r="7" fill="var(--orange)"/></svg><svg class="star-ic" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,6 60,38 94,38 66,59 77,92 50,71 23,92 34,59 6,38 40,38" fill="currentColor"/></svg>
+        <span data-en="LIVE STATUS" data-zh="实时状态">LIVE STATUS</span>
+      </span>
+      <h2 class="section-title" data-en="Where the project stands" data-zh="项目现状">Where the project stands</h2>
+      <p class="section-sub" data-en="Snapshot of workspace/ as of 2026-08-07. The workspace is the source of truth — this section mirrors it." data-zh="截至 2026-08-07 的 workspace/ 快照。workspace 是真源——本区块如实镜像。">Snapshot of workspace/ as of 2026-08-07. The workspace is the source of truth — this section mirrors it.</p>
+
+      <div class="doc-body">
+        <h3 data-en="Goals — M1 (critical path)" data-zh="目标 — M1（关键路径）">Goals — M1 (critical path)</h3>
+        <ul>
+          <li>[x] <span data-en="Targeted survey: ecosystem / memory & state / unknown & weight" data-zh="定向调研：生态 / 记忆与状态 / 未知与权重">Targeted survey: ecosystem / memory &amp; state / unknown &amp; weight</span></li>
+          <li>[x] <span data-en="Establish directions/ folders + promotion gate" data-zh="建立 directions/ 文件夹 + 晋升门">Establish directions/ folders + promotion gate</span></li>
+          <li>[x] <span data-en="Open 4 competing directions: global-route / substrate / agent-plugin / weight-first" data-zh="开启 4 个竞争方向：global-route / substrate / agent-plugin / weight-first">Open 4 competing directions: global-route / substrate / agent-plugin / weight-first</span></li>
+          <li>[x] <span data-en="Public site (this site)" data-zh="公开站点（本站）">Public site (this site)</span></li>
+          <li>[ ] <span data-en="Design conversation: who it's for / first demo / v1 boundaries" data-zh="设计对话：给谁用 / 首个 demo / v1 边界">Design conversation: who it's for / first demo / v1 boundaries</span></li>
+          <li>[ ] <span data-en="Each direction produces a proposal + minimal falsification experiment (vertical slice)" data-zh="每个方向产出提案 + 最小证伪实验（垂直切片）">Each direction produces a proposal + minimal falsification experiment (vertical slice)</span></li>
+          <li>[ ] <span data-en="Convergence: first verified vertical slice defines M1 architecture" data-zh="收敛：第一个验证过的垂直切片定义 M1 架构">Convergence: first verified vertical slice defines M1 architecture</span></li>
+        </ul>
+
+        <h3 data-en="Decisions made so far" data-zh="至今的决策">Decisions made so far</h3>
+        <ol>
+          <li data-en="The foundation comes first as a state model and protocol — not by initializing a code project." data-zh="地基先做状态模型与协议——而不是先初始化代码工程。">The foundation comes first as a state model and protocol — not by initializing a code project.</li>
+          <li data-en="State is stored as Markdown + git, not a database / JSON / YAML." data-zh="状态用 Markdown + git 存储，不用数据库 / JSON / YAML。">State is stored as Markdown + git, not a database / JSON / YAML.</li>
+          <li data-en="State directory named workspace/, not wam/ or .wam/." data-zh="状态目录命名为 workspace/，不用 wam/ 或 .wam/。">State directory named workspace/, not wam/ or .wam/.</li>
+          <li data-en="Development governance: directions/ folders + promotion gate (evidence / proposals / decisions)." data-zh="开发治理：directions/ 文件夹 + 晋升门（证据 / 提案 / 决策三层）。">Development governance: directions/ folders + promotion gate (evidence / proposals / decisions).</li>
+          <li data-en="Four competing directions opened; convergence rule: first verified vertical slice wins." data-zh="开启四个竞争方向；收敛规则：第一个验证过的垂直切片胜出。">Four competing directions opened; convergence rule: first verified vertical slice wins.</li>
+          <li data-en="Public site as a bilingual atompunk presentation artifact." data-zh="公开站点作为双语原子朋克展示物。">Public site as a bilingual atompunk presentation artifact.</li>
+        </ol>
+
+        <h3 data-en="Progress log (recent)" data-zh="进展流水（近期）">Progress log (recent)</h3>
+        <ul>
+          <li data-en="2026-08-06 — Project founded; M0 foundation delivered (state model + six-step protocol); all files translated to English." data-zh="2026-08-06 — 立项；M0 地基交付（状态模型 + 六步协议）；全部文件转英文。">2026-08-06 — Project founded; M0 foundation delivered (state model + six-step protocol); all files translated to English.</li>
+          <li data-en="2026-08-07 — Targeted survey (3 parallel research tasks); governance established; 4 directions opened; site built, v2 (constructivism), v3 (age layer) and deployed." data-zh="2026-08-07 — 定向调研（3 个并行任务）；治理建立；4 个方向开启；站点 v1/v2（结构主义）/v3（做旧层）构建并部署。">2026-08-07 — Targeted survey (3 parallel research tasks); governance established; 4 directions opened; site built, v2 (constructivism), v3 (age layer) and deployed.</li>
+        </ul>
+
+        <p class="doc-quote" data-en="Nothing here is final. The ideas may be revised, extended, or overturned as the architecture progresses — that openness is part of WAM itself." data-zh="这里的一切都不是最终定义。随着架构推进，这些想法可能被修正、扩展甚至推翻——这种开放本身就是 WAM 的一部分。">Nothing here is final. The ideas may be revised, extended, or overturned as the architecture progresses — that openness is part of WAM itself.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="hazard" style="margin-bottom:40px;"></div>
+  <div class="container footer-inner">
+    <svg class="trefoil" viewBox="0 0 100 100" aria-hidden="true">
+      <g fill="currentColor">
+        <path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z"/>
+        <path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(120 50 50)"/>
+        <path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(240 50 50)"/>
+      </g>
+      <circle cx="50" cy="50" r="7" fill="var(--orange)"/>
+    </svg>
+    <p class="footer-quote" data-en="“Wait a Minute” is a reminder, a posture, a design philosophy — a comment written before every line of code." data-zh="“Wait a Minute” 是一个提醒，一种姿态，一种设计哲学——写在每一行代码前面的注释。">“Wait a Minute” is a reminder, a posture, a design philosophy — a comment written before every line of code.</p>
+    <p class="footer-meta">WAM — Wait a Minute · <span data-en="by" data-zh="作者">by</span> ceaserzhao (zbbsdsb) · <a href="https://github.com/zbbsdsb/WAM-Framework" target="_blank" rel="noopener" data-en="source on GitHub" data-zh="源码在 GitHub">source on GitHub</a></p>
+    <p class="scan-note">SCANNED &amp; INDEXED — 2026-08-07 · M1 ACTIVE</p>
+  </div>
+</footer>
+
+<script>
+  var KEY = 'wam-lang';
+  var lang = localStorage.getItem(KEY);
+  if (!lang) lang = (navigator.language || 'en').toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en';
+
+  function applyLang(l) {
+    document.documentElement.lang = l === 'zh' ? 'zh-CN' : 'en';
+    document.querySelectorAll('[data-en]').forEach(function (el) {
+      var t = el.getAttribute('data-' + l);
+      if (t !== null) el.innerHTML = t;
+    });
+    document.title = l === 'zh' ? 'WAM — 详情' : 'WAM — Details';
+    document.getElementById('lang-en').classList.toggle('active', l === 'en');
+    document.getElementById('lang-zh').classList.toggle('active', l === 'zh');
+    localStorage.setItem(KEY, l);
+  }
+  function setLang(l) { applyLang(l); }
+  applyLang(lang);
+</script>
+</body>
+</html>
