@@ -11,3 +11,4 @@
 - [2026-08-07] Opened 4 competing directions: global-route (author) / substrate / agent-plugin / weight-first; archived architecture/ (superseded) — Evidence: directions/*/README.md, directions/archive/architecture/README.md
 - [2026-08-07] Added a mermaid architecture diagram to each direction README — Evidence: directions/{global-route,substrate,agent-plugin,weight-first}/README.md
 - [2026-08-07] Built the public site (site/index.html, bilingual EN/中文, atompunk), verified in browser: language toggle, localStorage persistence, zero console errors — Evidence: site/index.html, browser verification
+- [2026-08-07] Deployed the site: gh-pages branch (source: site/index.html), GitHub Pages enabled via API (branch source had to be / or /docs — chose gh-pages branch with /) — Evidence: https://zbbsdsb.github.io/WAM-Framework/ (HTTP 200, all content checks PASS, browser render verified)
