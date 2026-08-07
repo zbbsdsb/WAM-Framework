@@ -51,6 +51,8 @@ Whether the underlying system is one agent or many is an implementation detail. 
 
 The collaboration state — read at the start of every session, written at the end — lives in [`workspace/`](workspace/).
 
+**Public site** (bilingual, atompunk): <https://zbbsdsb.github.io/WAM-Framework/> · source: [`site/`](site/)
+
 ---
 
 *This document records the core ideas of WAM. It is not the final definition; the ideas may be revised, extended, or overturned as the architecture progresses. That openness is part of WAM itself.*
