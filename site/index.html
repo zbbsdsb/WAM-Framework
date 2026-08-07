@@ -7,19 +7,30 @@
 <title>WAM — Wait a Minute</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#F4EEDC; --paper-2:#EAE1C8; --ink:#211D17; --muted:#6E6658;
-    --line:#C7BCA0; --orange:#E8501E; --teal:#0F6E66; --amber:#F0A92E; --red:#C8102E;
+    --paper:#EFE5CC; --paper-2:#E3D7B8; --ink:#2E2517; --muted:#7A6C55;
+    --line:#C3B18A; --orange:#C25A1D; --teal:#0B5750; --amber:#C98F24; --red:#B8152E;
     --mono:'Space Mono','Noto Sans SC','Microsoft YaHei',monospace;
     --display:'Bungee','Noto Sans SC','Microsoft YaHei',sans-serif;
+    --typewriter:'Special Elite','Space Mono','Noto Sans SC','Microsoft YaHei',monospace;
     --shadow:4px 4px 0 var(--ink);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{background:var(--paper);color:var(--ink);font-family:var(--mono);line-height:1.65;font-size:16px;}
   ::selection{background:var(--orange);color:var(--paper);}
+
+  /* ---------- age overlay: scanlines + grain + vignette + stains ---------- */
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
+    background:repeating-linear-gradient(0deg, transparent 0 3px, rgba(46,37,23,.03) 3px 4px);}
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;mix-blend-mode:multiply;opacity:.85;
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='linear' slope='0.055'/></feComponentTransfer></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
+      radial-gradient(ellipse at center, transparent 55%, rgba(58,40,20,.14) 100%),
+      radial-gradient(ellipse 340px 260px at 10% 20%, rgba(122,90,40,.10), transparent 60%),
+      radial-gradient(ellipse 280px 220px at 90% 80%, rgba(100,70,30,.09), transparent 60%);}
   .container{max-width:1040px;margin:0 auto;padding:0 24px;}
 
   /* ---------- hazard stripes ---------- */
@@ -50,7 +61,8 @@
   .hero-inner{position:relative;z-index:1;padding:72px 0 64px;display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:center;}
   .hero-kicker{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:2px;color:var(--paper);background:var(--red);border:2px solid var(--ink);padding:6px 12px;margin-bottom:22px;box-shadow:3px 3px 0 var(--ink);}
   .hero-kicker svg{width:16px;height:16px;}
-  .hero h1{font-family:var(--display);font-size:clamp(44px,7vw,84px);line-height:1.02;text-transform:uppercase;letter-spacing:1px;transform:skewX(-6deg);}
+  .hero h1{font-family:var(--display);font-size:clamp(44px,7vw,84px);line-height:1.02;text-transform:uppercase;letter-spacing:1px;transform:skewX(-6deg);
+    text-shadow:1.6px 1px 0 rgba(184,21,46,.16), -1.1px -0.6px 0 rgba(11,87,80,.13);}
   .hero h1 .dot{color:var(--orange);}
   .hero .tagline{margin-top:20px;font-size:17px;max-width:52ch;color:var(--ink);}
   .hero .cta{margin-top:30px;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-weight:700;font-size:15px;text-decoration:none;color:var(--paper);background:var(--ink);border:2px solid var(--ink);padding:14px 22px;box-shadow:var(--shadow);}
@@ -77,6 +89,11 @@
   footer .star-ic{display:none;}
   h2.section-title{font-family:var(--display);font-size:clamp(26px,3.6vw,40px);margin-top:18px;text-transform:uppercase;letter-spacing:.5px;}
   h2.section-title::before{content:"";display:inline-block;width:13px;height:13px;background:var(--red);margin-right:14px;transform:rotate(45deg);}
+  h2.section-title::after{font-family:var(--typewriter);font-size:.42em;color:var(--muted);letter-spacing:3px;margin-left:12px;vertical-align:middle;}
+  #problem h2::after{content:"№ 01";}
+  #philosophy h2::after{content:"№ 02";}
+  #principles h2::after{content:"№ 03";}
+  #status h2::after{content:"№ 04";}
   .section-sub{margin-top:10px;color:var(--muted);max-width:70ch;}
 
   /* ---------- defects ---------- */
@@ -105,7 +122,8 @@
   .panel .zh-sub{display:block;color:var(--muted);font-size:14px;margin-top:8px;}
 
   .one-pct{margin-top:40px;display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:center;border:2px dashed var(--ink);padding:30px 34px;background:var(--paper-2);position:relative;overflow:hidden;}
-  .one-pct::before{content:"";position:absolute;inset:0;background:repeating-conic-gradient(from 0deg, rgba(200,16,46,.07) 0deg 6deg, transparent 6deg 22deg);pointer-events:none;}
+  .one-pct::before{content:"";position:absolute;inset:0;background:repeating-conic-gradient(from 0deg, rgba(184,21,46,.07) 0deg 6deg, transparent 6deg 22deg);pointer-events:none;}
+  .one-pct::after{content:"";position:absolute;left:16px;top:12px;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 35%, rgba(46,37,23,.4), rgba(46,37,23,.1) 65%, transparent);box-shadow:26px 0 0 0 rgba(46,37,23,.16);}
   .one-pct .big{font-family:var(--display);font-size:clamp(64px,9vw,110px);line-height:.9;color:var(--orange);-webkit-text-stroke:2px var(--ink);}
   .one-pct .text{font-size:16.5px;}
   .one-pct .text strong{display:block;font-size:19px;margin-bottom:6px;}
@@ -133,14 +151,20 @@
   .dir-row .w{font-size:12px;font-weight:700;letter-spacing:1px;color:var(--teal);border:1px solid var(--teal);padding:3px 8px;white-space:nowrap;}
   .status-foot{padding:14px 22px;font-size:14px;border-top:1px solid var(--paper-2);color:var(--paper);}
 
+  /* ---------- stamps (age marks) ---------- */
+  .stamp-circ{width:132px;height:132px;margin-top:34px;color:var(--red);opacity:.82;transform:rotate(-9deg);mix-blend-mode:multiply;filter:blur(.3px);}
+  .stamp-sq{position:absolute;right:20px;bottom:14px;width:150px;color:var(--red);opacity:.72;transform:rotate(4deg);mix-blend-mode:multiply;z-index:2;filter:blur(.3px);}
+  .stamp text{font-family:var(--mono);}
+
   /* ---------- footer ---------- */
   footer{padding:48px 0 0;background:var(--ink);color:var(--paper);}
   .footer-inner{display:flex;flex-direction:column;gap:18px;align-items:center;text-align:center;padding-bottom:40px;}
   .footer-inner .trefoil{width:56px;height:56px;color:var(--amber);}
-  .footer-quote{font-size:15px;font-style:italic;color:var(--paper-2);max-width:56ch;}
+  .footer-quote{font-size:15px;font-style:italic;color:var(--paper-2);max-width:56ch;font-family:var(--typewriter);}
   .footer-meta{font-size:13px;color:var(--muted);}
   .footer-meta a{color:var(--orange);text-decoration:none;}
   .footer-meta a:hover{text-decoration:underline;}
+  .scan-note{font-size:11px;letter-spacing:2.5px;color:var(--muted);}
 
   /* ---------- responsive ---------- */
   @media (max-width:840px){
@@ -148,6 +172,8 @@
     .atom{order:-1;width:min(240px,60vw);}
     .hero .ring{display:none;}
     .hero .hero-star{width:54px;height:54px;top:12px;right:4%;}
+    .stamp-circ{width:104px;height:104px;margin-top:24px;}
+    .stamp-sq{width:118px;right:12px;bottom:10px;}
     .philosophy-grid{grid-template-columns:1fr;}
     .principles{grid-template-columns:1fr;}
     .dir-row{grid-template-columns:1fr;gap:4px;}
@@ -199,6 +225,14 @@
         <h1 data-en="Wait a Minute<span class=&quot;dot&quot;>.</span>" data-zh="等一下<span class=&quot;dot&quot;>。</span>">Wait a Minute<span class="dot">.</span></h1>
         <p class="tagline" data-en="An agent framework that stops, looks at the whole situation, and then — and only then — takes the next step." data-zh="一个智能体框架：先停下来，看清整个局面，然后——只有然后——才迈出下一步。">An agent framework that stops, looks at the whole situation, and then — and only then — takes the next step.</p>
         <a class="cta" href="#problem" data-en="READ THE MANIFESTO ↓" data-zh="阅读宣言 ↓">READ THE MANIFESTO ↓</a>
+        <svg class="stamp stamp-circ" viewBox="0 0 120 120" aria-hidden="true">
+          <defs><path id="circ" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs>
+          <circle cx="60" cy="60" r="52" fill="none" stroke="currentColor" stroke-width="2.5"/>
+          <circle cx="60" cy="60" r="44" fill="none" stroke="currentColor" stroke-width="1" opacity=".55"/>
+          <text font-size="13" letter-spacing="2.5" fill="currentColor"><textPath href="#circ">WAIT A MINUTE • EST. 2026 • ATOMIC AGE •</textPath></text>
+          <text x="60" y="66" text-anchor="middle" font-size="24" font-weight="700" fill="currentColor" font-family="var(--display)">WAM</text>
+          <text x="60" y="80" text-anchor="middle" font-size="8" letter-spacing="2" fill="currentColor" opacity=".85">ARCHIVED</text>
+        </svg>
       </div>
       <div class="atom" aria-hidden="true">
         <div class="orbit-wrap a"><div class="orbit"></div></div>
@@ -290,6 +324,11 @@
           <strong data-en="We build the bottom 1% of the foundation — and build it solidly." data-zh="只做底座的 1%，但把这 1% 做扎实。">We build the bottom 1% of the foundation — and build it solidly.</strong>
           <span data-en="No 100% shell. State sync, goal construction, progress continuity, uncertainty management — answered before any feature list." data-zh="不做 100% 的空壳。状态如何同步、目标如何构建、进展如何延续、不确定性如何管理——在任何一个功能清单之前，先回答这些。">No 100% shell. State sync, goal construction, progress continuity, uncertainty management — answered before any feature list.</span>
         </div>
+        <svg class="stamp stamp-sq" viewBox="0 0 120 56" aria-hidden="true">
+          <rect x="4" y="4" width="112" height="48" fill="none" stroke="currentColor" stroke-width="2.5"/>
+          <text x="60" y="25" text-anchor="middle" font-size="13" font-weight="700" letter-spacing="3" fill="currentColor">已验证 VERIFIED</text>
+          <text x="60" y="43" text-anchor="middle" font-size="9" letter-spacing="2" fill="currentColor" opacity=".8">PROMOTION GATE ✓</text>
+        </svg>
       </div>
     </div>
   </section>
@@ -354,6 +393,7 @@
     </svg>
     <p class="footer-quote" data-en="“Wait a Minute” is a reminder, a posture, a design philosophy — a comment written before every line of code." data-zh="“Wait a Minute” 是一个提醒，一种姿态，一种设计哲学——写在每一行代码前面的注释。">“Wait a Minute” is a reminder, a posture, a design philosophy — a comment written before every line of code.</p>
     <p class="footer-meta">WAM — Wait a Minute · <span data-en="by" data-zh="作者">by</span> ceaserzhao (zbbsdsb) · <a href="https://github.com/zbbsdsb/WAM-Framework" target="_blank" rel="noopener" data-en="source on GitHub" data-zh="源码在 GitHub">source on GitHub</a></p>
+    <p class="scan-note">SCANNED &amp; INDEXED — 2026-08-07 · M1 ACTIVE</p>
   </div>
 </footer>
 
