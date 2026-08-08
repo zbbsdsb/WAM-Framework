@@ -55,4 +55,4 @@ flowchart TB
 
 ## Next step
 
-Vertical slice: a Hermes skill that runs read→wait→judge→do→verify→write over workspace/, used on WAM's own repo for one week; promotion gate: three consecutive sessions where the skill's state check caught something the host agent would have missed.
+Vertical slice (scheduled, stage 2): a Hermes skill that runs read→wait→judge→do→verify→write over workspace/, used on WAM's own repo for one week; promotion gate: three consecutive sessions where the skill's state check caught something the host agent would have missed. Shares implementation with the substrate CLI.

@@ -29,10 +29,15 @@ WAM's own philosophy: no bluffing, verification before commitment. To keep the p
 
 ## Current directions
 
-- `global-route/` — (author) WAM as a global orchestration entity, inspired by Hermes Agent. Critical path.
-- `substrate/` — WAM as a state substrate: library + CLI for the state model, no agent of its own. Critical path.
-- `agent-plugin/` — WAM embedded in an existing agent (skill / MCP) implementing the six-step protocol. Critical path.
-- `weight-first/` — lead with the original contribution: goal DAG + critical-path computation + unknown registry. Critical path.
+- `global-route/` — (author) WAM as a global orchestration entity, inspired by Hermes Agent. Critical path. **Slicing: minimal resume experiment (no full engine).**
+- `substrate/` — WAM as a state substrate: library + CLI for the state model, no agent of its own. Critical path. **Slicing: stage 1 — wam CLI + evidence checker (verify-gate merged in).**
+- `agent-plugin/` — WAM embedded in an existing agent (skill / MCP) implementing the six-step protocol. Critical path. **Slicing: stage 2 — Hermes skill, one week on the WAM repo.**
+- `weight-first/` — lead with the original contribution: goal DAG + critical-path computation + unknown registry. Critical path. **Slicing: stage 3 — goal DAG + critical-path prototype.**
+
+## Deferred (not yet opened as directions)
+
+- `verify-gate/` — evidence checker for the Verify step — merged into the substrate slice (stage 1); reconsider as its own direction if it outgrows the CLI.
+- `state-v2/` — state model evolution from memory research (CoALA layering, reflection triggers) — deferred until substrate exposes real problems.
 
 ## Archived
 

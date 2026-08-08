@@ -69,4 +69,4 @@ flowchart LR
 
 ## Next step
 
-Author confirms the reconstruction → proposal.md + the vertical slice (orchestrator resume demo).
+Minimal resume experiment (scheduled, stage 1 parallel): cross-session "continue" from workspace/ — open the repo in a fresh session, verify the state files alone restore the situation/goals/progress/decisions. No full engine. Pass → engine worth building; fail → falsified (existing platforms already do this).

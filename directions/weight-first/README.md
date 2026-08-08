@@ -52,4 +52,4 @@ flowchart LR
 
 ## Next step
 
-Vertical slice: weight-tiered goal DAG + critical-path computation over WAM's own goals.md; promotion gate: within two weeks, the computed critical path changed (or prevented) a priority decision that the flat todo would not have caught.
+Vertical slice (scheduled, stage 3): weight-tiered goal DAG + critical-path computation over WAM's own goals.md (pure local prototype); promotion gate: within two weeks, the computed critical path changed (or prevented) a priority decision that the flat todo would not have caught.

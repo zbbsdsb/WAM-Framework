@@ -62,4 +62,4 @@ flowchart LR
 
 ## Next step
 
-Vertical slice: a `wam` CLI (`state check`, `goal next`, `log append`) exercised on WAM's own workspace for one week; promotion gate: the CLI must catch a real state-format error and answer "what's next" from goals.md without reading the files by hand.
+Vertical slice (scheduled, stage 1): a `wam` CLI (`state check`, `goal next`, `log append`) exercised on WAM's own workspace, plus an evidence checker for the Verify step (verify-gate merged in); promotion gate: the CLI must catch a real state-format error and answer "what's next" from goals.md without reading the files by hand; the checker must flag a "done" claim that carries no evidence.
