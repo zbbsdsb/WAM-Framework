@@ -21,11 +21,13 @@
 
 | Paper | Tier | WAM hook | Entry status |
 |---|---|---|---|
-| Memory in the Age of AI Agents (survey, 107p) | critical | Memory-form taxonomy → state-v2 / substrate layering | Ingestion done; deep-read scheduled |
-| BMAM: Brain-inspired Multi-Agent Memory | critical | Subsystem memory ↔ four state files; "soul erosion" names the continuity gap | Ingestion done; deep-read scheduled |
-| ADAMEM: Test-Time Adaptive Memory | enhancement | Long-term trajectory + on-the-fly strategy memory → Read step | Ingestion done |
-| Text World Models for LLM-based Agents | enhancement | State→action→outcome prediction → "reverse machine" / pre-verification | Ingestion done |
-| World-Action Model (WAM) — CALVIN | noise | Name collision only; robotics RL, unrelated | Ingestion done |
+| Memory in the Age of AI Agents (survey, 107p) | critical | Memory-form taxonomy → state-v2 / substrate layering | Full doc (selected sections read; Functions/Dynamics/7.5 pending) |
+| BMAM: Brain-inspired Multi-Agent Memory | critical | Subsystem memory ↔ four state files; "soul erosion" names the continuity gap | Full doc (method + experiments + ablations read) |
+| ADAMEM: Test-Time Adaptive Memory | enhancement | Long-term trajectory + on-the-fly strategy memory → Read step | Full doc (method + experiments read) |
+| Text World Models for LLM-based Agents | enhancement | State→action→outcome prediction → "reverse machine" / pre-verification | Full doc (taxonomy + mechanisms read) |
+| World-Action Model (WAM) — CALVIN | noise | Name collision only; robotics RL, unrelated | Full doc (method read) |
+
+Every entry now carries: problem & motivation, core method, experiments & results, limitations, detailed WAM mapping, **evaluation criteria (评估标准, for the later assessment phase)**, and an **R&D path (研发路线, for the later development phase)**. The library is a *storage repository* — assessment and development happen later, gated by the normal promotion process.
 
 ## Source material
 
