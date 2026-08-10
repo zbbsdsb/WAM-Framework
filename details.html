@@ -274,6 +274,55 @@
     </div>
   </section>
 
+  <!-- ============ 06 REFERENCE ============ -->
+  <section id="doc-reference" class="doc-section">
+    <div class="container">
+      <span class="section-tag">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><g fill="currentColor"><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z"/><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(120 50 50)"/><path d="M50 50 L50 20 A30 30 0 0 1 75.98 35 Z" transform="rotate(240 50 50)"/></g><circle cx="50" cy="50" r="7" fill="var(--orange)"/></svg><svg class="star-ic" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,6 60,38 94,38 66,59 77,92 50,71 23,92 34,59 6,38 40,38" fill="currentColor"/></svg>
+        <span data-en="THE REFERENCE LIBRARY" data-zh="借鉴库">THE REFERENCE LIBRARY</span>
+      </span>
+      <h2 class="section-title" data-en="Borrowed papers, weighted" data-zh="按权重分类的借鉴">Borrowed papers, weighted</h2>
+      <p class="section-sub" data-en="A storage repository: papers classified into three weight tiers with full documentation (method, experiments, WAM mapping, evaluation criteria, R&D path). Assessment and development happen later, gated by the promotion process. Full entries live in the repository under reference/." data-zh="存储库定位：论文按三档权重分类，文档写足（方法、实验、与 WAM 的映射、评估标准、研发路线）。评估与研发后期进行，走正常的晋升门。完整条目在仓库 reference/ 下。">A storage repository: papers classified into three weight tiers with full documentation (method, experiments, WAM mapping, evaluation criteria, R&D path). Assessment and development happen later, gated by the promotion process. Full entries live in the repository under reference/.</p>
+
+      <div class="ref-list">
+        <div class="ref-card">
+          <div class="ref-head"><span class="tier critical">CRITICAL</span><span class="ref-title" data-en="Memory in the Age of AI Agents (survey)" data-zh="AI 智能体时代的记忆（综述）">Memory in the Age of AI Agents (survey)</span></div>
+          <div class="ref-file">reference/critical/memory-survey.md · 107 pages</div>
+          <p data-en="The memory-form taxonomy (Flat / Planar / Hierarchical, parametric, latent) — the design space and dictionary for state-v2 and the substrate read layer." data-zh="记忆形态分类学（Flat / Planar / Hierarchical、参数化、潜在）——state-v2 与基板读取层的设计空间与字典。">The memory-form taxonomy (Flat / Planar / Hierarchical, parametric, latent) — the design space and dictionary for state-v2 and the substrate read layer.</p>
+          <div class="ref-hook" data-en="→ Hook: our four Markdown files are a flat, human-readable form; the survey documents the trade-offs the field accepts instead." data-zh="→ 借鉴点：我们的四个 Markdown 文件是扁平的、人类可读的形态；综述记录了业界为此接受的权衡。">→ Hook: our four Markdown files are a flat, human-readable form; the survey documents the trade-offs the field accepts instead.</div>
+        </div>
+
+        <div class="ref-card">
+          <div class="ref-head"><span class="tier critical">CRITICAL</span><span class="ref-title" data-en="BMAM — Brain-inspired Multi-Agent Memory" data-zh="BMAM — 脑启发多智能体记忆">BMAM — Brain-inspired Multi-Agent Memory</span></div>
+          <div class="ref-file">reference/critical/bmam.md · arXiv 2601.20465</div>
+          <p data-en="Names the enemy: “soul erosion” — fragmented memory degrading behavioral continuity across sessions. Its four memory subsystems independently converge on WAM's four-file split (log / decisions / goals / protocol)." data-zh="给敌人命名：“灵魂侵蚀”——碎片化记忆导致跨会话行为连续性退化。其四个记忆子系统独立收敛于 WAM 的四文件拆分（log / decisions / goals / protocol）。">Names the enemy: “soul erosion” — fragmented memory degrading behavioral continuity across sessions. Its four memory subsystems independently converge on WAM's four-file split (log / decisions / goals / protocol).</p>
+          <div class="ref-hook" data-en="→ Hook: external validation of M0's bet; timeline indexing and hybrid retrieval (RRF) are state-v2 candidates." data-zh="→ 借鉴点：M0 赌注的外部验证；时间线索引与混合检索（RRF）是 state-v2 的候选。">→ Hook: external validation of M0's bet; timeline indexing and hybrid retrieval (RRF) are state-v2 candidates.</div>
+        </div>
+
+        <div class="ref-card">
+          <div class="ref-head"><span class="tier enhancement">ENHANCEMENT</span><span class="ref-title" data-en="ADAMEM — Test-Time Adaptive Memory" data-zh="ADAMEM — 测试时自适应记忆">ADAMEM — Test-Time Adaptive Memory</span></div>
+          <div class="ref-file">reference/enhancement/adamem.md · arXiv 2606.05684</div>
+          <p data-en="Static guidance retrieved once at episode start becomes misaligned as tasks unfold — the academic statement of state desync. Raw trajectory dumps degrade at scale (verbosity pathology)." data-zh="只在 episode 开始时检索一次的静态指导会随任务展开而错位——状态不同步的学术表述。原始轨迹堆砌会随规模增大而退化（冗长病）。">Static guidance retrieved once at episode start becomes misaligned as tasks unfold — the academic statement of state desync. Raw trajectory dumps degrade at scale (verbosity pathology).</p>
+          <div class="ref-hook" data-en="→ Hook: evidence for the protocol's Read step; the one-line-answer criterion for the wam CLI." data-zh="→ 借鉴点：协议“读”步骤的证据；wam CLI 的“一行答案”标准。">→ Hook: evidence for the protocol's Read step; the one-line-answer criterion for the wam CLI.</div>
+        </div>
+
+        <div class="ref-card">
+          <div class="ref-head"><span class="tier enhancement">ENHANCEMENT</span><span class="ref-title" data-en="Text World Models for LLM Agents" data-zh="面向 LLM 智能体的文本世界模型">Text World Models for LLM Agents</span></div>
+          <div class="ref-file">reference/enhancement/text-world-model.md · arXiv 2606.09032</div>
+          <p data-en="A transition model over textual states: given a state and a candidate action, predict the outcome. The academic form of the “reverse machine” in the global-route sketch — and a pre-verification upgrade for the Verify step." data-zh="文本状态上的转移模型：给定状态与候选动作，预测结果。global-route 草图中“反向机”的学术形态——也是“验”步骤的前瞻式升级。">A transition model over textual states: given a state and a candidate action, predict the outcome. The academic form of the “reverse machine” in the global-route sketch — and a pre-verification upgrade for the Verify step.</p>
+          <div class="ref-hook" data-en="→ Hook: “predict the evidence before doing” protocol variant; decision-preservation beats textual similarity when evaluating state summaries." data-zh="→ 借鉴点：“先预测证据再执行”的协议变体；评估状态摘要时，决策保持优于文本相似度。">→ Hook: “predict the evidence before doing” protocol variant; decision-preservation beats textual similarity when evaluating state summaries.</div>
+        </div>
+
+        <div class="ref-card">
+          <div class="ref-head"><span class="tier noise">NOISE</span><span class="ref-title" data-en="World-Action Model (CALVIN)" data-zh="World-Action Model（CALVIN）">World-Action Model (CALVIN)</span></div>
+          <div class="ref-file">reference/noise/world-action-model.md · arXiv 2603.28955</div>
+          <p data-en="Robotics RL world model with an inverse-dynamics head. Unrelated to this project — recorded for name-collision awareness only." data-zh="带逆动力学头的机器人 RL 世界模型。与本项目无关——仅记录撞名注意事项。">Robotics RL world model with an inverse-dynamics head. Unrelated to this project — recorded for name-collision awareness only.</p>
+          <div class="ref-hook" data-en="→ Hook: search/brand disambiguation when citing “WAM”." data-zh="→ 借鉴点：引用“WAM”时的检索/品牌消歧。">→ Hook: search/brand disambiguation when citing “WAM”.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer>
