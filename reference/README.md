@@ -1,6 +1,8 @@
 # Reference — 借鉴库
 
 > Established 2026-08-07. A weighted library of papers and ideas borrowed into WAM's development. Every entry is classified by weight tier and carries a "how to use it" exploration (利用探讨).
+>
+> **The pipeline is defined in [WORKFLOW.md](WORKFLOW.md)**: Ingest → Assess (no code, assessment matrix) → Propose (directions/) → Verify (vertical slice) → Integrate (promotion gate + write-back) → Revisit. Assessment and development happen AFTER ingestion — the library is a storage repository until a paper passes its matrix.
 
 ## Weight tiers (consistent with workspace/goals.md)
 
@@ -19,13 +21,15 @@
 
 ## Index
 
-| Paper | Tier | WAM hook | Entry status |
+Status: `ingested` (awaiting assessment) / `assessing` / `adopted` / `adapted` / `deferred` / `rejected`. Assessment priority: critical → enhancement → noise (never).
+
+| Paper | Tier | WAM hook | Status |
 |---|---|---|---|
-| Memory in the Age of AI Agents (survey, 107p) | critical | Memory-form taxonomy → state-v2 / substrate layering | Full doc (selected sections read; Functions/Dynamics/7.5 pending) |
-| BMAM: Brain-inspired Multi-Agent Memory | critical | Subsystem memory ↔ four state files; "soul erosion" names the continuity gap | Full doc (method + experiments + ablations read) |
-| ADAMEM: Test-Time Adaptive Memory | enhancement | Long-term trajectory + on-the-fly strategy memory → Read step | Full doc (method + experiments read) |
-| Text World Models for LLM-based Agents | enhancement | State→action→outcome prediction → "reverse machine" / pre-verification | Full doc (taxonomy + mechanisms read) |
-| World-Action Model (WAM) — CALVIN | noise | Name collision only; robotics RL, unrelated | Full doc (method read) |
+| Memory in the Age of AI Agents (survey, 107p) | critical | Memory-form taxonomy → state-v2 / substrate layering | ingested — assessment scheduled (next) |
+| BMAM: Brain-inspired Multi-Agent Memory | critical | Subsystem memory ↔ four state files; "soul erosion" names the continuity gap | ingested — assessment scheduled |
+| ADAMEM: Test-Time Adaptive Memory | enhancement | Long-term trajectory + on-the-fly strategy memory → Read step | ingested — assessment scheduled |
+| Text World Models for LLM-based Agents | enhancement | State→action→outcome prediction → "reverse machine" / pre-verification | ingested — assessment scheduled |
+| World-Action Model (WAM) — CALVIN | noise | Name collision only; robotics RL, unrelated | ingested — noise tier, never assessed |
 
 Every entry now carries: problem & motivation, core method, experiments & results, limitations, detailed WAM mapping, **evaluation criteria (评估标准, for the later assessment phase)**, and an **R&D path (研发路线, for the later development phase)**. The library is a *storage repository* — assessment and development happen later, gated by the normal promotion process.
 
