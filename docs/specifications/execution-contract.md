@@ -1,8 +1,8 @@
 # Execution Contract — 接口、状态结构与 Move 生命周期
 
-> Status: **specified**（未实现；`docs/decisions/register.md` 中无对应证据）· Version: 2026-11-10 · Supersedes: none（原文搬迁自 `docs/development/mvp-plan.md` §5–§7）
+> Status: **specified**（未实现；`docs/decisions/register.md` 中无对应证据）· Version: 2026-11-10 · Supersedes: none（原文搬迁自**重构前**的 `docs/06-development-plan.md` §5–§7）
 > Carrier: **none** — 本仓库尚无实现代码（`docs/development/roadmap.md` W1 起才有）
-> 本文件是 2026-10-09 v3 版 `docs/development/mvp-plan.md` 的 §5–§7 **原文搬迁**：文字一字未改，**节号保留为 §5 / §6 / §7**，因此仓内引用只需换路径（`docs/specifications/execution-contract.md §5.2` → 本文件 §5.2）。
+> 本文件是 2026-10-09 v3 版 `docs/06-development-plan.md`（今 `docs/development/mvp-plan.md`）的 §5–§7 **原文搬迁**：文字一字未改，**节号保留为 §5 / §6 / §7**，因此仓内原写作 `docs/06 §5.2` 的引用只需换路径，节号不变。
 > 上游（为什么这样设计）：`docs/architecture.md` · 下游（哪一周实现它）：`docs/development/roadmap.md`
 
 ## 5. 接口与数据契约
