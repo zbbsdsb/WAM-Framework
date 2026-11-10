@@ -1,6 +1,9 @@
 # Direction: substrate
 
-> Status: OPEN · Weight: critical path · Opened: 2026-08-07
+> Status: **PARKED** (2026-11-10) · Weight: critical path · Opened: 2026-08-07
+>
+> **Why parked, not archived.** Its first cut **is** `docs/development/roadmap.md` W1 (skeleton + `StateRepository` + schema v1); the work continues as a task, not as a direction. Nothing was falsified.
+> **Unlock condition.** Unpark as a direction only if the CLI outgrows the loop — e.g. the dashboard's `state check` returns, or the state model needs its own surface again.
 
 ## Hypothesis
 

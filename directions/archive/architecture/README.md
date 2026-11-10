@@ -1,6 +1,6 @@
 # Direction: Architecture
 
-> Status: OPEN · Weight: critical path · Opened: 2026-08-07
+> Status: **ARCHIVED** (2026-08-07, superseded by the four competing directions) · Weight: critical path · Opened: 2026-08-07
 
 ## Hypothesis
 

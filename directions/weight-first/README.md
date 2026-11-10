@@ -1,6 +1,9 @@
 # Direction: weight-first
 
-> Status: OPEN · Weight: critical path · Opened: 2026-08-07
+> Status: **PARKED — rejected for the MVP, not falsified** (2026-11-10) · Weight: critical path · Opened: 2026-08-07
+>
+> **Why parked, not archived.** Excluded from the MVP by `docs/decisions/register.md` H-04 (`dependency structure ≠ importance`) and by `docs/development/roadmap.md` §7. That is a judgement about *ordering*, not a disproof of the direction.
+> **Unlock condition.** Flat `goals.md` demonstrably fails at retrieval/priority — the reopen condition stated in `docs/development/roadmap.md` §7.
 >
 > **2026-10-09 annotation (not a rewrite).** `docs/development/mvp-plan.md` §4 places this slice **outside the MVP**, on the grounds recorded in `docs/vision.md` §9: dependency structure is not importance, and building a dependency graph before judgment quality has been validated risks optimizing a dimension never shown to matter — which is exactly what design principle P2 forbids. This is a recommendation on ordering, not a rejection of the direction; its own promotion gate still applies. Recorded as `docs/decisions/register.md` H-04.
 

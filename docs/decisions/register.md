@@ -98,12 +98,21 @@
 
 - **内容**：Evidence（`research/briefs/`）→ Proposals（`directions/`，**不可信**）→ Decisions（`docs/` + `workspace/`，权威）。未经验证不得进入官方结构。
 - **来源**：`docs/foundation.md` §Development Governance；`directions/README.md`
-- **性质**：本次新增的所有 `docs/vision.md–08` 属于 Decisions 层。
+- **性质**：本次新增的整套设计基线（`docs/vision.md` · `docs/architecture.md` · `docs/specifications/` · `docs/decisions/register.md` · `docs/specifications/acceptance.md`，即原 `docs/03`–`docs/08`）属于 Decisions 层。
 
 ### C-13 实验路径宣言：局部性结论
 
 - **内容**：实验路径不是完整路径，只为一个局部性结论存在；结论到达即终止归档；失败是成功。
 - **来源**：`experiments/README.md` §宣言（作者定义，2026-08-15）
+
+---
+
+### C-14 仓库知识结构：一类事实一个住处
+
+- **内容**：`docs/` 按生命周期分层（`foundation` / `vision` / `architecture` + `specifications/` / `decisions/` / `development/`）；`research/` 承载知识层；`directions/` 保留但增加第三个出口 `parked`；`workspace/` 四文件是项目状态的唯一权威；`docs/README.md` 是唯一文档索引。**同一类事实只允许一个住处，第二处只能留指针。**
+- **来源**：`REFACTORING_AUDIT.md`（13 条冲突、8 条结构问题）；`REPOSITORY_ARCHITECTURE.md`；`workspace/decisions.md` 2026-11-10
+- **性质**：治理决定，**不改变任何技术设计**。`docs/development/mvp-plan.md` §5–§7 的原文搬迁（至 `docs/specifications/execution-contract.md`）逐行核对：694 个非空行与迁移前一致。
+- **边界**：K-01（`workspace/*.md` 与 `.wam/state.json` 谁是权威）与 OQ-09/OQ-10 **未因本次重构被裁决**，仍按原状态挂着。
 
 ---
 
@@ -369,7 +378,9 @@ Intent / Situation / Judgment / Move / Evidence & Update。
 | **X-08** | DeepSeek Harness 被 `experiments/README.md` 记录为已验证的执行环境 | npm 上有 `@deepseek-ai/dsh@0.2.0-rc.2`，但本机 `node_modules` **未安装**，本轮未验证可运行 | 记为 B-09 的备选；不阻塞 MVP（I4 是接口） |
 | **X-09** | `docs/development/mvp-plan.md` §1.1 记 Python 为 **3.13.12** | 2026-10-28 实测本机为 **3.14.2** | 无实际影响（零第三方依赖）。记录以免后续按 3.13 的特性写代码 |
 | **X-10** | `docs/development/mvp-plan.md` §1.2 / B-09 把 **codex-cli 作为首个 JudgmentProvider 与 MoveExecutor**，并称"全部所需 flag 已实测" | flag 确实存在，**但执行被地区限制**：`api.openai.com` 返回 403 `Country, region, or territory not supported`（cf-ray HKG）。codex **已登录**，问题不在认证 | **已修正为 B-15**：改 DSH headless 为主、人作兜底。这是本仓库第一次出现"实测通过但结论仍被推翻"的情形——**验证了一个属性，不等于验证了它能不能用** |
-| **X-11** | 全部 `docs/` 的版本戳为 **2026-10-09**，`docs/decisions/register.md` 写于该日 | 本会话实际日期 **2026-10-28**，间隔 19 天；同一天（10-28）发现 codex 403、Python 3.14.2，并新增 `docs/development/scope.md`–`research/external-assets.md` | `docs/development/scope.md`–`research/external-assets.md` 以 2026-10-28 为版本戳；`docs/development/mvp-plan.md` 保留 10-09 版本戳并加修正指针（**不静默改写历史版本**） |
+| **X-11** | 全部 `docs/` 的版本戳为 **2026-10-09**，`docs/decisions/register.md` 写于该日 | 本会话实际日期 **2026-10-28**，间隔 19 天；同一天（10-28）发现 codex 403、Python 3.14.2，并新增 `docs/development/scope.md`、`docs/development/roadmap.md`、`research/external-assets.md` | 这三份以 2026-10-28 为版本戳；`docs/development/mvp-plan.md` 保留 10-09 版本戳并加修正指针（**不静默改写历史版本**） |
+| **X-12** | `site/details.html` §LIVE STATUS 自称 "Snapshot of workspace/ ... this section mirrors it"（"本区块如实镜像"） | 实为 **2026-08-07 冻结快照**：仍写"4 个方向"，无 `docs/03`–`11` 任何内容，无 codex 被证伪一事。与 README / `workspace/state.md` 三处不一致 | 2026-11-10 改标为 frozen snapshot（不再声称镜像）；内容与设计不动 |
+| **X-13** | 格子数：`README`、`workspace/state.md`、`workspace/goals.md` 写 **35**；`docs/development/scope.md` §1 写 **36**，§4.2 四集合为 20+3+1+12 | **36 才对**：摘要漏掉了 `MVP-SEAM`（1 项）这一类 | 2026-11-10 已统一为 36 并补上 SEAM；`scope` §4.2 为权威 |
 
 
 ---

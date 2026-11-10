@@ -1,6 +1,6 @@
 # Direction: shared-context
 
-> Status: **OPEN** · Weight: critical path（决定 M2 之后的架构走向；但它自己的第一个切片**不在** MVP 关键路径上）
+> Status: **ACTIVE** · Weight: critical path（决定 M2 之后的架构走向；但它自己的第一个切片**不在** MVP 关键路径上）
 > Opened: 2026-10-28 · 来源：作者 2026-10-27 的架构判断（原文见 §0）
 > 可信度：**提案层（不可信）**。未通过晋升门之前，任何实现不得引用它作为依据。
 

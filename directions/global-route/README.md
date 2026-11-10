@@ -1,6 +1,9 @@
 # Direction: global-route
 
-> Status: OPEN (author-authored) · Weight: critical path · Opened: 2026-08-07
+> Status: **PARKED** (2026-11-10) · Weight: critical path · Opened: 2026-08-07
+>
+> **Why parked, not archived.** Nothing here was tested or falsified; its two claims were *absorbed*: cross-session resume became MVP capability 8 (`docs/development/mvp-plan.md` §3.2), and "a single global orchestration entity" is now carried by `directions/shared-context/` §5 (Miracle Agent).
+> **Unlock condition.** Unpark if the resume capability proves insufficient in the fixture project, or if the shared-context experiment contradicts the single-judgment-source claim.
 >
 > **2026-10-09 annotation (not a rewrite).** The line below describing Hermes Agent as "the platform this project is developed on" could not be verified: there is no Hermes directory under `D:/github projects/`. The platform whose mechanism *was* verified against source is DeepSeek Harness (preset = directory containing `agent.cordis.yml` + `preset.yml`; see `experiments/README.md` §DSH 集成机制). WAM has **no confirmed execution platform dependency** — `docs/foundation.md` defers tech stack as an implementation detail. Recorded as `docs/decisions/register.md` X-01 / OQ-10. This file remains a proposals-layer document; resolving this needs the author's decision.
 

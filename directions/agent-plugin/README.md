@@ -1,6 +1,9 @@
 # Direction: agent-plugin
 
-> Status: OPEN · Weight: critical path · Opened: 2026-08-07
+> Status: **PARKED — unresolved conflict** (2026-11-10) · Weight: critical path · Opened: 2026-08-07
+>
+> **Why parked, not archived.** `directions/shared-context/` §8 states the opposite rule for the same question: when WAM is embedded in a host agent, **WAM still assigns `scope` and the host only executes**. If that cannot hold, agent-plugin and shared-context are mutually exclusive. This is a live design conflict, so archiving would erase it.
+> **Unlock condition.** The author decides who assigns `scope` in a host-agent deployment.
 >
 > **2026-10-09 annotation (not a rewrite).** References to "Hermes skill" below could not be verified: there is no Hermes directory under `D:/github projects/`. The mechanism that *was* verified against source is DeepSeek Harness agent presets (`experiments/README.md` §DSH 集成机制; re-confirmed 2026-10-09 against `D:/github projects/deepseek-harness/apps/cli/config/agent-presets/`, whose structure matches the repo template). Also note `docs/development/mvp-plan.md` §1 places this slice **after** the minimal verifiable core, not at stage 2. Recorded as `docs/decisions/register.md` X-01 / OQ-10.
 
