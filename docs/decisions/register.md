@@ -111,7 +111,7 @@
 
 - **内容**：`docs/` 按生命周期分层（`foundation` / `vision` / `architecture` + `specifications/` / `decisions/` / `development/`）；`research/` 承载知识层；`directions/` 保留但增加第三个出口 `parked`；`workspace/` 四文件是项目状态的唯一权威；`docs/README.md` 是唯一文档索引。**同一类事实只允许一个住处，第二处只能留指针。**
 - **来源**：`REFACTORING_AUDIT.md`（13 条冲突、8 条结构问题）；`REPOSITORY_ARCHITECTURE.md`；`workspace/decisions.md` 2026-11-10
-- **性质**：治理决定，**不改变任何技术设计**。`docs/development/mvp-plan.md` §5–§7 的原文搬迁（至 `docs/specifications/execution-contract.md`）逐行核对：694 个非空行与迁移前一致。
+- **性质**：治理决定，**不改变任何技术设计**。`docs/development/mvp-plan.md` §5–§7 的原文搬迁（至 `docs/specifications/execution-contract.md`）逐行核对：694 个非空行，路径归一化后与迁移前逐行相同（4 处差异全为路径字符串），正文一句未改。
 - **边界**：K-01（`workspace/*.md` 与 `.wam/state.json` 谁是权威）与 OQ-09/OQ-10 **未因本次重构被裁决**，仍按原状态挂着。
 
 ---

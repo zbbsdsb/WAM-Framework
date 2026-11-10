@@ -137,7 +137,7 @@ WAM-Framework/
 |---|---|---|
 | **V-1** | 全仓 Markdown 相对链接 | **0 处断链**（49 篇，排除 `research/archive/raw-archive.md` 的原文链接）。迁移前基线同为 0——没有引入新断链 |
 | **V-2** | 旧路径残留 | **0 处**（排除四份重构报告，它们描述的是旧状态；另有一处 `directions/archive/architecture/README.md` 里 2026-08-07 的历史引用，属归档原文，按规则不改） |
-| **V-3** | 拆分无内容丢失 | 把 `execution-contract.md`（去头部）+ `mvp-plan.md`（去插入行）按原顺序拼接，与 `git show 03c0432:docs/06-development-plan.md` 比对：**694 个非空行逐行相同**，差异只有新增的 2 处注记 |
+| **V-3** | 拆分无内容丢失 | 把 `execution-contract.md`（去头部）+ `mvp-plan.md`（去注记）按原顺序拼接，与 `git show 03c0432:docs/06-development-plan.md` 比对：**694 个非空行，把路径 token 归一化后逐行相同**；剩下的 4 行差异全部是路径字符串（长路径改名、短写 `docs/05` 展开为全路径、链接目标 `10-rd-roadmap-2027.md` → `roadmap.md`）。**无一句正文改动** |
 | **V-4** | `文件:行号` 引用 | `rawnote.md` 49 处：`docs/06` 的 12 处按新行号重算（§5–§7 段 `−223`，其余 `+1 / −315`，已抽验 3 处内容一致）；其余 37 处为纯改名，行号不变；4 处指向 README 的在文件头标注为"重构前行号" |
 | **V-5** | 空目录 | **0 个**（`experiments/archive/` 有 `.gitkeep`） |
 | **V-6** | 索引与目录一致 | `docs/` 实际 12 篇 = `docs/README.md` + 表中 11 篇，一一对应 |
