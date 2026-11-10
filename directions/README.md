@@ -1,6 +1,8 @@
 # Directions — Unverified Development Zones
 
 > Established 2026-08-07. Governance rule: nothing unverified enters the official structure.
+>
+> **2026-10-09 annotation.** All four directions remain OPEN and unverified; none has produced a vertical slice yet (see `workspace/log.md`, 2026-08-15: eight days with zero recorded execution). Ordering changed: `docs/06-development-plan.md` §1 places the minimal verifiable core (stage 2) ahead of the agent-plugin and weight-first slices. Two facts were checked and did not hold up — "Hermes Agent is the platform this project is developed on" (no such directory under `D:/github projects/`; DSH is the verified mechanism) and "WAM is built on Sponge" (zero occurrences in this repo, while `D:/github projects/Sponge/研发/03_架构与生态位.md` claims it). Both are recorded in `docs/07-decision-register.md` X-01, X-02, OQ-09, OQ-10 and need the author's decision.
 
 ## Why
 
@@ -33,6 +35,7 @@ WAM's own philosophy: no bluffing, verification before commitment. To keep the p
 - `substrate/` — WAM as a state substrate: library + CLI for the state model, no agent of its own. Critical path. **Slicing: stage 1 — wam CLI + evidence checker (verify-gate merged in).**
 - `agent-plugin/` — WAM embedded in an existing agent (skill / MCP) implementing the six-step protocol. Critical path. **Slicing: stage 2 — Hermes skill, one week on the WAM repo.**
 - `weight-first/` — lead with the original contribution: goal DAG + critical-path computation + unknown registry. Critical path. **Slicing: stage 3 — goal DAG + critical-path prototype.**
+- `shared-context/` — (author, 2026-10-27) WAM's collaboration substrate is a **layered shared context with explicit per-agent exploration boundaries**, not inter-agent messages; default scheduling runs a single global agent (Miracle Agent) that may call several tool-registry entities at once. Critical path (for the architecture after the MVP). **Slicing: a one-session, three-stage scope-conflict experiment — not a service.** Nearest neighbours to read first: SE-Blackboard (IEEE 11527206), LLM blackboard (NeurIPS 2026).
 
 ## Deferred (not yet opened as directions)
 

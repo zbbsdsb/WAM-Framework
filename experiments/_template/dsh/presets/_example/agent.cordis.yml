@@ -1,0 +1,64 @@
+# EXAMPLE agent preset for a WAM experiment stage.
+#
+# Copy this directory (`_example`) to your own preset id under
+# `dsh/presets/<preset-id>/`, edit, then sync (see dsh/SYNC.md).
+#
+# What a preset does: one session composes its agent from ONE preset, and
+# these rows decide which persona, tools, and skills that agent sees. This
+# example mirrors the harness's own `minimal` preset, adapted for WAM
+# experiment stages on Windows.
+#
+# Editing checklist:
+# - persona.text   -> stage name + the protocol/prompt contract this stage tests
+# - tool rows      -> keep only what the stage needs (1% principle: fewer tools,
+#                     fewer confounds; the model cannot use what it cannot see)
+# - skills/        -> add stage skills if the stage needs them
+
+# ── identity ────────────────────────────────────────────────────────────────
+
+# The persona is this agent's system prompt. For an experiment stage, spell out
+# the stage contract explicitly, e.g.:
+#
+#   You are running stage 01 of experiment path <path-id>.
+#   Protocol: read the stage plan at stages/01-<name>/plan.md, run the steps,
+#   then write results.md with evidence per DoD item. No evidence = not done.
+- id: persona
+  name: '@deepseek-ai/dsh-persona'
+  config:
+    text: |-
+      You are a WAM experiment agent.
+      Follow the six-step protocol: read -> wait -> judge -> do -> verify -> write.
+      Verify before claiming done; every "done" must carry evidence.
+      (Edit this text for the concrete stage contract.)
+    complete: true
+    includeRuntimeContext: false
+
+# ── shell ───────────────────────────────────────────────────────────────────
+
+# bash on non-Windows, pwsh on Windows (same pattern as the shipped `code`
+# preset). The executors stay on the host plane; these rows only expose the
+# model-facing tool.
+- id: tool-bash
+  name: '@deepseek-ai/dsh-tool-bash'
+  disabled: !!js process.platform === 'win32'
+
+- id: tool-pwsh
+  name: '@deepseek-ai/dsh-tool-pwsh'
+  disabled: !!js process.platform !== 'win32'
+
+# ── filesystem ──────────────────────────────────────────────────────────────
+
+- id: tool-fs
+  name: '@deepseek-ai/dsh-tool-fs'
+
+- id: tool-fs-search
+  name: '@deepseek-ai/dsh-tool-fs-search'
+
+# ── skills ──────────────────────────────────────────────────────────────────
+
+# A preset may ship skills: dsh/presets/<preset-id>/skills/<name>/SKILL.md
+- id: skill-filesystem
+  name: '@deepseek-ai/dsh-skill-filesystem'
+
+- id: tool-skill
+  name: '@deepseek-ai/dsh-tool-skill'

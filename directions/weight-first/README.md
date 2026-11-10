@@ -1,6 +1,8 @@
 # Direction: weight-first
 
 > Status: OPEN · Weight: critical path · Opened: 2026-08-07
+>
+> **2026-10-09 annotation (not a rewrite).** `docs/06-development-plan.md` §4 places this slice **outside the MVP**, on the grounds recorded in `docs/03-vision-and-concepts.md` §9: dependency structure is not importance, and building a dependency graph before judgment quality has been validated risks optimizing a dimension never shown to matter — which is exactly what design principle P2 forbids. This is a recommendation on ordering, not a rejection of the direction; its own promotion gate still applies. Recorded as `docs/07-decision-register.md` H-04.
 
 ## Hypothesis
 

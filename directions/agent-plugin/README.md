@@ -1,6 +1,8 @@
 # Direction: agent-plugin
 
 > Status: OPEN · Weight: critical path · Opened: 2026-08-07
+>
+> **2026-10-09 annotation (not a rewrite).** References to "Hermes skill" below could not be verified: there is no Hermes directory under `D:/github projects/`. The mechanism that *was* verified against source is DeepSeek Harness agent presets (`experiments/README.md` §DSH 集成机制; re-confirmed 2026-10-09 against `D:/github projects/deepseek-harness/apps/cli/config/agent-presets/`, whose structure matches the repo template). Also note `docs/06-development-plan.md` §1 places this slice **after** the minimal verifiable core, not at stage 2. Recorded as `docs/07-decision-register.md` X-01 / OQ-10.
 
 ## Hypothesis
 

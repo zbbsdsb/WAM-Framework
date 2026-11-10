@@ -1,6 +1,8 @@
 # Direction: global-route
 
 > Status: OPEN (author-authored) · Weight: critical path · Opened: 2026-08-07
+>
+> **2026-10-09 annotation (not a rewrite).** The line below describing Hermes Agent as "the platform this project is developed on" could not be verified: there is no Hermes directory under `D:/github projects/`. The platform whose mechanism *was* verified against source is DeepSeek Harness (preset = directory containing `agent.cordis.yml` + `preset.yml`; see `experiments/README.md` §DSH 集成机制). WAM has **no confirmed execution platform dependency** — `docs/01-foundation.md` defers tech stack as an implementation detail. Recorded as `docs/07-decision-register.md` X-01 / OQ-10. This file remains a proposals-layer document; resolving this needs the author's decision.
 
 ## Hypothesis
 

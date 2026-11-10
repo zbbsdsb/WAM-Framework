@@ -1,0 +1,15 @@
+# Local agent data — never commit
+.workbuddy/
+
+# Runtime state produced by WAM itself (see docs/specifications/execution-contract.md §6)
+.wam/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
