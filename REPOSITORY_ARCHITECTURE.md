@@ -54,7 +54,12 @@ WAM-Framework/
 │       ├── mvp-plan.md        ← docs/06 剩余段（§1–§4, §8–§15）工程计划
 │       └── dashboard-plan.md  ← docs/02  **deferred**（九周内不做，标注重开条件）
 │
-├── research/                  知识层——"外面知道的、我们抄回来的、作者写下的"
+├── paths/                     架构路径层——"整套架构的探索"（2026-11-11 新增，见 §14）
+│   ├── README.md              登记表：现有几条、各自状态、怎么加一条新的
+│   ├── _template/             最小模板：README / hypothesis / comparison
+│   └── octsix/                **Proposed**：有名字与六个空间名，**无内容**
+│
+├── research/                  知识层（跨路径）——"外面知道的、我们抄回来的、作者写下的"
 │   ├── README.md              新增：与 reference/ 的边界
 │   ├── briefs/                ← docs/research/01–03（带 Sources 的调研简报）
 │   ├── external-assets.md     ← docs/11（A/B/C 核实 + adopt/adapt/defer/reject）
@@ -62,7 +67,7 @@ WAM-Framework/
 │   └── archive/
 │       └── raw-corpus.md      ← raw-archive.md（392 个文件原文汇编，3.5 MB）
 │
-├── directions/                提案层——"还没验证的主张"（名字与治理规则保留）
+├── directions/                机制提案层——"单个机制/组件的未验证主张"（**不是**整套架构，那是 paths/）
 │   ├── README.md              治理：三层信任 + 晋升门（+ 新增 parked 出口）
 │   ├── shared-context/        **active**（唯一活跃主张）
 │   ├── global-route/          parked（内容已分流）
@@ -110,6 +115,7 @@ WAM-Framework/
 | `docs/development/roadmap.md` | 这周做什么 | 周表、退出条件、砍单顺序 | 任务细节（在 mvp-plan） | **时间** |
 | `docs/development/scope.md` | 什么进 MVP、什么不进 | 三轴格子、推导规则、类型声明 | 排期 | **范围** |
 | `docs/development/mvp-plan.md` | 怎么造 | 环境基线、能力分级、任务、阶段门 | 周排期（指回 roadmap） | 工程做法 |
+| `paths/` | 还有哪些整体架构在试 | 每条路径的假设、概念模型、差异、路径内决定 | 已采纳的架构（那是 `docs/`）、单个机制提案（`directions/`） | **哪条路径说了什么** |
 | `research/` | 我们知道了什么 | 简报、外部资产、作者原始材料、原文汇编 | 任何"我们主张"的结论 | **证据与外部分析** |
 | `directions/` | 我们可能怎么做 | 假设、证伪条件、切片刻画 | 已采纳的设计、已跑的结论 | **未验证主张** |
 | `experiments/` | 跑了什么、得到什么 | plan / results / artifacts / preset | 架构主张 | **实验结论** |
@@ -123,8 +129,9 @@ WAM-Framework/
 
 按顺序问，第一个命中即停：
 
+0. **是一整套架构吗？**（自带概念模型、可能改变 WAM 的顶层名词）→ `paths/<id>/`。判据与流程见 §14 与 `PATH_GOVERNANCE.md`。
 1. **是外部的东西吗？**（论文 / 别人的系统）→ `reference/`（要借鉴，走六阶段）或 `research/briefs/`（只做调研）。
-2. **是我们还没证据的主张吗？** → `directions/<name>/`。**能写出证伪条件才准进。**
+2. **是一个机制 / 组件的主张吗？** → `directions/<name>/`。**能写出证伪条件才准进。**
 3. **是要跑的验证吗？** → `experiments/<id>/`，跑前有 `plan.md`，跑后有 `results.md`。
 4. **是已经采纳、且会约束实现的决定吗？** → `docs/specifications/`（行为契约）或 `docs/decisions/register.md`（状态）+ `workspace/decisions.md`（事件）。
 5. **是"什么时候做"吗？** → `docs/development/roadmap.md`。**是"做不做"吗？** → `docs/development/scope.md`。
@@ -334,3 +341,62 @@ site/* <── 只从 README + docs/vision 取材（不抄状态）
 | 2 份原始材料在根目录 | 1 个 `research/` 层，含原文汇编归档 |
 | 4 个方向永久 `OPEN` | 1 active / 4 parked（各写解锁条件）/ 1 archived |
 | 无 `.gitignore` | `.workbuddy/` 不进版本控制 |
+
+---
+
+## 14. 多路径架构层（2026-11-11 补充）
+
+> 本节修正 §1 的一个隐含前提：前一版目标树假定"仓库 = 一套架构 + 若干提案"。作者 2026-11-11 指出 WAM 必须支持多条独立架构路径，故新增 `paths/` 层，并把 `directions/` 明确降为**机制级**提案层。
+
+### 14.1 缺的是什么
+
+| # | 事实 | 后果 |
+|---|---|---|
+| K-14 | 仓库只能容纳一条架构（`docs/architecture.md` + 一份 `mvp-plan`） | 第二条架构只能覆盖第一条 |
+| K-15 | `OctSix` 在仓库里零内容（仅 334 B 空 canvas，`raw-archive.md` B-288） | 无法审计；不能替它编结构 |
+| K-16 | `docs/` 的五概念基线 vs OctSix 六空间，归属未定 | 可能是"canonical vs 新路径"，也可能是"同一套东西的两个阶段" → **OQ-28** |
+| K-17 | "Shared Context" 同时是空间名、方向名、概念近邻 | 同名跨层，合并即失真 |
+
+### 14.2 目标树增量
+
+```text
+paths/
+├── README.md      登记表（6 列）+ 加一条新路径的 5 步
+├── _template/     README.md / hypothesis.md / comparison.md
+└── octsix/        README.md（Proposed；声明 + 词面对照 + OQ-28）
+```
+
+`directions/` 重定位为"机制提案层"；`experiments/README.md` 增加 `path:` / `direction:` 归属字段。
+
+### 14.3 三层知识落到目录
+
+| 层 | 目录 | 晋升 |
+|---|---|---|
+| 路径内 | `paths/<id>/` | 组件级，需决定 + E1/E2 证据（`PATH_GOVERNANCE.md` §5） |
+| 跨路径 | `research/` · `reference/` | 不自动变成架构 |
+| Canonical | `docs/` | 只能经晋升进入 |
+
+### 14.4 为什么不照搬参考方案（逐条）
+
+| 参考方案 | 决定 | 理由 |
+|---|---|---|
+| 用 `core/` 取代 `docs/` | **不采用（可随时改）** | ① `core/` 会与未来 `src/wam/core` 代码树撞名；② `docs/` 在本仓已被定义为"已采纳"（`docs/README.md` 首行、`CONTRIBUTING.md` §1）；③ 规则要的是"`docs/` 只放 canonical"，不是"它必须叫 core"。**若作者要 `core/`，就是一次 `git mv` + 引用替换，映射已备好** |
+| 每条 Path 自带 `architecture/ specifications/ research/ experiments/ decisions/` 六件套 | **部分采用** | 前三个按需建（模板里是可选项）；**`research/` 与 `experiments/` 不复制**——跨路径知识住 `research/`，实验住顶层 `experiments/<id>/` 并写 `path:` 字段。复制会产生第二真相；锁在路径里会失去对比价值 |
+| `research/{shared,literature}` | **不采用** | `reference/` 已经是 literature（有入库/评估/六阶段流程），再建会有两个答案；`shared/` 与现有 `briefs/` 重叠 |
+| Path Registry | **采用** | `paths/README.md`，6 列：id / 一句话主张 / 状态 / 已晋升组件 / 关联实验 / 最后动作。**不把 11 维度做成列**——那会强迫所有路径用同一套分类 |
+| 每条 Path 独立 lifecycle | **采用并简化** | Proposed → Exploring → Validating → {Promoted \| Paused \| Archived}，Paused 可 Resumed；**晋升是组件级**，状态写 `Promoted (partial: …)` |
+| 层级保持浅 | **满足** | 最深 3 层（`paths/octsix/specifications/*.md`），与现结构一致 |
+
+### 14.5 `paths/` 与 `directions/` 的分工
+
+| | `paths/` | `directions/` |
+|---|---|---|
+| 粒度 | 整套架构（有自己的概念模型） | 单个机制 / 组件 |
+| 典型问句 | "WAM 应由哪几个空间构成？" | "状态该不该用单一写点？" |
+| 出口 | Promoted / Paused / Archived | promote / parked / archive |
+
+两个提案层并存的风险是"新想法不知道去哪"。缓解只有一条：`CONTRIBUTING.md` 判定顺序的**第 0 问**——先问"这是不是一整套架构"。问一次就能分流，不需要读者理解全部治理。
+
+### 14.6 这一层怎么被推翻
+
+见 `PATH_GOVERNANCE.md` §9：6 个月后仍只有一条 Path 且无人写它 → 退回单架构并删掉这一层。**新增的层同样要能被证伪**，否则它只是在复制"目录越长越专业"的错觉。

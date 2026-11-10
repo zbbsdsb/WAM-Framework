@@ -187,3 +187,56 @@ WAM-Framework/
 | 只撤销 `docs/06` 拆分 | `git show 03c0432:docs/06-development-plan.md` 可取回原文件，两份新文件可删 |
 
 不建议 `--amend` 或 `push --force`：三个 commit 各自可独立回滚，历史比整洁更有用。
+
+---
+
+## 6. 补充（2026-11-11）：多路径架构支持
+
+作者补充要求：WAM 必须支持多条独立的**架构路径**（`OctSix` 是当前一条），仓库不能围绕任何单一路径设计。
+
+### 6.1 上一版漏在哪
+
+上一版的判据是"同一事实是否有多份拷贝"。这一层缺失不是拷贝问题，是**坐标系问题**：目标树默认了"仓库 = 一套架构 + 若干提案"。于是：
+
+- 第二条架构无处安放——写进 `docs/` 等于宣称已采纳（违反 No false finality），写进 `directions/` 等于把架构降格成机制提案。
+- `OctSix` 在仓库里**零内容**：全仓只有 `research/archive/raw-archive.md` B-288 的一份 334 B 空 canvas（节点"未命名组 / Ori Agent"）。
+
+### 6.2 做了什么
+
+| 产出 | 内容 |
+|---|---|
+| `PATH_GOVERNANCE.md` | Path 定义（9 项，只有"架构假设"是必需）· 三层知识（路径内 / 跨路径 / canonical）· 目录规则 · 生命周期（Proposed→Exploring→Validating→{Promoted\|Paused\|Archived}）· **组件级**晋升规则 · 11 维度比较 · Path vs Direction vs Core · 8 条可检查禁令 · 这一层自己的失效条件 |
+| `paths/README.md` | 登记表（6 列，1 行）+ 加一条新路径的 5 步（判据：新增不改任何既有文件） |
+| `paths/_template/` | `README.md` / `hypothesis.md` / `comparison.md` —— 三份都是空骨架，不是范例 |
+| `paths/octsix/README.md` | 状态 **Proposed**；作者口述的六空间照录；与 `docs/` 的**词面**对照（明确声明"不是等价判断"）；与 `directions/shared-context` 的分层说明；OQ-28；下一步 |
+| 规则接线 | `CONTRIBUTING.md` 判定顺序加第 0 问；`docs/README.md` 声明 canonical-only；`README.md` 加一条路径与一段说明；`experiments/README.md` 加 `path:` 归属字段 |
+| 台账 | `docs/decisions/register.md` C-15 + OQ-28；`workspace/` 四文件各一条 |
+
+### 6.3 三条关键取舍
+
+1. **建层，不填内容。** 六个空间只有名字，没有假设、边界、判据。给它们建 `architecture/` 就是在用目录假装进度。`paths/octsix/` 因此只有 1 个文件。
+2. **`directions/` 降为机制层，不合并进 `paths/`。** 五条方向都是"可插进任何架构的机制"（共享上下文、状态基板、目标 DAG…），与"整套架构"不同层。合并会毁掉唯一能产生对比的那个区分。
+3. **实验不复制进 Path。** 实验住顶层 `experiments/<id>/`，README 写 `path:` 字段。复制 = 第二真相；锁进路径目录 = 结果无法被别的路径读到。
+
+### 6.4 没有照搬参考方案的两处
+
+- **不改 `docs/` → `core/`**：`core/` 会与未来 `src/wam/core` 代码树撞名；`docs/` 在本仓已被定义为"已采纳"；规则要的是"`docs/` 只放 canonical"，不是"它必须叫 core"。映射已备好，要改是一条 `git mv`。
+- **不建 `research/{shared,literature}`**：`reference/` 已经是 literature（有入库/评估/六阶段流程）。
+
+### 6.5 验证
+
+| # | 检查 | 结果 |
+|---|---|---|
+| V-8 | 登记表行数 = 实际路径数 | 1 = 1 |
+| V-9 | `paths/octsix/` 文件数 | **1**（只有 README） |
+| V-10 | `docs/` 被污染程度 | 仅 `register.md` + `README.md`；其余 10 篇零改动 |
+| V-11 | `octsix` 在 `docs/` 的出现 | **正文（architecture / vision / foundation / specifications / development）0 处**；仅在 `decisions/register.md`（2 行，C-15 与 OQ-28 的登记）与 `docs/README.md`（1 行，索引）出现——登记需要，不是架构采用 |
+| V-12 | 全仓链接 | 0 断链 |
+
+### 6.6 需要作者裁决
+
+**OQ-28：`docs/` 现在的内容，是 canonical WAM，还是 OctSix 的早期形态？**
+
+作者的话（"不能因为它们在当前路径里就变成 WAM 的强制顶层抽象"）指向后者；register 里 B 类登记指向前者。**本次按前者处理**，因为那是可逆的一边——把文件搬进 `paths/octsix/` 随时可做；把 canonical 降级后，所有引用"已采纳"的地方都会失效。
+
+若答案是后者，预置动作写在 `REPOSITORY_MIGRATION_PLAN.md` §12.3（4 步，其中第 3 步需要作者重写 `docs/vision.md`，不是搬家能完成的）。

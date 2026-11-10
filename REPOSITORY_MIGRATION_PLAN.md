@@ -204,3 +204,55 @@ raw-archive.md                → research/archive/raw-archive.md
 5. 不改 `site/` 的设计与结构，只动一句状态表述。
 6. 不新建术语表 / 索引页 / 看板等派生文档。
 7. 不提交 `site/` 到 gh-pages（无凭证；需作者在自己终端 push）。
+
+---
+
+## 12. 补充（2026-11-11）：多路径架构层（批次 F）
+
+> 依赖：作者 2026-11-11 指令 + `REFACTORING_AUDIT.md` §9。**本次只建层，不填内容**——K-15 说明没有内容可填，K-16 说明归属未定。
+
+### 12.1 已执行
+
+| Current Path | New Path | Action | Reason |
+|---|---|---|---|
+| — | `PATH_GOVERNANCE.md` | CREATE | Path 的定义、三层知识、生命周期、组件级晋升、比较维度、Path/Direction/Core 区别、8 条可检查禁令、这一层自己的失效条件 |
+| — | `paths/README.md` | CREATE | 登记表（6 列，1 行）+ 加一条新路径的 5 步 |
+| — | `paths/_template/README.md` | CREATE | 新路径的 6 段骨架（含"与 core 的差异"必填） |
+| — | `paths/_template/hypothesis.md` | CREATE | 一行假设 + 证伪条件 + 晋升判据 + 成本上限 |
+| — | `paths/_template/comparison.md` | CREATE | 11 维度对照表，允许写"未建模" |
+| — | `paths/octsix/README.md` | CREATE | **Proposed**：作者口述的六个空间名 + 词面对照 + 与 shared-context 分层 + OQ-28 + Next step。**无架构内容** |
+| `docs/decisions/register.md` | 同左 | 追加 | C-15（多路径层）、OQ-28（`docs/` 归属） |
+| `CONTRIBUTING.md` | 同左 | 修改 | 层表加"架构路径"一行；判定顺序加第 0 问；禁令加两条（不把路径概念写进 `docs/`、不因同名合并） |
+| `docs/README.md` | 同左 | 修改 | 首行声明"`docs/` 只放 canonical"；两层各加一行 |
+| `README.md` | 同左 | 修改 | start-here 加一行"想试另一套整体架构"；正文加一段说明 `docs/` 与 `paths/` 的分界 |
+| `experiments/README.md` | 同左 | 修改 | 增加 `path:` / `direction:` 归属字段，并写明实验永远住顶层 |
+| `workspace/{state,goals,log,decisions}.md` | 同左 | 追加 | 记录新增层、OQ-28 与两条待办 |
+
+### 12.2 明确未执行
+
+| 事项 | 为什么不做 |
+|---|---|
+| 把 `docs/` 任何文件移入 `paths/octsix/` | OQ-28 未裁决；按可逆的一边处理（见 `paths/octsix/README.md` §6） |
+| 建 `paths/octsix/{architecture,specifications,hypothesis.md,comparison.md,decisions.md}` | 六空间只有名字，没有假设、没有边界、没有判据。建空结构 = 用目录假装进度 |
+| 建 `research/shared/`、`research/literature/` | `reference/` 已是 literature；`shared/` 与 `briefs/` 重叠 |
+| 把 `docs/` 改名 `core/` | 与未来 `src/wam/core` 撞名；`docs/` 已在本仓被定义为"已采纳"。映射已备好，作者要改时一条 `git mv` |
+| 每条 Path 内建 `experiments/` | 实验住顶层并写 `path:` 字段，否则结果被锁在路径里、无法对比 |
+
+### 12.3 若 OQ-28 判为"`docs/` 其实是 OctSix 的早期形态"
+
+这不是纯移动，预置清单如下（**未执行**）：
+
+1. `docs/vision.md` §4（五概念）、`docs/architecture.md` 主体、`docs/specifications/*` → `paths/octsix/`（`git mv`）；
+2. `docs/` 保留：`foundation.md`（协作协议）、`development/*`（项目日历与工程计划）、`decisions/register.md`（决策台账）；
+3. `docs/vision.md` 需**重写**为"只描述问题、不描述解法"的版本——这一步是设计工作，不是搬家，必须作者参与；
+4. register 记一条 C 类（含"降级了哪些"），旧文案标 `superseded by paths/octsix`，不删。
+
+### 12.4 验证
+
+| # | 检查 | 结果 |
+|---|---|---|
+| V-8 | 登记表行数 = 实际路径数 | 1 = 1（`octsix`） |
+| V-9 | `paths/octsix/` 文件数 | 1（只有 README）——证明"建层不填内容" |
+| V-10 | `docs/` 是否被污染 | 只有 `register.md` 增两节 + `README.md` 两行；其余 10 篇零改动 |
+| V-11 | `octsix` 一词的分布 | `paths/`、`PATH_GOVERNANCE.md`、四份报告、workspace 记录；`docs/` 只有 register 2 行（C-15/OQ-28 登记）与索引 1 行，**正文 0 处**（满足禁令 §8.1） |
+| V-12 | 链接检查 | 0 断链 |

@@ -116,6 +116,15 @@
 
 ---
 
+### C-15 多路径架构层：Path 与 canonical 分离（2026-11-11）
+
+- **内容**：仓库必须同时容纳多条**整套架构**的探索。`paths/<id>/` 承载路径内知识（概念模型、组件、路径内决定与实验判据），`docs/` 只承载已晋升的 canonical；晋升需一条决定 + 一条 E1/E2 证据，**概念在多条路径里重复出现不构成证据**。`directions/` 降为机制级提案，与 Path 分属两层。规则：`PATH_GOVERNANCE.md`；登记表：`paths/README.md`。
+- **来源**：作者 2026-11-11 指令；`PATH_GOVERNANCE.md`；`REPOSITORY_ARCHITECTURE.md` §14
+- **性质**：治理决定，不改变任何现有设计内容。**本次没有把 `docs/` 的任何内容搬进 `paths/octsix/`**——那份归属未裁决（OQ-28）。
+- **代价**：多一层目录与一份规则文档。**失效条件写在 `PATH_GOVERNANCE.md` §9**：若 6 个月内仍只有一条 Path 且无人写它，这一层按规则退化掉。
+
+---
+
 ## 2. Current Design Baseline 当前设计基线
 
 > 已收敛、适合继续设计的方向。**仍需与现有代码和实际开发约束对齐**——仓库当前零代码。
@@ -358,6 +367,7 @@ Intent / Situation / Judgment / Move / Evidence & Update。
 | **OQ-25** | **10 个状态是否过多？** 社区产品在收敛到 3 个可见状态，而 WAM 主张 10 个 | 不阻塞 MVP（U1 为 MVP-MIN）；阻塞"交互表征数量"的最终答案 | W4 之后的实际使用：作者是否真的看第 6–10 个状态 |
 | **OQ-26** | **`dsh --profile headless` 的输出能否被可靠地约束为 JSON？** profile 未安装，能力只见于帮助文本 | **阻塞 `docs/development/roadmap.md` W3 的 JudgmentProvider** | W0 的一次命令（`docs/development/roadmap.md` §4 D1） |
 | **OQ-27** | **J6 的停滞判据（连续 3 个 Move 无新事实 → 转向）是否有效？** 已有文献讨论"agent 循环把停滞误当进展 + 自我评估偏差"，本会话未读全文 | 不阻塞 W6 之前的任何工作；**若 W2 前未读该文献，则 W6 不实现 J6** | 读 `arXiv:2607.25152`（`research/external-assets.md` §2 E1） |
+| **OQ-28** | **`docs/` 现在的内容是 canonical，还是 OctSix 的早期形态？** 作者 2026-11-11：OctSix 的六个空间"不能因为它们在当前路径里就变成 WAM 的强制顶层抽象"——这句话暗示当前写下的设计本就属于某条路径 | 若答案是"OctSix 的"，则 `docs/vision.md` §4 与 `docs/architecture.md` 主体需降级为 `paths/octsix/`，core 只剩 `foundation.md` 与通用部分 | **作者裁决**。裁决前按 canonical 处理（可逆的那一边），见 `paths/octsix/README.md` §6 |
 
 
 ---

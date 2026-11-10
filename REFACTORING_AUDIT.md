@@ -217,3 +217,22 @@ WAM-Framework/                      main @ 5155a38, 29 tracked / 51 worktree fil
 | **D-1** | `directions/` 是否保留为目录名（含是否引入 `parked` 状态） | 宪法 `docs/01 §Development Governance` 写死了这个词汇；改 = 改治理规则 |
 | **D-2** | `docs/06` 是否拆出 `specifications/`（§5–§7 整段移动） | 拆分会改变 15 个文件里约 27 处 `docs/06 §X` 的指向；纯移动可逆，但这是对"唯一工程权威"的结构性改写 |
 | **D-3** | `workspace/` 四文件是否保持原样 | 它们是 M0 宪法条文（K-01 的双权威冲突就在此处），**我倾向不动**，需作者确认 |
+
+---
+
+## 9. 补充审计（2026-11-11）：仓库缺"架构路径"这一层
+
+起因：作者指出 WAM 必须支持多条**独立的架构路径**同时存在（`OctSix` 是当前一条），并要求仓库不能围绕任何单一路径设计。
+
+这一条上一轮审计**没有抓到**，原因是判据选错了：上一轮的判据是"同一事实是否有多份拷贝"，而这一层缺失不是拷贝问题，是**坐标系问题**——它假定了"仓库 = 一套架构 + 若干提案"。
+
+| # | 发现 | 证据 | 影响 |
+|---|---|---|---|
+| **K-14** | 仓库**只能容纳一条架构** | `docs/architecture.md` 是唯一的架构文档；`docs/specifications/*` 是它的契约；只有一份 `mvp-plan`。`directions/` 是**机制粒度**（5 条，1 active / 4 parked，没有一条是"整套架构"） | 第二条架构无处可放：写进 `docs/` = 宣称它已被采纳（违反 No false finality）；写进 `directions/` = 把一个架构降格成一个机制提案 |
+| **K-15** | **OctSix 在仓库里零内容** | 全仓检索 `octsix`：仅 `research/archive/raw-archive.md` B-288（`WAM OctSix Topology.canvas`，334 B，节点只有"未命名组 / Ori Agent"）。除此之外无任何正文 | 任何"OctSix 的架构是什么"的陈述都只能来自作者口述；本仓库无法自证 |
+| **K-16** | 现有五概念基线 vs 六个空间，**归属未定** | `docs/vision.md` §4 的五概念（Intent / Situation / Judgment / Move / Evidence）在 register 里登记为 B-02"当前设计基线"；作者 2026-11-11 给的六空间是 Intent / Shared Context / Cognition / Action / State / Reflection | 若 `docs/` 其实是 OctSix 的早期形态 → 它必须降级为 `paths/octsix/`；若不是 → OctSix 必须写"与 core 的差异"。**两者都能自圆其说，仓库无法自判** → OQ-28 |
+| **K-17** | 同名跨层风险已经成事实 | "Shared Context" 同时是：OctSix 的一个空间名、`directions/shared-context/` 的方向名、以及 `docs/` 里最接近 `Situation` 的那一区 | 看到同一个词就合并，等于用词表代替架构。必须带限定词书写（`PATH_GOVERNANCE.md` §7） |
+
+**结论**：需要新增一层（`paths/`）+ 一份治理（`PATH_GOVERNANCE.md`），但**不填内容**——K-15 说明没有内容可填，K-16 说明连"该填给谁"都还没定。
+
+**与上一轮的关系**：上一轮的 13 条冲突（K-01…K-13）全部仍然成立；本节新增 4 条（K-14…K-17），其中 K-16 是本轮唯一一条**可能推翻已有结论**的冲突（若答案是"OctSix 的"，则 `docs/` 的主体要降级）。它被显式登记为 OQ-28，而不是由本次审计自行裁决。

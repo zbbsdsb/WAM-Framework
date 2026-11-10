@@ -15,14 +15,16 @@
 | 决策 | `docs/decisions/register.md`（状态）· `workspace/decisions.md`（事件） | 理由 + 替代方案 + 权重判断 | 被新决策取代 |
 | 计划 / 范围 | `docs/development/` | 有 E1 退出条件 | 被新计划取代 |
 | 知识 | `research/`（我们的）· `reference/`（外部论文） | 有出处 | 不移入规范层 |
-| 未验证主张 | `directions/<name>/` | 一行假设 + 证伪条件 | promote / parked / archive |
+| 架构路径 | `paths/<id>/` | 一行架构主张 + 与 core 的差异 | Promoted / Paused / Archived |
+| 机制假设 | `directions/<name>/` | 一行假设 + 证伪条件 | promote / parked / archive |
 | 跑过的验证 | `experiments/<id>/` | plan.md + results.md + 产物 | 结题归档 |
 | 项目状态 | `workspace/` | 有证据的"完成" | 只追加 |
 
 ## 2. 不知道该放哪：按顺序问，第一个命中即停
 
+0. 是**一整套架构**（自带概念模型、可能改变 WAM 的顶层名词）？→ `paths/<id>/`（见 `PATH_GOVERNANCE.md`；写不出"与 core 的差异"就别建）
 1. 是**外部的东西**（论文 / 别人的系统）？→ `reference/`（要借鉴）或 `research/briefs/`（只做调研）
-2. 是**我们还没证据的主张**？→ `directions/`（写不出证伪条件就别放）
+2. 是**一个机制 / 组件的主张**？→ `directions/`（写不出证伪条件就别放）
 3. 是**要跑的验证**？→ `experiments/`
 4. 是**已采纳、会约束实现的决定**？→ `docs/decisions/register.md` + `workspace/decisions.md`
 5. 是"**什么时候做**"？→ `docs/development/roadmap.md`；是"**做不做**"？→ `docs/development/scope.md`
@@ -76,6 +78,8 @@
 - 不建空目录、不建占位 `.gitkeep` 层（`src/` `tests/` 在 W1 真开工时再建）
 - 不把未验证的设计写成已实现（状态条就是为此存在）
 - 不同时维护两份同类事实——发现第二份，删掉它，留指针
+- **不把某条 Path 的概念写进 `docs/`**：`docs/` 只放已晋升的 canonical；路径概念留在 `paths/<id>/`
+- 不因为两条 Path 用了同一个词就认为它们是同一个东西（`PATH_GOVERNANCE.md` §7）
 
 ## 9. 提交
 

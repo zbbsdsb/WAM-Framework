@@ -18,6 +18,9 @@
 - [ ] **按 `docs/development/roadmap.md` 执行 W1–W9** — Weight: critical path — Progress: **not started（W1 窗口 11-02→11-08 已过，仓内仍无 `.py`）** — Next step: W1 = 骨架 + `StateRepository` + schema v1（含 `agent_state` / `scope`）— DoD: roadmap §3 W1 行
 - [ ] **读 arXiv:2607.25152**（停滞 / 自我评估偏差）— Weight: critical path — Progress: not started — Next step: **W2 之前**；未读则 W6 不实现 J6（OQ-27）
 - [ ] **作者裁决**：`roadmap` §4 的 D1–D3 + `scope` §3.2 的 MVP 类型声明（只主张 T1）+ OQ-09 / OQ-10 — Weight: critical path — Progress: submitted 2026-10-28，待作者答复
+- [x] **多路径架构层**（2026-11-11）：`paths/` + 登记表 + 模板 + `PATH_GOVERNANCE.md`；`directions/` 明确定位为机制级提案；`paths/octsix/` 以 `Proposed` 状态登记（**内容未写**，仅有作者口述的六个空间名）— Weight: critical path — Evidence: PATH_GOVERNANCE.md、paths/README.md
+- [ ] **作者裁决 OQ-28**：`docs/` 是 canonical，还是 OctSix 的早期形态 — Weight: critical path — Progress: open — Next step: 若答案是 OctSix，则 `docs/vision.md` §4 与 `docs/architecture.md` 主体移入 `paths/octsix/`；否则 OctSix 需写"与 core 的差异"
+- [ ] **写 `paths/octsix/hypothesis.md`**：一行假设 + 至少一条证伪条件 — Weight: critical path — Progress: not started — Next step: 写不出来之前不要写它的 architecture
 - [ ] **第一个实验路径**：`directions/shared-context/` §6 的三阶段 scope 冲突实验（进 `experiments/`，不写产品代码）— Weight: enhancement — Progress: not started — Next step: 先读 SE-Blackboard（IEEE 11527206）
 
 ## M0 — 地基（已完成，证据保留）

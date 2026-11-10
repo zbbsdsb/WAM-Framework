@@ -52,6 +52,9 @@ Two places hold the current truth, and this file will not duplicate them:
 | About to write code | [`docs/development/roadmap.md`](docs/development/roadmap.md) → [`docs/specifications/execution-contract.md`](docs/specifications/execution-contract.md) → [`docs/development/mvp-plan.md`](docs/development/mvp-plan.md) |
 | Judging whether a claim holds | [`docs/decisions/register.md`](docs/decisions/register.md) → [`docs/specifications/acceptance.md`](docs/specifications/acceptance.md) |
 | Contributing material | [`CONTRIBUTING.md`](CONTRIBUTING.md) — where each kind of content belongs |
+| Exploring a *different* overall architecture | [`paths/`](paths/) — the path registry; rules in [`PATH_GOVERNANCE.md`](PATH_GOVERNANCE.md) |
+
+**A note on what `docs/` means here.** `docs/` holds only what has been *adopted*. Explorations of a different overall architecture live in `paths/` — including `octsix`, the path the author is currently working in. **No path is canonical by default**, and the concepts of one path do not become WAM's concepts because they are in the current one.
 
 The full documentation map lives in **[`docs/README.md`](docs/README.md)**. Everything outside `docs/` — research, proposals, experiments, the paper library, project state, the public site — is described there too; this file intentionally does not repeat it.
 

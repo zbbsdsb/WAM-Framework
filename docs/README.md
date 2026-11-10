@@ -1,6 +1,7 @@
 # Documentation Index — 文档地图
 
 > `docs/` 的**唯一索引**。根 `README.md` 只回答"WAM 是什么"，这里回答"某个问题去哪找"。
+> **`docs/` 只放 canonical**：已采纳、有状态标记的架构与契约。**某一条架构路径（Path）的东西不放这里**——它们住 [`../paths/`](../paths/)，晋升进来要走 `../PATH_GOVERNANCE.md` §5。
 > 维护规则：新增或移动任何文档，必须同时改这张表。表与目录不一致 **≥2 次**，说明索引已失效——退回 README 单页地图。
 
 ---
@@ -18,6 +19,7 @@
 | 什么进 MVP、什么明确不进 | [`development/scope.md`](development/scope.md) | 想加需求时 |
 | 工程怎么做（任务、阶段门、环境基线） | [`development/mvp-plan.md`](development/mvp-plan.md) | 写代码时 |
 | 项目现在到哪一步了 | [`../workspace/state.md`](../workspace/state.md) | 每次会话开始；**不要在其他地方找** |
+| 有别的整体架构在试吗、试到哪了 | [`../paths/`](../paths/) | 想开新路径、或怀疑 core 只是其中一条路径时 |
 
 **三条阅读路径**
 
@@ -52,7 +54,8 @@
 | 起源 | [`../idea.md`](../idea.md) | 作者原文，一切主张的源头 |
 | 知识 | [`../research/`](../research/) | 外部调研、外部资产核实、作者脑暴、原文汇编 |
 | 外部论文库 | [`../reference/`](../reference/) | 要借鉴的论文 + 六阶段借鉴流程（入库→评估→提案→验证→整合→回访） |
-| 未验证主张 | [`../directions/`](../directions/) | 假设与证伪条件；1 active / 4 parked / 1 archived |
+| 架构路径 | [`../paths/`](../paths/) | 整套架构的探索 + 登记表；目前 1 条（`octsix`，Proposed）。规则见 [`../PATH_GOVERNANCE.md`](../PATH_GOVERNANCE.md) |
+| 机制假设 | [`../directions/`](../directions/) | 单个机制/组件的提案；1 active / 4 parked / 1 archived |
 | 跑过的验证 | [`../experiments/`](../experiments/) | 路径 = 一个局部结论；跑前 plan.md，跑后 results.md |
 | 项目状态 | [`../workspace/`](../workspace/) | 局面 / 目标+证据 / 流水 / 决策事件。**唯一权威** |
 | 对外页面 | [`../site/`](../site/) | 公开站；不承载任何实时状态 |
