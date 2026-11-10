@@ -2,7 +2,7 @@
 
 > Established 2026-08-07. Governance rule: nothing unverified enters the official structure.
 >
-> **2026-10-09 annotation.** All four directions remain OPEN and unverified; none has produced a vertical slice yet (see `workspace/log.md`, 2026-08-15: eight days with zero recorded execution). Ordering changed: `docs/06-development-plan.md` §1 places the minimal verifiable core (stage 2) ahead of the agent-plugin and weight-first slices. Two facts were checked and did not hold up — "Hermes Agent is the platform this project is developed on" (no such directory under `D:/github projects/`; DSH is the verified mechanism) and "WAM is built on Sponge" (zero occurrences in this repo, while `D:/github projects/Sponge/研发/03_架构与生态位.md` claims it). Both are recorded in `docs/07-decision-register.md` X-01, X-02, OQ-09, OQ-10 and need the author's decision.
+> **2026-10-09 annotation.** All four directions remain OPEN and unverified; none has produced a vertical slice yet (see `workspace/log.md`, 2026-08-15: eight days with zero recorded execution). Ordering changed: `docs/development/mvp-plan.md` §1 places the minimal verifiable core (stage 2) ahead of the agent-plugin and weight-first slices. Two facts were checked and did not hold up — "Hermes Agent is the platform this project is developed on" (no such directory under `D:/github projects/`; DSH is the verified mechanism) and "WAM is built on Sponge" (zero occurrences in this repo, while `D:/github projects/Sponge/研发/03_架构与生态位.md` claims it). Both are recorded in `docs/decisions/register.md` X-01, X-02, OQ-09, OQ-10 and need the author's decision.
 
 ## Why
 
@@ -12,9 +12,9 @@ WAM's own philosophy: no bluffing, verification before commitment. To keep the p
 
 | Tier | Where it lives | Trust level |
 |---|---|---|
-| Evidence | `docs/research/` | Sourced facts, verifiable — permanent |
+| Evidence | `research/briefs/` | Sourced facts, verifiable — permanent |
 | Proposals | `directions/<name>/` | Ideas, drafts, designs, prototypes — NOT trusted |
-| Decisions & constitutions | `docs/01-foundation.md`, `workspace/decisions.md`, `workspace/goals.md` | Verified — official |
+| Decisions & constitutions | `docs/foundation.md`, `workspace/decisions.md`, `workspace/goals.md` | Verified — official |
 
 ## Lifecycle of a direction
 

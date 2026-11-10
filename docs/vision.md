@@ -1,8 +1,8 @@
 # Vision & Core Concepts — 愿景与核心概念
 
 > 版本：2026-10-09 · 状态：**Current Design Baseline**（本文档描述的是设计基线，不是已实现能力）
-> 上位文档：`idea.md`（哲学原始表述，英文）· `docs/01-foundation.md`（M0 已交付的地基）
-> 决策记录：`docs/07-decision-register.md` · 时间线日志：`workspace/decisions.md`
+> 上位文档：`idea.md`（哲学原始表述，英文）· `docs/foundation.md`（M0 已交付的地基）
+> 决策记录：`docs/decisions/register.md` · 时间线日志：`workspace/decisions.md`
 
 ---
 
@@ -11,11 +11,11 @@
 本文档回答「WAM 是什么、为谁解决什么问题、核心概念各自负责什么」。
 
 它**不**描述：
-- 代码模块划分（见 `docs/04-architecture.md` 的「概念 → 实现映射」一节）
-- 具体字段设计（见 `docs/05-state-move-evidence.md`）
-- 开发顺序（见 `docs/06-development-plan.md`）
+- 代码模块划分（见 `docs/architecture.md` 的「概念 → 实现映射」一节）
+- 具体字段设计（见 `docs/specifications/state-and-evidence.md`）
+- 开发顺序（见 `docs/development/mvp-plan.md`）
 
-本文档中所有能力描述均为**设计意图**。仓库当前**零实现代码**（`git ls-files` 29 项全为 Markdown/HTML/CSS/YAML，见 `docs/04-architecture.md` §7），任何"已具备"的说法都需以运行产物为准。
+本文档中所有能力描述均为**设计意图**。仓库当前**零实现代码**（`git ls-files` 29 项全为 Markdown/HTML/CSS/YAML，见 `docs/architecture.md` §7），任何"已具备"的说法都需以运行产物为准。
 
 ---
 
@@ -117,7 +117,7 @@ WAM **可以**自主判断：当前什么真正重要、先解决哪个问题、
 
 ## 4. 五个核心概念
 
-当前架构基线由五个概念构成。**它们是职责划分，不是五个软件模块**（见 `docs/04-architecture.md` §6）。
+当前架构基线由五个概念构成。**它们是职责划分，不是五个软件模块**（见 `docs/architecture.md` §6）。
 
 ### 4.1 Intent（意图）
 
@@ -157,7 +157,7 @@ Judgment 不是传统 Planner 的同义词，不是简单的优先级排序算�
 
 **WAM 必须解决前一个问题，才能可靠地解决后一个问题。** 现有框架普遍直接回答后者，这是它们"能生成计划但不理解局面"的根因。
 
-Judgment 必须能回答「你为什么认为这个重要」——不可追溯的判断不算判断（见 `docs/07-decision-register.md` H-03）。
+Judgment 必须能回答「你为什么认为这个重要」——不可追溯的判断不算判断（见 `docs/decisions/register.md` H-03）。
 
 ### 4.4 Move（行动）
 
@@ -192,7 +192,7 @@ Evidence 可以支持、削弱或推翻假设，也可以揭示新的约束、�
 
 ## 5. Judgment 的启发式观察视角
 
-`docs/04-architecture.md` 展开架构前，先约定 Judgment 的观察维度。
+`docs/architecture.md` 展开架构前，先约定 Judgment 的观察维度。
 
 **这些维度是启发式视角，不是固定的软件模块清单，也不要求每次决策逐项机械检查。** 它们的作用是提供"该往哪看"的线索，防止 Judgment 退化成直觉。
 
@@ -226,7 +226,7 @@ WAM 的目标形态：**无论底层跑几个 agent，呈现给用户的都是�
 
 ## 7. 概念 ↔ 仓库现有词汇桥接
 
-`docs/01-foundation.md` 的四文件状态模型 + 六步协议是 **M0 已交付**的成果。五核心概念与它是**职责对齐**关系，不是替换关系。
+`docs/foundation.md` 的四文件状态模型 + 六步协议是 **M0 已交付**的成果。五核心概念与它是**职责对齐**关系，不是替换关系。
 
 | 五概念 | 四文件中的对应载体 | 现状 | 缺口 |
 |---|---|---|---|
@@ -237,7 +237,7 @@ WAM 的目标形态：**无论底层跑几个 agent，呈现给用户的都是�
 | **Evidence & Update** | `workspace/log.md` 的 `Evidence:` 字段 | ✅ 部分载体 | 缺"证据是否满足验收条件"与"是否足以更新状态"的区分 |
 | 方向（Direction） | `goals.md` 的 weight tier（critical path / enhancement / noise） | ✅ 有粗粒度表达 | 见 §9 的张力说明 |
 
-**结论**：Situation 与 Evidence 有基础，Move 部分成型，**Judgment 无载体，Intent 无载体**。后两项是 MVP 的真实阻塞点，见 `docs/06-development-plan.md` §6。
+**结论**：Situation 与 Evidence 有基础，Move 部分成型，**Judgment 无载体，Intent 无载体**。后两项是 MVP 的真实阻塞点，见 `docs/development/mvp-plan.md` §6。
 
 ---
 
@@ -268,7 +268,7 @@ WAM 的目标形态：**无论底层跑几个 agent，呈现给用户的都是�
 - **依赖结构不等于重要性。** 一个不阻塞任何事但直接验证核心假设的实验，可能比一条长依赖链上的任务更重要。
 - 反过来，一条在关键路径上但已被证伪的路径，计算上仍然"在关键路径上"，但已经不值得走。
 
-**当前处理**（设计基线，见 `docs/07-decision-register.md` H-04）：weight tier 与关键路径都作为 **Judgment 的输入信号**，Judgment 是综合判断，不等于任何一个。人类标注的 tier 不能被计算结果自动覆盖，计算结果也不能自动改写人类 tier。
+**当前处理**（设计基线，见 `docs/decisions/register.md` H-04）：weight tier 与关键路径都作为 **Judgment 的输入信号**，Judgment 是综合判断，不等于任何一个。人类标注的 tier 不能被计算结果自动覆盖，计算结果也不能自动改写人类 tier。
 
 **保留为 Open Question**（OQ-03）：三档是否够用、如何低成本维护。见 `workspace/state.md` 已记录的"是否需要更细粒度"。
 
@@ -278,10 +278,10 @@ WAM 的目标形态：**无论底层跑几个 agent，呈现给用户的都是�
 
 | 需要 | 去看 |
 |---|---|
-| 概念如何变成组件与循环 | `docs/04-architecture.md` |
-| Situation / Move / Evidence 的具体表达 | `docs/05-state-move-evidence.md` |
-| 先做什么、怎么验收 | `docs/06-development-plan.md` |
-| 哪些是已确立 / 基线 / 假设 / 开放问题 | `docs/07-decision-register.md` |
-| WAM 是否真的成立 | `docs/08-scenarios-and-acceptance.md` |
+| 概念如何变成组件与循环 | `docs/architecture.md` |
+| Situation / Move / Evidence 的具体表达 | `docs/specifications/state-and-evidence.md` |
+| 先做什么、怎么验收 | `docs/development/mvp-plan.md` |
+| 哪些是已确立 / 基线 / 假设 / 开放问题 | `docs/decisions/register.md` |
+| WAM 是否真的成立 | `docs/specifications/acceptance.md` |
 | 哲学原始表述（英文） | `idea.md` |
-| M0 地基与治理（英文） | `docs/01-foundation.md` |
+| M0 地基与治理（英文） | `docs/foundation.md` |

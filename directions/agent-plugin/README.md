@@ -2,7 +2,7 @@
 
 > Status: OPEN · Weight: critical path · Opened: 2026-08-07
 >
-> **2026-10-09 annotation (not a rewrite).** References to "Hermes skill" below could not be verified: there is no Hermes directory under `D:/github projects/`. The mechanism that *was* verified against source is DeepSeek Harness agent presets (`experiments/README.md` §DSH 集成机制; re-confirmed 2026-10-09 against `D:/github projects/deepseek-harness/apps/cli/config/agent-presets/`, whose structure matches the repo template). Also note `docs/06-development-plan.md` §1 places this slice **after** the minimal verifiable core, not at stage 2. Recorded as `docs/07-decision-register.md` X-01 / OQ-10.
+> **2026-10-09 annotation (not a rewrite).** References to "Hermes skill" below could not be verified: there is no Hermes directory under `D:/github projects/`. The mechanism that *was* verified against source is DeepSeek Harness agent presets (`experiments/README.md` §DSH 集成机制; re-confirmed 2026-10-09 against `D:/github projects/deepseek-harness/apps/cli/config/agent-presets/`, whose structure matches the repo template). Also note `docs/development/mvp-plan.md` §1 places this slice **after** the minimal verifiable core, not at stage 2. Recorded as `docs/decisions/register.md` X-01 / OQ-10.
 
 ## Hypothesis
 
@@ -15,7 +15,7 @@ The fastest verified path is **embedding WAM inside an existing agent** as a ski
 
 ## Inputs (evidence)
 
-- docs/research/01-ecosystem-survey.md: "embed into or replace existing workflows?" is an open question; Claude Code's CLAUDE.md bloat (issue #42796) is the failure mode this must beat.
+- research/briefs/01-ecosystem-survey.md: "embed into or replace existing workflows?" is an open question; Claude Code's CLAUDE.md bloat (issue #42796) is the failure mode this must beat.
 - The host platform (Hermes) already provides memory, sessions, and skills — the plugin only needs to add the shared-state discipline.
 
 ## Architecture

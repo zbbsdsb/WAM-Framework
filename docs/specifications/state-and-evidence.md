@@ -1,8 +1,9 @@
 # State, Move & Evidence Model — 状态、行动与证据模型
 
 > 版本：2026-10-09 · 状态：**Current Design Baseline**（职责已定，字段未细化）
-> 依赖：`docs/03-vision-and-concepts.md` · `docs/04-architecture.md`
-> 决策记录：`docs/07-decision-register.md`
+> Status: **specified**（无实现；`docs/decisions/register.md` 无对应证据）· Carrier: none · 2026-11-10 迁入本目录，**正文一字未改**
+> 依赖：`docs/vision.md` · `docs/architecture.md`
+> 决策记录：`docs/decisions/register.md`
 
 ---
 
@@ -47,7 +48,7 @@ Situation 是**当前判断的依据**。它必须同时容纳"已知的"和"不
 
 ## 2. 事实、假设、未知、决策、证据的区分
 
-这是 WAM 认识论状态的核心（`docs/03-vision-and-concepts.md` §5 的 Knowledge 维度）。
+这是 WAM 认识论状态的核心（`docs/vision.md` §5 的 Knowledge 维度）。
 
 ### 2.1 五类的定义与判据
 
@@ -68,7 +69,7 @@ Situation 是**当前判断的依据**。它必须同时容纳"已知的"和"不
 
 ### 2.3 防止假设被当成事实
 
-**这是 Open Question OQ-03，不是已解决问题。** 现有机制只有语言层面的约定（`docs/01-foundation.md` 硬规则 4：unknown-unknowns 必须明确列出），没有结构保障。
+**这是 Open Question OQ-03，不是已解决问题。** 现有机制只有语言层面的约定（`docs/foundation.md` 硬规则 4：unknown-unknowns 必须明确列出），没有结构保障。
 
 已知的部分缓解手段（均在设计中，非实现）：
 
@@ -79,7 +80,7 @@ Situation 是**当前判断的依据**。它必须同时容纳"已知的"和"不
 
 **当前仓库未实现任何一条。**
 
-**MVP 的结构化落地**（`docs/06-development-plan.md` §6.3）——把上述四条变成 schema 级约束：
+**MVP 的结构化落地**（`docs/development/mvp-plan.md` §6.3）——把上述四条变成 schema 级约束：
 
 | 约束 | 实现形式 |
 |---|---|
@@ -92,7 +93,7 @@ Situation 是**当前判断的依据**。它必须同时容纳"已知的"和"不
 
 ### 2.4 认识论状态与 research 的对应
 
-`docs/research/03-unknown-and-weight.md` 已记录：
+`research/briefs/03-unknown-and-weight.md` 已记录：
 
 - Smithson 1989 的四象限（known / known-unknown / unknown-unknown）正是 `state.md` 三段所用的词汇。
 - **无监督的 unknown-unknown 检测本质上是未解问题**（该文献明确标注）。
@@ -112,11 +113,11 @@ Situation 是**当前判断的依据**。它必须同时容纳"已知的"和"不
 | **意图** | 这个 Move 服务于 Intent 的哪一部分 | 无此则 Move 可能与目标无关，甚至破坏目标（验收 T7） |
 | **前提** | 它依赖哪些假设与条件 | 前提失效则 Move 结果不可解释 |
 | **预期改变** | 做完之后什么会不同 | 无此则无法判断 Move 是否成功，只能靠"看起来做完了" |
-| **如何确认** | 验收方式 | 对应 `docs/04-architecture.md` §5 的第 4 级 |
+| **如何确认** | 验收方式 | 对应 `docs/architecture.md` §5 的第 4 级 |
 
 ### 3.2 生命周期
 
-> **本表是完整状态集，权威定义在此。** MVP 激活的状态子集、与本表的映射、以及工程约束（幂等键、权限边界、原子写入）见 [`docs/06-development-plan.md` §7](06-development-plan.md)。
+> **本表是完整状态集，权威定义在此。** MVP 激活的状态子集、与本表的映射、以及工程约束（幂等键、权限边界、原子写入）见 [`docs/development/mvp-plan.md` §7](../development/mvp-plan.md)。
 
 ```mermaid
 stateDiagram-v2
@@ -146,7 +147,7 @@ stateDiagram-v2
 | **未满足验收 ≠ 失败** | 是 `Insufficient`，需要补证据，不是重做 |
 | **失败必须分析** | 进入 `Analyzed`，产出信息而非仅报错（见 §5） |
 | **不可逆 Move 需显式授权** | 超出授权边界 → `Rejected`，转人类判断节点 |
-| **Active Move 治理** | 同时可以只有一个处于 `Authorized`/`Executing` 的 Move；但一个 Move 内部可并行（`docs/03-vision-and-concepts.md` §4.4） |
+| **Active Move 治理** | 同时可以只有一个处于 `Authorized`/`Executing` 的 Move；但一个 Move 内部可并行（`docs/vision.md` §4.4） |
 
 ### 3.4 现状差距
 
@@ -157,7 +158,7 @@ stateDiagram-v2
 
 ### 3.5 MVP 如何落地这四要素
 
-MVP 的具体字段（`.wam/state.json` 的 `active_move`）见 [`docs/06-development-plan.md` §6.2](06-development-plan.md)。四要素的对应：
+MVP 的具体字段（`.wam/state.json` 的 `active_move`）见 [`docs/development/mvp-plan.md` §6.2](../development/mvp-plan.md)。四要素的对应：
 
 | 本节要素 | `active_move` 字段 | MVP 强制程度 |
 |---|---|---|
@@ -165,7 +166,7 @@ MVP 的具体字段（`.wam/state.json` 的 `active_move`）见 [`docs/06-develo
 | 前提 | `premises[]`（引用 `assumptions`/`facts` 的 id） | **必填且非空** |
 | 预期改变 | `expected_change` | **必填** |
 | 如何确认 | `acceptance[]`（在 Move 被接受时即写定并持久化） | **必填且非空**；事后补的验收条件等于没有 |
-| 判断理由 | `why` | **必填**；`docs/06` §9.2 A10 会自动检查它是否引用了具体 fact id |
+| 判断理由 | `why` | **必填**；`docs/development/mvp-plan.md` §9.2 A10 会自动检查它是否引用了具体 fact id |
 | 幂等 | `idempotency_key`（**禁止含时间戳**） | **必填**；中断恢复的唯一依据 |
 | 可逆性 | `reversible` | **必填**；`false` 时中断后禁止自动重试 |
 
@@ -182,7 +183,7 @@ MVP 的具体字段（`.wam/state.json` 的 `active_move`）见 [`docs/06-develo
 | **验证 Verify** | WAM 基于证据 | 证据满足 / 不满足验收条件 | 记为 `Insufficient`，不伪造 |
 | **提交 Commit** | WAM | 项目状态正式更新 | 不提交，保留旧状态 |
 
-**"验证行动是否成功"与"判断行动是否值得"是两个不同的问题**（`docs/03-vision-and-concepts.md` §4.5）。
+**"验证行动是否成功"与"判断行动是否值得"是两个不同的问题**（`docs/vision.md` §4.5）。
 
 - 验证：这次 Move 达成了预期改变吗？→ 可由证据回答。
 - 判断：这次 Move 值得做吗、做完是否还要继续？→ 需要 Judgment，且可能因为"做成了"而得出"这条路到此为止"的结论。
@@ -215,7 +216,7 @@ MVP 的具体字段（`.wam/state.json` 的 `active_move`）见 [`docs/06-develo
 
 - ✅ `experiments/README.md` 硬规则 3：results.md 必须记录失败项，不隐藏。
 - ✅ `directions/` 归档机制记录失败方向（"归档是记忆，不是羞辱"）。
-- ❌ **没有机制把失败与"哪条假设被否定"关联起来。** 这是 `docs/06-development-plan.md` 的 MVP 目标之一。
+- ❌ **没有机制把失败与"哪条假设被否定"关联起来。** 这是 `docs/development/mvp-plan.md` 的 MVP 目标之一。
 
 ---
 
@@ -255,7 +256,7 @@ MVP 的具体字段（`.wam/state.json` 的 `active_move`）见 [`docs/06-develo
 
 **6 项可答，2 项不可答，2 项勉强。** 缺口集中在 **假设**（5）与 **失败路径**（9）。
 
-**MVP 的目标状态**（`docs/06-development-plan.md` §6.4）：把第 5 项和第 9 项变成可答。
+**MVP 的目标状态**（`docs/development/mvp-plan.md` §6.4）：把第 5 项和第 9 项变成可答。
 
 | # | 问题 | MVP 载体 |
 |---|---|---|
@@ -267,7 +268,7 @@ MVP 的具体字段（`.wam/state.json` 的 `active_move`）见 [`docs/06-develo
 
 ### 6.4 MVP 的恢复判据
 
-MVP 只需回答**五个问题**（`docs/08` 的 T2、T5）：
+MVP 只需回答**五个问题**（`docs/specifications/acceptance.md` 的 T2、T5）：
 
 1. 上一个 Move 是什么状态？
 2. 它如果停在 `executing`，能否安全重试？（看 `idempotency_key` + `reversible`）
@@ -301,11 +302,11 @@ MVP 只需回答**五个问题**（`docs/08` 的 T2、T5）：
 
 **MVP 阶段的策略**（不新建机制）：
 
-1. 读的时候不全读——`log.md` 只读尾部（`docs/01-foundation.md` 六步协议 Read 步已规定）。
+1. 读的时候不全读——`log.md` 只读尾部（`docs/foundation.md` 六步协议 Read 步已规定）。
 2. 写的时候要短——每条 log 回答"发生了什么 + 证据"，不复述过程。
 3. 状态文件（`state.md`/`goals.md`/`decisions.md`）保持精简，历史沉到 `log.md` 和 git。
 
-**不做**自动摘要、压缩、遗忘机制。`docs/research/02-memory-and-state.md` 明确："LLM-generated reflections/summaries have no correctness guarantee"。在没有正确性保证前自动压缩状态，是把不确定性引入权威来源。
+**不做**自动摘要、压缩、遗忘机制。`research/briefs/02-memory-and-state.md` 明确："LLM-generated reflections/summaries have no correctness guarantee"。在没有正确性保证前自动压缩状态，是把不确定性引入权威来源。
 
 ---
 
@@ -313,7 +314,7 @@ MVP 只需回答**五个问题**（`docs/08` 的 T2、T5）：
 
 | 需要 | 去看 |
 |---|---|
-| 概念定义 | `docs/03-vision-and-concepts.md` |
-| 循环与组件职责 | `docs/04-architecture.md` |
-| 实现顺序 | `docs/06-development-plan.md` |
-| 开放问题 | `docs/07-decision-register.md` |
+| 概念定义 | `docs/vision.md` |
+| 循环与组件职责 | `docs/architecture.md` |
+| 实现顺序 | `docs/development/mvp-plan.md` |
+| 开放问题 | `docs/decisions/register.md` |

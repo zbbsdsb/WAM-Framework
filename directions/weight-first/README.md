@@ -2,7 +2,7 @@
 
 > Status: OPEN · Weight: critical path · Opened: 2026-08-07
 >
-> **2026-10-09 annotation (not a rewrite).** `docs/06-development-plan.md` §4 places this slice **outside the MVP**, on the grounds recorded in `docs/03-vision-and-concepts.md` §9: dependency structure is not importance, and building a dependency graph before judgment quality has been validated risks optimizing a dimension never shown to matter — which is exactly what design principle P2 forbids. This is a recommendation on ordering, not a rejection of the direction; its own promotion gate still applies. Recorded as `docs/07-decision-register.md` H-04.
+> **2026-10-09 annotation (not a rewrite).** `docs/development/mvp-plan.md` §4 places this slice **outside the MVP**, on the grounds recorded in `docs/vision.md` §9: dependency structure is not importance, and building a dependency graph before judgment quality has been validated risks optimizing a dimension never shown to matter — which is exactly what design principle P2 forbids. This is a recommendation on ordering, not a rejection of the direction; its own promotion gate still applies. Recorded as `docs/decisions/register.md` H-04.
 
 ## Hypothesis
 
@@ -15,8 +15,8 @@ Lead with WAM's original contribution: the **weight model** — goals as a DAG w
 
 ## Inputs (evidence)
 
-- docs/research/03-unknown-and-weight.md: CPM in LLM agent planning is unresearched (nearest: Vote-Tree-Planner, DART-LLM — neither uses CPM); "What Deserves Memory" (arXiv:2508.03341) criticizes heuristic importance scoring; Smithson's quadrant taxonomy matches state.md's three sections.
-- docs/research/01-ecosystem-survey.md: no framework has critical-path/enhancement/noise tiers.
+- research/briefs/03-unknown-and-weight.md: CPM in LLM agent planning is unresearched (nearest: Vote-Tree-Planner, DART-LLM — neither uses CPM); "What Deserves Memory" (arXiv:2508.03341) criticizes heuristic importance scoring; Smithson's quadrant taxonomy matches state.md's three sections.
+- research/briefs/01-ecosystem-survey.md: no framework has critical-path/enhancement/noise tiers.
 
 ## Architecture
 

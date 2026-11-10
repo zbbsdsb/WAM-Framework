@@ -20,7 +20,7 @@
 |---|---|---|---|
 | 假设 | `directions/<name>/` | 方向竞争：假设 / 证伪条件 / 切片计划 | 不可信（提案） |
 | **执行** | **`experiments/<path>/`** | **实验路径：分阶段运行 + 产物 + 证据** | **运行中（无信任）** |
-| 证据 | `docs/research/`、经确认的 results.md | 可验证事实 | 永久 |
+| 证据 | `research/briefs/`、经确认的 results.md | 可验证事实 | 永久 |
 
 - `directions/` 回答"WAM 应该往哪走"（假设）；`experiments/` 回答"这个假设是否成立"（执行）。
 - 实验路径**不是新的信任层级**：它的 results.md 经作者确认后才成为证据层输入；实验结论（通过/证伪）通过正常晋升门影响 directions/ 与 M1 收敛。

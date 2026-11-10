@@ -1,6 +1,7 @@
 # R&D Dashboard Plan — 研发看板计划
 
 > Status: **approved for planning** (2026-08-07, author direction "专门写进一个计划里"). The team-facing dashboard that makes WAM's shared state visible. This plan is the single source of truth for the dashboard effort; execution is staged P1–P4 with DoD, hard gates, and time boxes.
+> **2026-11-10: status downgraded to `deferred`.** Not built in the nine weeks (`docs/development/roadmap.md` §7); reopening conditions are stated there. The rest of this document is kept verbatim as the record of that plan — its "start immediately" default is **void**.
 
 ## Background & motivation
 
@@ -106,7 +107,7 @@ Dogfooding: WAM claims state sync as its core contribution — its own team shou
 |---|---|
 | Generator judgment drifts from human judgment | Sampled cross-checks at each P stage; generator output is auditable (deterministic) |
 | Dashboard becomes decoration nobody uses | Fixed usage in Orient/Retro meetings; author is the primary user |
-| md format evolution breaks parsing | Tolerant parser + format conventions documented in docs/01-foundation.md if needed |
+| md format evolution breaks parsing | Tolerant parser + format conventions documented in docs/foundation.md if needed |
 | Dashboard duplicates the site's look or drifts from it | Reuse site/style.css; generation shares the design tokens |
 
 ## Open decisions (defaults in brackets — author may override)

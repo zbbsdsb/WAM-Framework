@@ -14,7 +14,7 @@
 | **B** | 读到了**摘要或标题 + 权威页面**，未读全文 | 只能作为"存在这个说法"的证据，不得转述其结论 |
 | **C** | 只有二手转述（搜索结果、他人总结） | **不得引用**，只能作为"去读原文"的线索 |
 
-**本仓库已因一次编造文献被标记过**（`docs/research/03` caveat：Ramírez & Burrage 在 Crossref/arXiv/Semantic Scholar 均未找到，已标记未编造）。本节遵守同一条纪律：**没读到的东西不写成结论。**
+**本仓库已因一次编造文献被标记过**（`research/briefs/03` caveat：Ramírez & Burrage 在 Crossref/arXiv/Semantic Scholar 均未找到，已标记未编造）。本节遵守同一条纪律：**没读到的东西不写成结论。**
 
 ---
 
@@ -22,7 +22,7 @@
 
 | # | 结论 | 对 WAM 的直接影响 |
 |---|---|---|
-| **1** | **作者"不用传统 Multi-Agent"的判断，有独立的外部支持，而且支持它的是工业界而非学术界** | M6 从"我们的偏好"升级为"有依据的拒绝"（`docs/09` G5） |
+| **1** | **作者"不用传统 Multi-Agent"的判断，有独立的外部支持，而且支持它的是工业界而非学术界** | M6 从"我们的偏好"升级为"有依据的拒绝"（`docs/development/scope.md` G5） |
 | **2** | **"共享上下文作为组件"这个定位，恰好是别人明确说"没人认真在做"的空位** | `directions/shared-context/` 的差异化不是想象出来的 |
 | **3** | **黑板架构（blackboard）是最接近的先例，但它的第三个部件必须被拒绝** | 借鉴知识源 + 共享数据结构；拒绝 control（仲裁器） |
 | **4** | **状态表征的形式基础是 statechart 而不是 FSM** | 解释了为什么是"10 状态 / 6 模式 / 两个正交轴"而不是"一个 10 状态机" |
@@ -61,7 +61,7 @@
 |---|---|---|
 | 知识源 knowledge sources | **采纳**：就是"工具注册实体"/"被调用的能力"，无状态、可并发 | 与作者"Miracle Agent 可并发调用多个工具注册实体"完全同构 |
 | 黑板数据结构 blackboard | **采纳**：就是"共享上下文"，多层级 + 显式探索边界 | 这正是作者说的"位于信息源职责映射空间内的独立组件" |
-| 控制 control（仲裁器） | **拒绝** | 仲裁器就是调度器——`docs/09` M6 拒绝的正是它。WAM 用**单一全局 Agent 的判断**替代仲裁 |
+| 控制 control（仲裁器） | **拒绝** | 仲裁器就是调度器——`docs/development/scope.md` M6 拒绝的正是它。WAM 用**单一全局 Agent 的判断**替代仲裁 |
 
 > 一句话：**WAM 要黑板的"板"，不要黑板的"主席"。** 这句话可以直接拿去做 `directions/shared-context/` 的题眼。
 
@@ -76,7 +76,7 @@
 | C1 | [LangGraph Interrupts](https://docs.langchain.com/oss/python/langgraph/interrupts) | **B（官方文档页存在）** 中断是一等原语：停在某点、等人、用检查点恢复 | U1、S1、M4 | **adapt（概念）** |
 | C2 | [Temporal: durable execution for LangGraph](https://temporal.io/blog/temporal-langgraph-plugin-durable-execution) | **B（官方博客存在）** 用确定性重放实现"进程死了工作还在" | S1、M4 | **reject（作为依赖）/ adopt（作为测试思路）** |
 
-**为什么拒绝 Temporal 类 durable execution 引擎**：项目当前的全部持久化需求是"一个 JSON 文件、单写点、原子替换、幂等键"（`docs/06` §6.5、§7.3）。引入重放引擎会把 1% 原则换成一个运维负担，而它解决的问题（崩溃后状态一致）已经被"单写点 + `os.replace`"覆盖到 MVP 所需的程度。
+**为什么拒绝 Temporal 类 durable execution 引擎**：项目当前的全部持久化需求是"一个 JSON 文件、单写点、原子替换、幂等键"（`docs/development/mvp-plan.md` §6.5、§7.3）。引入重放引擎会把 1% 原则换成一个运维负担，而它解决的问题（崩溃后状态一致）已经被"单写点 + `os.replace`"覆盖到 MVP 所需的程度。
 
 **但要采纳它的一个想法**：*determinism*. Temporal 的恢复之所以可靠，是因为重放是确定性的。WAM 的等价检验是——
 
@@ -84,7 +84,7 @@
 
 这条可以变成 W5 的一个测试思路，而**不需要引入引擎**。这是"借鉴机制"与"引入依赖"的分界线。
 
-**C1 采纳的只是概念**：中断要能被持久化，而不是一个异常。这与 `docs/04` §12 的 `WAITING` / `ASKING` / `STOPPED` 三态是一致的——**它们不是错误处理，是正常状态**。
+**C1 采纳的只是概念**：中断要能被持久化，而不是一个异常。这与 `docs/architecture.md` §12 的 `WAITING` / `ASKING` / `STOPPED` 三态是一致的——**它们不是错误处理，是正常状态**。
 
 ---
 
@@ -96,7 +96,7 @@
 | D2 | [Microsoft HAX 人机交互指南](https://github.com/miguelferre/human-ai-governance)（HAX-18 审计工具）与 Google PAIR | **B（工具与指南存在）** 18 条指南里与本项目直接相关的三条：*make system status visible*、*convey consequences*、*support efficient correction* | U2 的验收清单 | **adapt** |
 | D3 | 社区实践：[visible session states — Working + WaitingAgent + Done](https://github.com/xmiksay/entanglement/commit/563ba57789f36e436852efdd8f42db410dad0dd9) | **B（一个提交记录）** 有产品在收敛到 **3 个**可见状态 | 对 U1 的**反向信号** | **记录，不采纳** |
 
-**D1 是本节最有用的发现**：我们不需要"一个 10 状态机"，我们需要**一个 statechart**——因为 WAM 天然有两个正交区域（注意力的状态 × 物的状态），而把正交的东西塞进一个平面状态机会导致状态数乘积爆炸（10 × 7 = 70）。**这正是 `docs/04` §12.1 决定分两个轴的独立依据**，不只是"两个受众不同"。
+**D1 是本节最有用的发现**：我们不需要"一个 10 状态机"，我们需要**一个 statechart**——因为 WAM 天然有两个正交区域（注意力的状态 × 物的状态），而把正交的东西塞进一个平面状态机会导致状态数乘积爆炸（10 × 7 = 70）。**这正是 `docs/architecture.md` §12.1 决定分两个轴的独立依据**，不只是"两个受众不同"。
 
 **D3 必须被记录，因为它是反对意见**：如果真实产品收敛到 3 个状态，我们凭什么要 10 个？答案是——**那 3 个状态是给"一次对话内"的 agent 用的；WAM 的状态要服务"跨会话、跨天、跨中断"的重新同步，而在这个时间尺度上，`WAITING` 与 `ASKING` 的区分是决定性的**（前者你别回来，后者只有你能解锁）。
 **但这条答案是可错的**：若 W4 之后作者发现自己从不看第 6–10 个状态，那就砍到 3 个模式 + 1 个"在等谁"。**记入 §5 的自我怀疑。**
@@ -110,13 +110,13 @@
 | E1 | [When Do Agent Loops Mistake Stagnation for Progress? Self-Evaluation Bias and Externally Grounded Verification in Long-Running Autonomous LLM Agent Loops](https://arxiv.org/abs/2607.25152) | **B（标题 + 检索摘要；本会话取全文被 429 限流，未读）** 标题同时命中 P1（活动量≠进展）与 C-07（外部接地验证） | **J6、J3、C-08** | **defer → 列为 J6 的必读前置** |
 | E2 | [METR: Measuring AI Ability to Complete Long Tasks](https://arxiv.org/abs/2503.14499) | **B（arXiv 页面存在；具体数值以原文为准）** 以"50% 成功率下的任务时长"作为能力度量，该时长约每 7 个月翻倍 | **Move 的尺寸**（M1）、W8 失败分析 | **adapt（用法如下）** |
 
-**E1 为什么最重要**：`docs/09` J6 提出的停滞判据（连续 3 个 Move 无新事实 → 转向）是**我们自己想的**，而这篇标题暗示别人已经在研究同一件事，且结论可能更细（"自我评估偏差"意味着**系统自己判断"我在进展"是不可信的**——这直接威胁我们让 LLM 自己产出 `why` 的设计）。**在 W6 实现 J6 之前必须读它**，否则我们可能在实现一个已知无效的方案。
+**E1 为什么最重要**：`docs/development/scope.md` J6 提出的停滞判据（连续 3 个 Move 无新事实 → 转向）是**我们自己想的**，而这篇标题暗示别人已经在研究同一件事，且结论可能更细（"自我评估偏差"意味着**系统自己判断"我在进展"是不可信的**——这直接威胁我们让 LLM 自己产出 `why` 的设计）。**在 W6 实现 J6 之前必须读它**，否则我们可能在实现一个已知无效的方案。
 
 **E2 的实用价值不是"AI 能做多长时间的任务"，而是反过来用**：
 
 > **一个 Move 的复杂度，必须显著低于模型的时间视野。**
 
-如果模型在 50% 成功率下的时间视野是若干小时，那么一个"预计要 3 天"的 Move 的失败不是执行问题，是**边界切错了**。这把 `docs/09` OQ-08（Move 的边界怎么定）从纯设计问题变成可用外部数据约束的问题。**这是本次调研里唯一一条能直接改工程决策的外部输入。**
+如果模型在 50% 成功率下的时间视野是若干小时，那么一个"预计要 3 天"的 Move 的失败不是执行问题，是**边界切错了**。这把 `docs/development/scope.md` OQ-08（Move 的边界怎么定）从纯设计问题变成可用外部数据约束的问题。**这是本次调研里唯一一条能直接改工程决策的外部输入。**
 
 **为什么 E2 只到 adapt**：METR 测的是"任务时长"与"成功率"，不是"判断质量"。它约束的是**尺寸**，不是**智慧**。把两者混起来正是 P6（不要把研究判断与执行验证混在一起）要防的。
 
@@ -126,7 +126,7 @@
 
 | # | 来源 | 它说什么（核实程度） | 裁决 |
 |---|---|---|---|
-| F1 | Anthropic *Effective context engineering for AI agents*；Chroma *context rot* 技术报告 | **C（二手）** 长上下文中信息利用率下降，需要"策展"而非"堆叠" | **defer**：与 `docs/05` §7 的立场一致（先测量长度，再决定压缩），不构成新决策 |
+| F1 | Anthropic *Effective context engineering for AI agents*；Chroma *context rot* 技术报告 | **C（二手）** 长上下文中信息利用率下降，需要"策展"而非"堆叠" | **defer**：与 `docs/specifications/state-and-evidence.md` §7 的立场一致（先测量长度，再决定压缩），不构成新决策 |
 | F2 | ADAMEM verbosity pathology（已在 `reference/enhancement/adamem.md`） | **已入库** 检索轨迹越多，性能反而下降（52.1% → 47.8%） | 已被采纳为设计准则（`wam goal next` 只输出一行） |
 
 ---
@@ -173,8 +173,8 @@
 
 | 需要 | 去看 |
 |---|---|
-| 每格的承诺与证据标准 | `docs/09-goal-taxonomy.md` |
-| 这些材料在 9 周里什么时候用 | `docs/10-rd-roadmap-2027.md` |
+| 每格的承诺与证据标准 | `docs/development/scope.md` |
+| 这些材料在 9 周里什么时候用 | `docs/development/roadmap.md` |
 | 共享上下文方向的假设与证伪 | `directions/shared-context/README.md` |
 | 借鉴流程的正式规则 | `reference/WORKFLOW.md`、`reference/templates/assessment-matrix.md` |
 | 已有的 5 篇入库文献 | `reference/README.md` |

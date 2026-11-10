@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# 3.5 MB verbatim corpus: treat as binary for diff purposes
+research/archive/raw-archive.md -diff

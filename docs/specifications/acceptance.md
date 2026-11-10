@@ -1,7 +1,8 @@
 # Scenarios & Acceptance — 设计验证场景与验收标准
 
 > 版本：2026-10-09 · 状态：**Current Design Baseline**
-> 依赖：`docs/04-architecture.md` · `docs/05-state-move-evidence.md` · `docs/06-development-plan.md`
+> Status: **specified**（无实现；验收用例全部尚未跑过）· Carrier: none · 2026-11-10 迁入本目录，**正文一字未改**
+> 依赖：`docs/architecture.md` · `docs/specifications/state-and-evidence.md` · `docs/development/mvp-plan.md`
 
 ---
 
@@ -13,7 +14,7 @@
 - §2 **10 条通用行为验收标准**：适用于任何任务。
 - §3 **4 类设计验证案例**：任务性质差异极大，用来检验架构在无统一指标时是否仍能工作。
 
-**它们不是四套独立产品模式。** 四类场景共用同一套核心循环（`docs/04-architecture.md` §2）与同一套持久记录，差异只在 **Intent 内容** 与 **Evidence 形式**：
+**它们不是四套独立产品模式。** 四类场景共用同一套核心循环（`docs/architecture.md` §2）与同一套持久记录，差异只在 **Intent 内容** 与 **Evidence 形式**：
 
 | 场景 | Intent 的性质 | Evidence 的形式 |
 |---|---|---|
@@ -22,7 +23,7 @@
 | C. 开源建设 | **没有单一指标** | 真实用户反馈 + 使用证据 |
 | D. 社科研究 | **没有分数** | 文献、竞争性解释、论证链 |
 
-**这个差异表就是 WAM 的核心检验**：如果 WAM 只在 A（有分数）下能工作，那它就退化成了"任务跑分器"，违背 `docs/03-vision-and-concepts.md` §3。
+**这个差异表就是 WAM 的核心检验**：如果 WAM 只在 A（有分数）下能工作，那它就退化成了"任务跑分器"，违背 `docs/vision.md` §3。
 
 ---
 
@@ -66,7 +67,7 @@
 **输入**：执行器报告"完成"，但实际产物或测试不支持这一说法。
 
 **通过条件**：
-- WAM 不接受报告本身作为证据（`docs/04-architecture.md` §5 第 2 级 → 第 3 级）。
+- WAM 不接受报告本身作为证据（`docs/architecture.md` §5 第 2 级 → 第 3 级）。
 - WAM 去取可检查证据。
 - 若证据不支持，状态**不更新**，且记录为 `Insufficient` 而非"已完成"。
 
@@ -209,11 +210,11 @@
 | 易错 | 为什么 |
 |---|---|
 | 擅自选择 L2 作为目标 | 用户说"复现"，未指定层次。WAM 挑最轻的 = 悄悄改变用户目标（C-04 禁止） |
-| 调参直到数字接近 | 这是把"看起来对"当证据。`docs/03-vision-and-concepts.md` C-07 |
+| 调参直到数字接近 | 这是把"看起来对"当证据。`docs/vision.md` C-07 |
 | 把没复现当代码 Bug | 研究结论未复现 ≠ 代码有错（P6） |
 | 隐含条件不记录 | 实现中的隐含假设一旦丢失，后续复用会踩坑 |
 
-**该场景检验什么**：认识论状态（`docs/05-state-move-evidence.md` §2）、实验判断、证据管理。
+**该场景检验什么**：认识论状态（`docs/specifications/state-and-evidence.md` §2）、实验判断、证据管理。
 
 ### 场景 C：从零建设一个真正有价值的开源项目
 
@@ -269,7 +270,7 @@
 | 易错 | 为什么 |
 |---|---|
 | 把相关当因果 | 这是认识论问题，不是能力问题 |
-| 把假设写成结论 | `docs/05-state-move-evidence.md` §2 的核心问题 |
+| 把假设写成结论 | `docs/specifications/state-and-evidence.md` §2 的核心问题 |
 | 用"文献量大"当研究进展 | 活动量 ≠ 进展（P1） |
 
 **该场景检验什么**：在**完全没有**数值奖励的情况下，WAM 是否仍能开展有方向的研究和建设。
@@ -293,7 +294,7 @@
 
 ### 5.1 在 MVP 阶段
 
-MVP（`docs/06-development-plan.md` §3）**只跑一个真实任务**，按 `docs/06-development-plan.md` §3.1 的九条能力逐条验证，并对照本文档 §2 的十条。
+MVP（`docs/development/mvp-plan.md` §3）**只跑一个真实任务**，按 `docs/development/mvp-plan.md` §3.1 的九条能力逐条验证，并对照本文档 §2 的十条。
 
 **不建议在 MVP 阶段同时跑四类场景。** 那会分散资源，且四类场景都需要阶段二的能力存在才有意义。
 
@@ -311,7 +312,7 @@ MVP（`docs/06-development-plan.md` §3）**只跑一个真实任务**，按 `do
 
 ### 5.3 结论进入哪里
 
-场景检验的结论进入 `workspace/decisions.md`（作者确认后），状态更新到 `docs/07-decision-register.md`。
+场景检验的结论进入 `workspace/decisions.md`（作者确认后），状态更新到 `docs/decisions/register.md`。
 
 **不允许**把场景检验的结论直接写成设计决策——结论是输入，作者的判断才是决策（沿用 `experiments/README.md` 宣言第 5 条）。
 
@@ -321,7 +322,7 @@ MVP（`docs/06-development-plan.md` §3）**只跑一个真实任务**，按 `do
 
 | 需要 | 去看 |
 |---|---|
-| 核心循环与组件职责 | `docs/04-architecture.md` |
-| 认识论状态 | `docs/05-state-move-evidence.md` |
-| 实现顺序与阶段门 | `docs/06-development-plan.md` |
-| 决策四态 | `docs/07-decision-register.md` |
+| 核心循环与组件职责 | `docs/architecture.md` |
+| 认识论状态 | `docs/specifications/state-and-evidence.md` |
+| 实现顺序与阶段门 | `docs/development/mvp-plan.md` |
+| 决策四态 | `docs/decisions/register.md` |

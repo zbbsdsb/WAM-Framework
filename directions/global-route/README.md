@@ -2,7 +2,7 @@
 
 > Status: OPEN (author-authored) · Weight: critical path · Opened: 2026-08-07
 >
-> **2026-10-09 annotation (not a rewrite).** The line below describing Hermes Agent as "the platform this project is developed on" could not be verified: there is no Hermes directory under `D:/github projects/`. The platform whose mechanism *was* verified against source is DeepSeek Harness (preset = directory containing `agent.cordis.yml` + `preset.yml`; see `experiments/README.md` §DSH 集成机制). WAM has **no confirmed execution platform dependency** — `docs/01-foundation.md` defers tech stack as an implementation detail. Recorded as `docs/07-decision-register.md` X-01 / OQ-10. This file remains a proposals-layer document; resolving this needs the author's decision.
+> **2026-10-09 annotation (not a rewrite).** The line below describing Hermes Agent as "the platform this project is developed on" could not be verified: there is no Hermes directory under `D:/github projects/`. The platform whose mechanism *was* verified against source is DeepSeek Harness (preset = directory containing `agent.cordis.yml` + `preset.yml`; see `experiments/README.md` §DSH 集成机制). WAM has **no confirmed execution platform dependency** — `docs/foundation.md` defers tech stack as an implementation detail. Recorded as `docs/decisions/register.md` X-01 / OQ-10. This file remains a proposals-layer document; resolving this needs the author's decision.
 
 ## Hypothesis
 
@@ -26,7 +26,7 @@ The deliverable is the engine **plus the folder** (the living workspace) — "no
 
 - Author's sketch 2026-08-07 (PNG, reconstructed via OCR — pending author review of 反向机 and arrow semantics).
 - idea.md: "no matter how many agents run beneath, what is presented to the user should be a unified, global, constructive collaboration entity."
-- docs/research/01-ecosystem-survey.md: no framework offers human-readable shared state; the global orchestrator + folder pattern is unoccupied.
+- research/briefs/01-ecosystem-survey.md: no framework offers human-readable shared state; the global orchestrator + folder pattern is unoccupied.
 - Pattern reference: Hermes Agent (the platform this project is developed on) — persistent memory, session continuity, delegation, skills.
 
 ## Architecture

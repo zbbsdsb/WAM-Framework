@@ -2,7 +2,7 @@
 
 > Version: M0 · 2026-08-06 · Status: In effect (subject to revision through practice)
 >
-> **2026-10-09 note.** This document remains the currently-in-force constitution: the four-file state model and the six-step protocol are M0's delivered output and are still in effect. The design baseline in `docs/03`–`docs/08` **refines** it in three places — (1) Intent must be read, not just goals and progress; (2) "Judge" means choosing what *type* of step to take, including waiting or stopping; (3) "Verify" separates *obtaining evidence* from *evidence meeting the acceptance condition*. See [`docs/04-architecture.md` §2](04-architecture.md) for the mapping table. Everything else in this document stands unchanged.
+> **2026-10-09 note.** This document remains the currently-in-force constitution: the four-file state model and the six-step protocol are M0's delivered output and are still in effect. The design baseline in `docs/vision.md`–`docs/specifications/acceptance.md` **refines** it in three places — (1) Intent must be read, not just goals and progress; (2) "Judge" means choosing what *type* of step to take, including waiting or stopping; (3) "Verify" separates *obtaining evidence* from *evidence meeting the acceptance condition*. See [`docs/architecture.md` §2](architecture.md) for the mapping table. Everything else in this document stands unchanged.
 
 ## Thesis
 
@@ -45,7 +45,7 @@ Established 2026-08-07. To keep the project from drifting off course, the projec
 
 | Tier | Where it lives | Trust level |
 |---|---|---|
-| Evidence | `docs/research/` | Sourced facts, verifiable — permanent |
+| Evidence | `research/briefs/` | Sourced facts, verifiable — permanent |
 | Proposals | `directions/<name>/` | Ideas, drafts, prototypes — NOT trusted |
 | Decisions & constitutions | `docs/` (this file), `workspace/` (decisions.md, goals.md) | Verified — official |
 
@@ -64,16 +64,16 @@ The M0 foundation above answers *how state is shared*. It does not answer *what 
 
 | Question | Answered in |
 |---|---|
-| What problem WAM solves; the five core concepts; the seven principles | [`docs/03-vision-and-concepts.md`](03-vision-and-concepts.md) |
-| The core loop; component responsibilities; persistent record; Human Absent Mode; concept-vs-module boundaries | [`docs/04-architecture.md`](04-architecture.md) |
-| What Situation must express; fact / assumption / unknown; Move lifecycle; the five-level evidence ladder | [`docs/05-state-move-evidence.md`](05-state-move-evidence.md) |
-| The minimal verifiable core, stage gates, what is deferred, what blocks development | [`docs/06-development-plan.md`](06-development-plan.md) |
-| Which decisions are established / baseline / hypothesis / open | [`docs/07-decision-register.md`](07-decision-register.md) |
-| Four design-validation scenarios + 10 acceptance criteria | [`docs/08-scenarios-and-acceptance.md`](08-scenarios-and-acceptance.md) |
+| What problem WAM solves; the five core concepts; the seven principles | [`docs/vision.md`](vision.md) |
+| The core loop; component responsibilities; persistent record; Human Absent Mode; concept-vs-module boundaries | [`docs/architecture.md`](architecture.md) |
+| What Situation must express; fact / assumption / unknown; Move lifecycle; the five-level evidence ladder | [`docs/specifications/state-and-evidence.md`](specifications/state-and-evidence.md) |
+| The minimal verifiable core, stage gates, what is deferred, what blocks development | [`docs/development/mvp-plan.md`](development/mvp-plan.md) |
+| Which decisions are established / baseline / hypothesis / open | [`docs/decisions/register.md`](decisions/register.md) |
+| Four design-validation scenarios + 10 acceptance criteria | [`docs/specifications/acceptance.md`](specifications/acceptance.md) |
 
 Two things the M0 foundation does **not** provide, and which the MVP must build:
 
-1. **A carrier for Intent.** `goals.md` holds a goal tree, not the user's intent or authorization boundary. This is the largest open gap (`docs/07-decision-register.md` OQ-01).
+1. **A carrier for Intent.** `goals.md` holds a goal tree, not the user's intent or authorization boundary. This is the largest open gap (`docs/decisions/register.md` OQ-01).
 2. **A carrier for the Judgment process.** `decisions.md` records what was decided; it does not record how the judgment was reached, so judgment traceability cannot be checked.
 
 **Implementation status: zero.** This repository currently contains no executable code. The four Markdown files under `workspace/` are maintained by hand and carry the protocol, but nothing validates them yet.

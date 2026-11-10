@@ -2,9 +2,10 @@
 
 > 版本：2026-10-09 v3 · 状态：**Current Design Baseline**（计划已定，**§13 开工批次待作者审阅**，未执行）
 > v3 变更：新增 §13 开工批次计划（可直接交给开发 Agent 执行）与 §14 待裁决清单。
-> 本文档是**唯一的开发计划权威**。v1（2026-10-09 上午）的高层阶段划分已并入本文档 §9。
-> 依赖：`docs/03-vision-and-concepts.md`（概念）· `docs/04-architecture.md`（架构）· `docs/05-state-move-evidence.md`（状态与 Move 语义）
-> 决策状态：`docs/07-decision-register.md` · 验收场景：`docs/08-scenarios-and-acceptance.md`
+> 本文档是**工程做法的权威**（时间安排以 `docs/development/roadmap.md` 为准）。v1（2026-10-09 上午）的高层阶段划分已并入本文档 §9。
+> 依赖：`docs/vision.md`（概念）· `docs/architecture.md`（架构）· `docs/specifications/state-and-evidence.md`（状态与 Move 语义）
+> 决策状态：`docs/decisions/register.md` · 验收场景：`docs/specifications/acceptance.md`
+> **2026-11-10 结构说明**：§5–§7（接口集 / `state.json` 结构 / Move 生命周期）已原文移至 [`docs/specifications/execution-contract.md`](../specifications/execution-contract.md)，**节号保留**；本文只承载工程做法与环境基线。
 
 ---
 
@@ -49,7 +50,7 @@
 
 ### 1.3 一个必须记录的设计冲突
 
-`docs/01-foundation.md`（M0 宪法）规定：**所有协作状态放在 `workspace/` 的四个 Markdown 文件里，人和 AI 都直接读写。**
+`docs/foundation.md`（M0 宪法）规定：**所有协作状态放在 `workspace/` 的四个 Markdown 文件里，人和 AI 都直接读写。**
 
 而本计划的 MVP 选择 `state.json` 作为机器权威。两者冲突，处理方式：
 
@@ -91,11 +92,11 @@
 
 | 能力 | 未来接入点 | MVP 最小实现 | 替换理由 |
 |---|---|---|---|
-| 更强的 Situation 构建与上下文压缩 | `SituationBuilder` | 文件树 + git + 现有 md；**不压缩、不摘要** | 文档已长到需要压缩，但压缩有无正确性保证未知（`docs/05` §7、`docs/research/02`）。**先测量长度，再决定是否压缩** |
+| 更强的 Situation 构建与上下文压缩 | `SituationBuilder` | 文件树 + git + 现有 md；**不压缩、不摘要** | 文档已长到需要压缩，但压缩有无正确性保证未知（`docs/specifications/state-and-evidence.md` §7、`research/briefs/02`）。**先测量长度，再决定是否压缩** |
 | 更复杂的 Judgment | `JudgmentProvider` | 单次调用 + schema | 这是最该被替换的一块（§5） |
 | 多候选方案比较 / 反事实推演 | `JudgmentProvider` 的实现内 | **不实现**。输出结构里预留 `alternatives_considered` 字段但允许为空 | 结构上有位置，就不会在加能力时改动循环 |
-| 更完整的未知发现与研究策略 | `SituationBuilder` + `JudgmentProvider` | 只登记未知，不主动生成研究任务 | 无监督的 unknown-unknown 检测是未解问题（`docs/research/03`）。WAM 的贡献是显式登记 + 人在回路 |
-| 更可靠的长期记忆组织 / 项目关系模型 | `StateRepository` | 单文件扁平结构 | Project Graph 明确推迟（`docs/04` §8.2） |
+| 更完整的未知发现与研究策略 | `SituationBuilder` + `JudgmentProvider` | 只登记未知，不主动生成研究任务 | 无监督的 unknown-unknown 检测是未解问题（`research/briefs/03`）。WAM 的贡献是显式登记 + 人在回路 |
+| 更可靠的长期记忆组织 / 项目关系模型 | `StateRepository` | 单文件扁平结构 | Project Graph 明确推迟（`docs/architecture.md` §8.2） |
 | 多 Agent 协调 | `MoveExecutor` | 单执行器 | P7：Move 边界未稳定前不谈并行 |
 | 可插拔模型 / 执行器 / 验证器 / 存储后端 | 全部 6 个接口 | 单实现（codex / 内建验证器 / JSON 文件） | 每个接口都有具体的替换理由（§5），不是为了"可扩展" |
 | 更复杂的风险评估与人工介入 | `MoveExecutor` 的 sandbox 档位 + `state.json` 的 `authorization` | 三档 sandbox + 三类需批准动作 | 企业级权限系统推迟，但**边界必须现在就有** |
@@ -110,7 +111,7 @@
 | 通用反事实世界模拟 | 成本极高，且当前无任何证据表明它会改变 Move 质量 | `JudgmentProvider` | Phase 4 失败分析显示"缺少对替代路径的评估"是主要失败原因 |
 | 高度复杂的动态项目图 | 依赖结构 ≠ 重要性；在判断质量未验证前建图，正是 P2 要防的事 | `StateRepository` | 扁平结构真实暴露检索痛点 |
 | 插件市场 / 分布式运行时 | 无需求证据 | 不预设 | 出现第二个真实使用方 |
-| 复杂可视化界面 | Dashboard 已有计划（`docs/02`），P1 优先级在 MVP 之后 | `docs/02` P1–P4 | MVP 闭环跑通 |
+| 复杂可视化界面 | Dashboard 已有计划（`docs/development/dashboard-plan.md`），P1 优先级在 MVP 之后 | `docs/development/dashboard-plan.md` P1–P4 | MVP 闭环跑通 |
 | 通用化抽象 | 1% 原则 | — | **默认永远不实现**，除非某个具体失败案例指向它 |
 | 向量检索作主状态存储 | 检索失效风险；已在反借鉴清单 | 不作为主存储 | — |
 
@@ -229,323 +230,7 @@ sequenceDiagram
 
 ---
 
-## 5. 接口与数据契约
-
-### 5.1 三种状态必须区分
-
-| 状态 | 含义 |
-|---|---|
-| **接口已定义** | 有契约（输入/输出/失败语义/调用方），但可以没有实现 |
-| **接口已接入最小实现** | 循环真的在用它，且它真的能工作 |
-| **高级能力已实现** | 更强的实现真的存在并被验证过 |
-
-**禁止用"接口已定义"冒充"能力已具备"。** 下表逐项标注。
-
-### 5.2 六个接口
-
-> 这六个来自候选职责清单。**每一个都保留，是因为它对应一个具体的、已知的替换理由。** 不需要替换理由的，不设接口——直接写函数。
-
----
-
-#### I1 `IntentProvider` — 提供当前有效的意图与约束
-
-| 项 | 内容 |
-|---|---|
-| **解决的边界问题** | 意图从哪来。循环不能假设意图永远由同一句话给出 |
-| **替换理由** | Human Absent Mode 需要意图来自**签过字的授权记录**，而不是一个现场的人。届时 Intent 的可信度级别不同（"人说过的" vs "记录下来的"） |
-| **最小输入** | `project_root`, `state.json` 现状, （可选）`--intent` 文本 |
-| **最小输出** | `Intent{raw, goals[], constraints[], authorization{allow,deny,require_approval_for,expires_at}}` |
-| **调用方 / 实现方** | 调用方：循环。实现方：文件读取 + 文本解析 |
-| **失败表达** | 无 intent 记录且未提供 `--intent` → `NoIntent`（不是"用默认目标"） |
-| **当前是否真实实现** | ✅ 是 |
-| **未来更强实现** | 从授权记录 / 外部 tracker 读取；支持意图修订历史 |
-
-**关键设计**：`goals[].origin ∈ {user, inferred}`。**`inferred` 的目标绝不能被当作用户说的**（`docs/03` §3.2）。这个字段是 C-04 的结构化落实。
-
----
-
-#### I2 `SituationBuilder` — 从工作区构建当前 Situation
-
-| 项 | 内容 |
-|---|---|
-| **解决的边界问题** | 判断的输入从哪来，且必须能区分"看到的"和"以为的" |
-| **替换理由** | 现在是文件树 + git。将来要做真实观察（跑测试、看 CI、查外部 API），成本和风险都高一个量级 |
-| **最小输入** | `project_root`, `state.json` 现状, `workspace/*.md`（若存在） |
-| **最小输出** | `Situation{facts[{statement, source, observed_at}], assumptions[{statement, validation_method, status}], unknowns[{question, blocking}]}` |
-| **调用方 / 实现方** | 调用方：循环。实现方：文件树 + `git status --porcelain` + 现有 md 全文读入 |
-| **失败表达** | 项目根不存在 / 不是目录 → `NoProject`；读不到 `workspace/*.md` → 不算失败（可选输入） |
-| **当前是否真实实现** | ✅ 是 |
-| **未来更强实现** | 真实观察执行；上下文压缩；**但"事实必须带 source"这条约束永远不变** |
-
-**关键设计**：三个强制字段——事实无 `source` 拒绝入库；假设无 `validation_method` 降级为"信念"并标注；未知无 `blocking` 无法参与优先级。**这是 OQ-03（防止假设误当事实）的最小结构性防护，不是完整解决方案。**
-
----
-
-#### I3 `JudgmentProvider` — 形成判断
-
-| 项 | 内容 |
-|---|---|
-| **解决的边界问题** | **WAM 最核心、最该被替换的一块。** 循环的其他部分都不应该知道判断是怎么产生的 |
-| **替换理由** | MVP 是单次 LLM 调用；未来是候选比较 + 反事实推演 + 长期后果分析 + 自我校准。**这些全部发生在这一个接口后面，循环不改** |
-| **最小输入** | `Intent`, `Situation`, `constraints`, 上一次 Move 的结果（若有） |
-| **最小输出** | `Judgment{decision, why, confidence, most_likely_wrong_about, alternatives_considered[], move?{intent_ref, premises[], expected_change, acceptance[], risk, reversible, idempotency_key}}` |
-| **调用方 / 实现方** | 调用方：循环（**不解析 LLM 内部结构，只读 schema 后的字段**）。实现方：`codex exec --output-schema` |
-| **失败表达** | schema 校验失败 / 超时 / 空输出 → `JudgmentUnavailable`。**降级路径固定为：`Blocked` + 请求人类判断。不重试超过 1 次，不 fallback 到"随便挑一个任务"** |
-| **当前是否真实实现** | ✅ 是（受限版） |
-| **未来更强实现** | 多候选生成与比较；反事实评估；价值冲突检测；判断置信的自校准 |
-
-**MVP Judgment vs Future Judgment 的分界**：
-
-| | MVP Judgment | Future Judgment |
-|---|---|---|
-| 输入 | Intent + Situation + 约束 | + 历史判断的结果、实际后果 |
-| 处理 | 选一个下一步 | 价值冲突处理、反事实推演、长期后果 |
-| 输出 | 一个 Move 或一个"不做" | 同上，但带更完整的权衡记录 |
-| 自我校准 | 无 | 有（判断命中率、被现实否定率） |
-| **不做什么** | 不打分、不排序、不多轮辩论、不多 Agent 协商 | — |
-
-**MVP 的成功标准不是"已经等于 Future Judgment"，而是：Judgment 作为循环中的一环真的有效，且未来替换它时循环不必重写。**
-
----
-
-#### I4 `MoveExecutor` — 执行被授权的 Move
-
-| 项 | 内容 |
-|---|---|
-| **解决的边界问题** | 执行是 WAM 之外的事。执行器可以换，边界不能变 |
-| **替换理由** | codex 只是第一个实现。DSH preset、人、未来的多 Agent 编排都会替换它。**P4 的核心主张正在于此** |
-| **最小输入** | `Move`, `sandbox_tier`（由 `authorization` 推导，不由调用方随意指定） |
-| **最小输出** | `ExecutionResult{exit_code, events[], artifacts[], duration}` |
-| **调用方 / 实现方** | 调用方：循环。实现方：`codex exec` 子进程 |
-| **失败表达** | 非零退出码 → `ExecutionResult` 正常返回但 `ok=false`。**执行器失败不是异常，是结果** |
-| **当前是否真实实现** | ✅ 是 |
-| **未来更强实现** | DSH preset；人工执行 + 手工填证据；多执行器并行 |
-
-**关键设计**：sandbox 档位**只能由 `authorization` 推导**。调用方不能传 `--dangerously-bypass-approvals-and-sandbox`。这条是 T8（授权边界）的实现点。
-
----
-
-#### I5 `EvidenceVerifier` — 判断证据是否足以更新状态
-
-| 项 | 内容 |
-|---|---|
-| **解决的边界问题** | **五级证据阶梯的第 3→4 级。** "执行器说成功"到"状态可以更新"之间必须有一道独立的闸 |
-| **替换理由** | 现在的验证器只能跑命令 + 查文件。将来需要跑测试套件、做语义检查、要人签字。**这道闸不能省，但闸的实现可以换** |
-| **最小输入** | `Move.acceptance[]`, `ExecutionResult` |
-| **最小输出** | `Verdict{pass, per_criterion[{criterion, met, actual}], insufficient?, failed?}` |
-| **调用方 / 实现方** | 调用方：循环。实现方：内建（进程退出码 / 文件路径存在 / 输出包含） |
-| **失败表达** | 验证器自身抛错 → `insufficient`（**默认保守：不提交**） |
-| **当前是否真实实现** | ✅ 是 |
-| **未来更强实现** | 测试套件；语义验证；人工确认作为一类 criterion |
-
-**关键设计**：验收条件在 Move `Accepted` 时**就已写定并持久化**，不是验证时现编。事后编的验收条件等于没有。
-
----
-
-#### I6 `StateRepository` — 保存与恢复项目状态
-
-| 项 | 内容 |
-|---|---|
-| **解决的边界问题** | 连续性的物理载体。谁拥有状态，决定了换执行器会不会丢状态（P4） |
-| **替换理由** | 单文件 JSON 有明确上限（体积、并发写、查询）。将来可能需要快照链或事件日志。**但那是替换这个接口，不是重写循环** |
-| **最小输入** | `project_root`, 读：`load()`；写：`save(state)`（原子） |
-| **最小输出** | `State{version, intent, situation, active_move, history[], journal[]}` |
-| **调用方 / 实现方** | 调用方：循环的**唯一写入点**。实现方：`tempfile` + `os.replace` |
-| **失败表达** | 文件不存在且无 `--init` → `NoState`（**不是"建一个空的"**）；JSON 损坏 → `CorruptState`，**不覆盖**，要求人工处理 |
-| **当前是否真实实现** | ✅ 是 |
-| **未来更强实现** | 快照链；事件日志 + 投影；多项目 |
-
-**关键设计**：**循环中只有 I6 一个写入点。** 这是 B5（一致性）的答案——不是加锁或加事务，是让只有一个地方能写。
-
-### 5.3 刻意不设的接口
-
-| 没设什么 | 为什么 |
-|---|---|
-| `DirectionProvider` | 方向是 Judgment 的输出，不是独立职责（B-04） |
-| `WeightCalculator` | 依赖结构 ≠ 重要性（H-04）。设它就是在为 P2 让路 |
-| `CandidateRanker` / `Scorer` | 直接违反 P2。排序是辅助信息，不是判断 |
-| `EventBus` / `Pipeline` / `Coordinator` | 循环是一条直线，加事件总线就是把 `if` 换成了订阅 |
-| `ReflectionService` | 自动反思/摘要有无正确性保证未知（`docs/05` §7）。在证明它可靠之前，它不能碰权威状态 |
-
----
-
-## 6. 项目状态与证据的最小模型
-
-### 6.1 存储布局
-
-```
-<project_root>/
-  .wam/
-    state.json          # 唯一权威，单文件，原子写
-    journal/            # 证据产物：每次 State Update 一个 JSON 记录
-      0001-<move_id>.json
-  workspace/            # 可选，M0 约定的 md（只读为证据，不回写）
-```
-
-### 6.2 `state.json` 最小结构
-
-```jsonc
-{
-  "version": 1,
-  "intent": {
-    "raw": "帮我继续推进这个项目",          // 用户原话，逐字，不改写
-    "goals": [
-      { "id": "g1", "statement": "…", "origin": "inferred", "confidence": "low" }
-    ],
-    "constraints": [
-      { "id": "c1", "statement": "不破坏现有测试", "origin": "user" }
-    ],
-    "authorization": {
-      "allow": ["read_files", "run_tests", "edit_files_under_project"],
-      "deny": ["network", "credentials", "delete_outside_wam"],
-      "require_approval_for": ["irreversible", "outside_project_root", "force_push"],
-      "expires_at": null
-    },
-    "revised_at": null,
-    "revision_history": []
-  },
-  "situation": {
-    "observed_at": "2026-10-09T16:00:00Z",
-    "facts": [
-      { "id": "f1", "statement": "pytest 有 3 个测试失败",
-        "source": "pytest run @ 2026-10-09", "observed_at": "…" }
-    ],
-    "assumptions": [
-      { "id": "a1", "statement": "失败原因是依赖版本回退",
-        "validation_method": "检查 lockfile 与上次提交差异", "status": "unverified" }
-    ],
-    "unknowns": [
-      { "id": "u1", "question": "这个模块是否还需要保留",
-        "blocking": true, "how_to_answer": "问作者" }
-    ]
-  },
-  "active_move": {
-    "id": "m0003",
-    "state": "executing",                 // 见 §7
-    "intent_ref": "g1",
-    "why": "…",                           // 必填
-    "premises": ["a1"],                   // 引用的假设/事实 id
-    "expected_change": "3 个失败测试中至少 1 个变绿，且没有新失败",
-    "acceptance": [
-      { "kind": "command_exit", "spec": { "cmd": "pytest -q" }, "expect": 0 }
-    ],
-    "risk": "low",
-    "reversible": true,
-    "idempotency_key": "m0003:pytest-after-pin-dep",
-    "executor": { "kind": "codex", "sandbox_tier": "workspace-write" },
-    "execution": null,                    // 执行后填
-    "evidence": [],
-    "verdict": null,
-    "started_at": "…",
-    "committed_at": null
-  },
-  "history": [ { "id": "m0001", "…": "…" } ],
-  "journal": [
-    { "ts": "…", "kind": "state_update", "move_id": "m0003",
-      "summary": "…", "evidence_refs": ["journal/0003-m0003.json"] }
-  ]
-}
-```
-
-### 6.3 事实 / 推断 / 假设 / 未验证 的区分方式
-
-| 类别 | 位置 | 强制约束 | 谁能改写 |
-|---|---|---|---|
-| **事实** | `situation.facts[]` | 必须有 `source`；无 `source` 拒绝入库 | 任何新证据（追加新 fact，不改旧 fact） |
-| **推断** | `judgment.why` / `most_likely_wrong_about` | 明确标为判断的一部分，**不进 facts** | — |
-| **假设** | `situation.assumptions[]` | 必须有 `validation_method`；否则 `status` 只能是 `belief` | 验证后 `status` 变 `supported` / `refuted`。**升级为 fact 必须显式动作 + 证据引用** |
-| **未验证的结论** | `journal[].summary` | 措辞上必须能看出是"这次做了什么"，不是"世界是怎样的" | — |
-
-**关键规则**：不存在"沉默即正确"。假设不会因为时间过去而自动变成事实。
-
-### 6.4 哪些必须持久化，哪些可以重建
-
-| 内容 | 处置 | 理由 |
-|---|---|---|
-| 意图原话、目标、约束、授权边界 | **必须持久** | 无法从代码或文件树重建；且它是判断的锚点 |
-| Situation 的事实 + source | **必须持久** | 事实的来源不可重建。**只存事实不存 source，等于把事实降级成断言** |
-| 假设 + 验证方法 | **必须持久** | 丢了就变成信念（OQ-03） |
-| Active Move 的验收条件 | **必须持久** | 事后编的验收条件等于没有（I5） |
-| 幂等键 | **必须持久** | 中断后判断"能否重试"的唯一依据 |
-| 已完成 Move 的历史 | **必须持久** | 防止重复劳动（T5） |
-| 失败信息 | **必须持久** | 不持久则重复无效行动（`docs/05` §5.2） |
-| 文件树 / git status | **可重建** | 每次现查，不存 |
-| Situation 的"当前摘要" | **可重建** | 从 facts + assumptions + unknowns 推导，不单独存 |
-
-### 6.5 事件日志 / 快照 / 关系图的取舍
-
-| 机制 | MVP 决定 | 依据 |
-|---|---|---|
-| 事件日志（完整） | ❌ 不做 | `journal/` 保留**每次状态更新的记录**，但不做事件溯源。理由：完整事件日志的价值在需要重放时，而 MVP 不重放 |
-| 快照 | ✅ 就是 `state.json` 本身 | 单文件即全量快照，无需多版本 |
-| 关系图 | ❌ 不做 | `docs/04` §8.2：Project Graph 明确推迟 |
-| git | ✅ 保留 | 状态文件本身在 git 里，天然有版本与 diff。**这是比自建事件日志更强的可追溯性** |
-
-**结论：单文件 JSON + git 已经是 MVP 的正确答案。** 需要解决的是"更新一致"（答案：唯一写入点 + 原子替换），不是"机制数量"。
-
----
-
-## 7. Move 生命周期
-
-### 7.1 状态机
-
-**权威定义在 `docs/05-state-move-evidence.md` §3.2。** 本节只定义 **MVP 激活的状态子集**，并说明与完整状态集的映射。
-
-```mermaid
-stateDiagram-v2
-    [*] --> Proposed
-    Proposed --> Accepted: 四要素齐备 + 在授权内
-    Proposed --> Blocked: 超出授权 / 不可逆 / 信息不足
-    Accepted --> Executing: sandbox 档位确定
-    Accepted --> Blocked: 前提失效
-    Executing --> Verifying: 执行器返回（无论成败）
-    Verifying --> Committed: 全部验收条件满足 + 有证据
-    Verifying --> Failed: 证据不满足验收条件
-    Verifying --> Blocked: 验证器无法判定（insufficient）
-    Failed --> Proposed: 前提被修正后重提（**必须带新 id**）
-    Blocked --> [*]
-    Committed --> [*]
-    Failed --> [*]
-```
-
-**与 `docs/05` 完整状态集的映射**：
-
-| 本节 MVP 状态 | `docs/05` 对应 | 说明 |
-|---|---|---|
-| Proposed | `Proposed` | 一致 |
-| Accepted | `Authorized` | 改名，强调"已接受且在授权内" |
-| Executing | `Executing` | 一致 |
-| Verifying | `Reported` + `Evidenced` | **MVP 合并**：不区分"执行器报告"和"拿到证据"，但**仍不合并 `Verifying` 与 `Committed`**——那道闸是 C-07 的核心 |
-| Committed | `Accepted`（docs/05 中表示"验收通过"） | 改名以避免与"Move 被接受"混淆 |
-| Failed | `Failed` + `Analyzed` | MVP 要求失败必须带分析信息才写 `Failed` |
-| Blocked | `Dropped` / 转人类 | MVP 新增显式状态：不是放弃，是等人 |
-
-### 7.2 工程约束（逐条回答）
-
-| 问题 | 答案 |
-|---|---|
-| **什么条件下可以开始执行？** | 四要素齐备（`intent_ref` / `premises` / `expected_change` / `acceptance[]` 非空）+ `why` 非空 + sandbox 档位可从 `authorization` 推导。**缺一不可，缺则停在 `Proposed`** |
-| **执行器报告成功后为什么还要验证？** | 因为 C-07：五级证据阶梯的第 2→3 级是本项目最容易失误的地方。`codex exec` 返回 0 只说明它完成了被要求的动作，不说明结果满足验收条件。这是 `T3` 验收针对的场景 |
-| **验证失败时状态如何变化？** | `Verifying` → `Failed`，**并且 `situation` 必须更新**：新事实 + 被反证的假设（`status: refuted`）+ 缩小后的方案空间。不更新 = 下次 Judgment 的输入没变 = 重复无效行动 |
-| **中断后如何知道 Move 执行到一半？** | `state.json` 里 `active_move.state == "executing"` 且 `execution == null` → **中断在执行中**。此时查 `idempotency_key`：见 §7.3 |
-| **一个 Move 会不会被错误重复执行？** | 见 §7.3 的幂等规则 |
-| **哪些动作允许自动执行？** | `authorization.allow` 内 + `risk: low` + `reversible: true` → 自动 |
-| **哪些必须人类批准？** | `authorization.require_approval_for` 命中的（`irreversible` / `outside_project_root` / `force_push`）+ `risk: high`。**硬编码在代码里的路径/命令黑名单**：`~`、`.git`、`.ssh`、`.env`、`*_credentials*`、注册表、Windows 系统目录 |
-| **如何避免验证失败或状态保存失败导致记录不一致？** | ①验证失败 → 不写成果，只写失败信息（**不删已有事实**）。②保存失败 → 原子写保证 `state.json` 要么是旧的完整版要么是新的完整版，**不存在半写状态**。③若 `os.replace` 失败，原文件仍在，下次启动可重试 |
-
-### 7.3 幂等与非幂等操作
-
-**规则**：
-
-| `reversible` | `idempotency_key` | 中断后恢复时的动作 |
-|---|---|---|
-| `true` | 有 | ✅ 允许重试（显式记录这是第 N 次尝试） |
-| `true` | 无 | ⚠️ **先检查当前状态判断能否重试**，检查不了就降级为不可重试 |
-| `false` | 任意 | 🛑 **禁止自动重试**。`state.json` 中标记 `needs_human`，把实际执行到的位置作为证据交给人判断 |
-
-**非幂等操作的例子（必须 `reversible: false`）**：删除、发布、推送、发送、发版、迁移、任何写到项目外的动作。
-
-**`idempotency_key` 的生成规则**：`move_id + ":" + 动作的语义标识`。**不允许包含时间戳**（含时间戳则每次重试都是新 key，幂等检查失效）。
+> **§5–§7 已移至** [`docs/specifications/execution-contract.md`](../specifications/execution-contract.md)：接口集、`state.json` 结构与 Move 生命周期。**原文与节号未改**，此处保留节号空档。
 
 ---
 
@@ -582,7 +267,7 @@ stateDiagram-v2
 | # | 用例 | 类型 | 怎么测 | 对应 |
 |---|---|---|---|---|
 | A1 | **正常闭环** | 集成 | fixture 项目跑一次，检查产物实际改变 + `Committed` 有证据引用 | §3.3 |
-| A2 | **已有项目** | 集成 | fixture 预置代码与实验记录；断言 Situation 包含它们，且**未重复初始化** | T2（`docs/08`） |
+| A2 | **已有项目** | 集成 | fixture 预置代码与实验记录；断言 Situation 包含它们，且**未重复初始化** | T2（`docs/specifications/acceptance.md`） |
 | A3 | **执行失败** | 单元 | 假执行器返回非零；断言**无 `Committed`**、状态写的是失败信息 | T-06 |
 | A4 | **证据不足** | 集成 | 假执行器返回成功但产物不存在；断言 `Verifying` → `Failed`/insufficient，**不提交** | T-07, T-11 |
 | A5 | **中断恢复** | 集成 | 在 `Executing` 中 kill 进程；重启后断言恢复 Active Move 并按幂等规则决策 | T-10 |
@@ -594,7 +279,7 @@ stateDiagram-v2
 | A11 | **状态损坏** | 单元 | 写入非法 JSON；断言 `CorruptState` 且**文件未被覆盖** | T-01 |
 | A12 | **假设不自动升级** | 单元 | 时间推进 + 无新证据；断言 `assumptions[].status` 仍为 `unverified` | T-03 |
 
-**A1–A9 可自动化。A10 必须人工判断**——判断质量无法用断言表达，这是 `docs/08` §5 的立场。
+**A1–A9 可自动化。A10 必须人工判断**——判断质量无法用断言表达，这是 `docs/specifications/acceptance.md` §5 的立场。
 
 ### 9.2 阶段门
 
@@ -604,7 +289,7 @@ stateDiagram-v2
 | **1** 最小闭环 | T-01→T-09 | §3.3 的 4 条判据全部满足 | A1, A2, A11 集成测试 + **人工实际跑一次 fixture** | **修复**。若 T-08 的 Judgment 反复不可靠 → **缩小范围**到"人工指定 Move"的半自动模式，先把闭环其余部分跑通 |
 | **2** 可靠性 | T-10→T-13 | 关键失败路径全部有自动化测试 | A3–A9, A12 | **修复**。若幂等规则无法可靠实现 → **停止 Phase 3**，先解决（不可靠的幂等比没有幂等更危险） |
 | **3** 固定接口 | T-14→T-15 | 6 个接口定义 + 至少 1 个被假实现替换验证 | 抽取前后 `journal/` 序列逐字节相同 | **缩小范围**：只保留真正被验证过的接口，其余降为普通函数 |
-| **4** 验证判断质量 | 用真实案例检验 Judgment | 至少 2 个案例（含 1 个无数值指标）跑出完整闭环 + 失败分析 | 人工评审 + `docs/08` 场景验收 | **失败就是收获**：失败模式写进 `docs/07`，判断机制按证据修订。**不为了通过而调 prompt 直到看起来好** |
+| **4** 验证判断质量 | 用真实案例检验 Judgment | 至少 2 个案例（含 1 个无数值指标）跑出完整闭环 + 失败分析 | 人工评审 + `docs/specifications/acceptance.md` 场景验收 | **失败就是收获**：失败模式写进 `docs/decisions/register.md`，判断机制按证据修订。**不为了通过而调 prompt 直到看起来好** |
 
 **阶段门不是流程。每一条都必须能回答"未通过怎么办"——如果答案是"继续做别的"，那这条门就没设计好。**
 
@@ -626,9 +311,9 @@ Phase 1–2 **不做**：任何 Dashboard 代码、任何 `directions/` 切片�
 | 开放式目标理解（模糊意图） | Intent 需要用户提供，`origin=inferred` 的目标不可信 | A1 / I1 |
 | 反事实推演 | 不做。`alternatives_considered` 字段留位，允许为空 | I3 |
 | 长期深层自我修正 | 无。没有判断命中率统计 | Phase 4 之后 |
-| 自动发现 unknown-unknown | **原理上未解**（`docs/research/03`）。WAM 的贡献是显式登记 + 人在回路，不是自动检测 | I2 |
+| 自动发现 unknown-unknown | **原理上未解**（`research/briefs/03`）。WAM 的贡献是显式登记 + 人在回路，不是自动检测 | I2 |
 | 上下文压缩下的判断可靠性 | 不压缩。先测量长度，超限再说 | I2 |
-| Human Absent 自主运行 | **不具备**。授权边界表达虽已定义，但无人监督下的越权检测未实现 | C-10 要求的路径见 `docs/04` §10.2 |
+| Human Absent 自主运行 | **不具备**。授权边界表达虽已定义，但无人监督下的越权检测未实现 | C-10 要求的路径见 `docs/architecture.md` §10.2 |
 
 ### 10.2 设计风险
 
@@ -640,7 +325,7 @@ Phase 1–2 **不做**：任何 Dashboard 代码、任何 `directions/` 切片�
 | **JSON schema 太严导致频繁降级** | `JudgmentUnavailable` 频发 | schema 允许 `alternatives_considered` 等可空字段；频发则放宽而非放弃 |
 | **codex 认证在别的机器上不可用** | P0-1 通过但换环境失败 | I3/I4 是接口，换实现即可 |
 | **Mini-project 太简单导致虚假信心** | Phase 4 一次通过 | Phase 4 必须含无数值指标案例 |
-| **`state.json` 体积膨胀** | `state.json` > 200KB | 不自动压缩（`docs/05` §7）；先测量 |
+| **`state.json` 体积膨胀** | `state.json` > 200KB | 不自动压缩（`docs/specifications/state-and-evidence.md` §7）；先测量 |
 
 ### 10.3 决定何时进入下一阶段的依据
 
@@ -707,13 +392,13 @@ Phase 1–2 **不做**：任何 Dashboard 代码、任何 `directions/` 切片�
 | 2 | 沙箱档位推导规则未验证 | Phase 1 用最保守版本（默认 `read-only`，需批准才升级），Phase 2 再放宽 |
 | 3 | Judgment 的 schema 可能需要反复调 | 预留预算。**如果调 3 次仍不稳定，说明 I3 的边界定错了**——此时回到设计，不要继续调 prompt |
 
-**有一件事会阻碍后续，但不阻碍 MVP**：`docs/07` OQ-09（WAM 与 Sponge 的关系）未裁决。若结论是"基于 Sponge"，I2 的实现位置可能变（Statuz 作为信息源）。**但 MVP 不依赖它**——这是刻意的：让 MVP 不被任何未裁决的架构争议阻塞。
+**有一件事会阻碍后续，但不阻碍 MVP**：`docs/decisions/register.md` OQ-09（WAM 与 Sponge 的关系）未裁决。若结论是"基于 Sponge"，I2 的实现位置可能变（Statuz 作为信息源）。**但 MVP 不依赖它**——这是刻意的：让 MVP 不被任何未裁决的架构争议阻塞。
 
 ---
 
 ## 12. 开工批次计划（待作者审阅）
 
-> **2026-10-28 注**：本节的 7 个批次已被 [`docs/10-rd-roadmap-2027.md`](10-rd-roadmap-2027.md) **时间化**为 W0–W9（批次内容不变，加上了日期、每周 E1 退出条件与固定砍单顺序）。**执行时以 `docs/10` 为准**；本节保留为历史记录与被取代的原始表述。另：§1.2 的 codex 执行器选择已被环境证伪（`docs/07` B-15 / X-10），代码级内容（§5 接口、§6 schema、§7 生命周期、§8 任务）不受影响。
+> **2026-10-28 注**：本节的 7 个批次已被 [`docs/development/roadmap.md`](roadmap.md) **时间化**为 W0–W9（批次内容不变，加上了日期、每周 E1 退出条件与固定砍单顺序）。**执行时以 `docs/development/roadmap.md` 为准**；本节保留为历史记录与被取代的原始表述。另：§1.2 的 codex 执行器选择已被环境证伪（`docs/decisions/register.md` B-15 / X-10），代码级内容（§5 接口、§6 schema、§7 生命周期、§8 任务）不受影响。
 
 > 本节把 §8 的任务列表排成**可交付的批次**。每个批次有明确的产物、验证方式和退出条件。
 >
@@ -838,7 +523,7 @@ flowchart LR
 | # | 事项 | 我的建议 | 不裁决的后果 |
 |---|---|---|---|
 | **1** | **P0-1：codex 是否已在本机登录？** 请在项目终端跑 `codex exec --ephemeral -s read-only "reply ok"` | — | 批次 2 无法开始。这是唯一的硬阻塞 |
-| **2** | **`.wam/state.json` 的 `intent` / `authorization` 结构**（`docs/06` §6.2 的草案） | 采纳草案。它是 `origin=inferred` 与授权边界推导的落点 | 批次 1 的 T-04 无法定稿 |
+| **2** | **`.wam/state.json` 的 `intent` / `authorization` 结构**（`docs/development/mvp-plan.md` §6.2 的草案） | 采纳草案。它是 `origin=inferred` 与授权边界推导的落点 | 批次 1 的 T-04 无法定稿 |
 | **3** | **acceptance criterion 的三类是否够用**（`command_exit` / `file_exists` / `output_contains`） | 够用。不足时再加——**criterion 太少会逼人写假验收，太多会让验收变成形式** | 批次 1 的 T-05 校验规则无法定稿 |
 
 ### 13.2 不阻塞开工，但建议裁决
@@ -889,10 +574,10 @@ flowchart LR
 
 | 需要 | 去看 |
 |---|---|
-| 概念定义与为什么 | `docs/03-vision-and-concepts.md` |
-| 循环、组件职责、架构图 | `docs/04-architecture.md` |
-| Move 完整状态集、证据阶梯、恢复核对 | `docs/05-state-move-evidence.md` |
-| 决策四态与未决问题 | `docs/07-decision-register.md` |
-| 四类场景与 10 条行为验收 | `docs/08-scenarios-and-acceptance.md` |
-| Dashboard 计划（P1–P4，排在 Phase 2 之后） | `docs/02-dashboard-plan.md` |
-| M0 宪法（本文档对其有一处已记录的偏离，见 §1.3） | `docs/01-foundation.md` |
+| 概念定义与为什么 | `docs/vision.md` |
+| 循环、组件职责、架构图 | `docs/architecture.md` |
+| Move 完整状态集、证据阶梯、恢复核对 | `docs/specifications/state-and-evidence.md` |
+| 决策四态与未决问题 | `docs/decisions/register.md` |
+| 四类场景与 10 条行为验收 | `docs/specifications/acceptance.md` |
+| Dashboard 计划（P1–P4，排在 Phase 2 之后） | `docs/development/dashboard-plan.md` |
+| M0 宪法（本文档对其有一处已记录的偏离，见 §1.3） | `docs/foundation.md` |

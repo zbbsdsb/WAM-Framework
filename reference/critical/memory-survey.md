@@ -44,7 +44,7 @@ A landscape survey organized around three axes:
 ## 评估标准 (evaluation criteria — later assessment phase)
 
 1. When state-v2 opens: use 3.1's taxonomy to position the proposal explicitly ("we choose Flat + human curation, and here is the documented trade-off") — do not silently inherit the survey's bias toward hierarchical/automated designs.
-2. Benchmark harvesting: extract the 6.1 table into docs/research/02 as an addendum; then decide which (if any) benchmark fits a human-shared-state evaluation.
+2. Benchmark harvesting: extract the 6.1 table into research/briefs/02 as an addendum; then decide which (if any) benchmark fits a human-shared-state evaluation.
 3. Trust checklist from 7.7 applied to workspace/: who can read it (public repo!), what sensitive data should never enter it (author's credentials, tokens).
 
 ## 研发路线 (R&D path — later phases)
@@ -57,7 +57,7 @@ A landscape survey organized around three axes:
 
 - [ ] Deep-read 4 (Functions) + 5 (Dynamics) — scheduled for the state-v2 kickoff
 - [ ] Locate and read 7.5 (Shared Memory in MAS) — target: does it cover human-shared memory at all? (If not, that absence itself is evidence for WAM's blank space.)
-- [ ] Extract 6.1 benchmark table → docs/research/02 addendum
+- [ ] Extract 6.1 benchmark table → research/briefs/02 addendum
 
 ## Related directions
 

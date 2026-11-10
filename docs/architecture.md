@@ -1,8 +1,8 @@
 # Architecture — 架构
 
 > 版本：2026-10-09 · 状态：**Current Design Baseline**（概念设计，尚未实现）
-> 依赖：`docs/03-vision-and-concepts.md`（概念定义）· `docs/05-state-move-evidence.md`（数据结构职责）
-> 决策记录：`docs/07-decision-register.md`
+> 依赖：`docs/vision.md`（概念定义）· `docs/specifications/state-and-evidence.md`（数据结构职责）
+> 决策记录：`docs/decisions/register.md`
 
 ---
 
@@ -10,7 +10,7 @@
 
 本文档说明**核心循环、组件职责、信息流、状态角色、执行层边界**。
 
-它**不**规定：类名、模块目录、编程语言、框架、Agent 数量、模型供应商、运行时形态。这些都是实现选择（`docs/03-vision-and-concepts.md` P7）。
+它**不**规定：类名、模块目录、编程语言、框架、Agent 数量、模型供应商、运行时形态。这些都是实现选择（`docs/vision.md` P7）。
 
 **当前仓库的实现状态：零代码。** 本文档描述的是目标架构，不是对现有代码的描述。唯一存在的实现是 `workspace/` 四文件的 Markdown 状态模型（人工读写），见 §7。
 
@@ -42,7 +42,7 @@ flowchart TD
     V -. "证据不满足验收" .-> S
 ```
 
-**这个循环与 `docs/01-foundation.md` 六步协议的对应关系**：
+**这个循环与 `docs/foundation.md` 六步协议的对应关系**：
 
 | 本文档循环 | 六步协议 | 变化 |
 |---|---|---|
@@ -117,7 +117,7 @@ flowchart TB
 | **输出** | 判断的锚点；Move 的方向来源；越界判定标准 |
 | **不负责** | 不判断当前什么重要（那是 Judgment）；不描述现状 |
 | **关键约束** | WAM 可以解释、澄清、建议，**不能自行改写用户的根本目标** |
-| **现状** | ⚠️ **无持久载体** — 见 `docs/03-vision-and-concepts.md` §7 |
+| **现状** | ⚠️ **无持久载体** — 见 `docs/vision.md` §7 |
 
 ### 4.2 Situation（局面）
 
@@ -127,7 +127,7 @@ flowchart TB
 | **输入** | 项目状态、外部现实、已有事实、未知、假设、依赖、资源、时间约束、过往行动及结果 |
 | **输出** | 供 Judgment 使用的整体理解；New Situation 是循环的输出 |
 | **不负责** | 不是聊天记录、不是历史摘要、不是静态 Task List |
-| **关键约束** | 随新观察和新证据持续更新；区分事实与推断（`docs/05-state-move-evidence.md`） |
+| **关键约束** | 随新观察和新证据持续更新；区分事实与推断（`docs/specifications/state-and-evidence.md`） |
 | **现状** | ✅ `workspace/state.md` 已有 Known / Unknown / Unknown-Unknowns 三段基线 |
 
 ### 4.3 Judgment（判断）
@@ -226,7 +226,7 @@ flowchart LR
 - 揭示工具或环境的不可靠性
 - 证明某条路径不值得继续
 
-**这些信息必须写入记录并影响后续 Situation 和 Judgment，防止系统重复无效行动。** 这是 `workspace/log.md` 之外必须补的能力（见 `docs/06-development-plan.md` §6）。
+**这些信息必须写入记录并影响后续 Situation 和 Judgment，防止系统重复无效行动。** 这是 `workspace/log.md` 之外必须补的能力（见 `docs/development/mvp-plan.md` §6）。
 
 ---
 
@@ -260,7 +260,7 @@ flowchart LR
 | Move | `workspace/goals.md` 条目 + `experiments/_template/stages/*/plan.md` | 文件存在，字段不足 |
 | Evidence | `workspace/log.md` 的 `Evidence:` 字段 | 文件存在 |
 | Judgment 记录 | `workspace/decisions.md` | 文件存在，**只记结果不记过程** |
-| 持久记录载体 | `workspace/` 四文件 + git | `docs/01-foundation.md` §The State Model |
+| 持久记录载体 | `workspace/` 四文件 + git | `docs/foundation.md` §The State Model |
 | 治理机制 | `directions/` + 晋升门 | `directions/README.md` |
 | 执行环境机制 | DSH agent preset（目录名=id，含 `agent.cordis.yml` + `preset.yml`） | `experiments/README.md` §DSH 集成机制；已在 `D:/github projects/deepseek-harness/apps/cli/config/agent-presets/{code,cordis,minimal,standard}/` 核实目录结构一致 |
 
@@ -286,7 +286,7 @@ flowchart LR
 - 实际存在的是 **DeepSeek Harness**（`D:/github projects/deepseek-harness`），且 `workspace/decisions.md` 2026-08-15 条目与 `experiments/README.md` 已对其 preset 机制做过源码验证。
 - `.hermes` 目录仅出现在 `D:/github projects/statuz/` 与 `D:/github projects/Oasis AdaMem/` 下，与 WAM 无关。
 
-**结论**：WAM 迄今**没有任何已确认的执行平台**。Hermes 是早期设想，实际验证过的是 DSH。本文按 DSH 记录，并保留"是否需要绑定任一平台"为 Open Question（OQ-08）——因为 `docs/01-foundation.md` 明确技术栈是实现细节。
+**结论**：WAM 迄今**没有任何已确认的执行平台**。Hermes 是早期设想，实际验证过的是 DSH。本文按 DSH 记录，并保留"是否需要绑定任一平台"为 Open Question（OQ-08）——因为 `docs/foundation.md` 明确技术栈是实现细节。
 
 ### 7.4 与 Sponge 的关系（外部口径冲突）
 
@@ -295,8 +295,8 @@ flowchart LR
 但：
 
 - **WAM 仓库中出现 0 次 "Sponge"**（已 grep 确认全部 29 个 tracked 文件）。
-- `workspace/decisions.md` 全部条目、`docs/01-foundation.md`、`idea.md` 均未提及任何框架依赖。
-- `docs/01-foundation.md` 明确："Tech stack, number of agents, runtime architecture: implementation details, all deferred."
+- `workspace/decisions.md` 全部条目、`docs/foundation.md`、`idea.md` 均未提及任何框架依赖。
+- `docs/foundation.md` 明确："Tech stack, number of agents, runtime architecture: implementation details, all deferred."
 
 **这是一个真实的跨仓库口径冲突，不是本文档能单方面裁决的。** 处理方式：
 
@@ -343,7 +343,7 @@ flowchart LR
 
 需要解决的是**一致性**（OQ-05），不是**机制数量**。
 
-**Project Graph 尤其应推迟**：`directions/weight-first/` 的目标 DAG 与 `docs/03-vision-and-concepts.md` §9 指出的张力（P2：不要把 Judgment 简化成 Priority Score）都说明，在判断质量未被验证前构建依赖图，风险是过早优化一个未被证明重要的维度。
+**Project Graph 尤其应推迟**：`directions/weight-first/` 的目标 DAG 与 `docs/vision.md` §9 指出的张力（P2：不要把 Judgment 简化成 Priority Score）都说明，在判断质量未被验证前构建依赖图，风险是过早优化一个未被证明重要的维度。
 
 ---
 
@@ -391,7 +391,7 @@ Human 在场时提供意图、判断、纠正与授权；人暂时不在场时�
 | 不可逆行动 | 必须在授权边界内，否则停下 |
 | 高风险行动 | 同上 |
 | 超出授权范围的行动 | **停在需要人类决定的节点** |
-| 更换根本目标 | **绝不允许**——需外部证据也不自动授权（`docs/03-vision-and-concepts.md` §3.2） |
+| 更换根本目标 | **绝不允许**——需外部证据也不自动授权（`docs/vision.md` §3.2） |
 
 ### 10.2 当前状态
 
@@ -403,13 +403,13 @@ Human 在场时提供意图、判断、纠正与授权；人暂时不在场时�
 2. 授权边界的结构化表达（授权什么、禁止什么、多久、什么条件下需升级）
 3. 暂停与升级的判定规则
 
-**72 小时自主测试可作为未来验收方式，但现在不得声称架构已具备该能力。** 建议的最小实现路径见 `docs/06-development-plan.md` §5。
+**72 小时自主测试可作为未来验收方式，但现在不得声称架构已具备该能力。** 建议的最小实现路径见 `docs/development/mvp-plan.md` §5。
 
 ---
 
 ## 11. 设计验证案例的存在理由
 
-`docs/08-scenarios-and-acceptance.md` 定义四类场景（Kaggle / 论文复现 / 开源建设 / 社会科学研究）作为**设计验证案例**。
+`docs/specifications/acceptance.md` 定义四类场景（Kaggle / 论文复现 / 开源建设 / 社会科学研究）作为**设计验证案例**。
 
 它们的作用：检验"当 WAM 没有自己的渴望，而用户的目标又不一定能被量化时"这个中心问题在四类不同任务下是否成立。
 
@@ -420,7 +420,7 @@ Human 在场时提供意图、判断、纠正与授权；人暂时不在场时�
 ## 12. 交互表征：注意力状态机（2026-10-28 新增）
 
 > 状态：**Design Baseline**（设计已定，实现为 MVP-MIN 项 U1）
-> 分类：`docs/09-goal-taxonomy.md` U1（L4 呈现层 · G2 · E1）
+> 分类：`docs/development/scope.md` U1（L4 呈现层 · G2 · E1）
 > 本节回答作者 2026-10-27 提出的问题：**要加入多少交互表征？**
 
 ### 12.1 先分清两个正交轴
@@ -429,7 +429,7 @@ Human 在场时提供意图、判断、纠正与授权；人暂时不在场时�
 
 | 轴 | 描述的是 | 已有定义 | 变化的频率 |
 |---|---|---|---|
-| **物的状态** — Move 生命周期 | 一个工作项走到哪了 | `docs/05` §3.2（权威） | 低（一个 Move 一生只变几次） |
+| **物的状态** — Move 生命周期 | 一个工作项走到哪了 | `docs/specifications/state-and-evidence.md` §3.2（权威） | 低（一个 Move 一生只变几次） |
 | **注意力的状态** — Agent State | 系统**现在**在做什么、在等谁 | **本节（新增）** | 高（一次循环内多次迁移） |
 
 一个用户回来看项目时，需要的是两个答案：「系统现在在干什么、卡在哪」和「那个 Move 走到哪了」。**把两者合成一个状态机会立刻失效**——因为同一时刻可以既不执行 Move 又在做别的事（判断、等待、问人），而这些恰恰是最需要被看见的时刻。
@@ -504,7 +504,7 @@ stateDiagram-v2
 | **I-5** | 状态与 Move 状态一致：`ACTING` ⇔ `active_move.state ∈ {Accepted, Executing}`；`VERIFYING` ⇔ `Verifying` | 断言 |
 | **I-6** | 每一次状态迁移写一条 `journal` 记录（含 `from`, `to`, `ts`, `why`） | journal 条目数 = 迁移次数 |
 
-**I-5 是最重要的一条**：它让"用户看到的"与"实际发生的"之间存在可执行的等式。没有它，状态机就会变成一层漂亮的装饰（这正是 `docs/09` F1 描述的失效在 L4 层的版本）。
+**I-5 是最重要的一条**：它让"用户看到的"与"实际发生的"之间存在可执行的等式。没有它，状态机就会变成一层漂亮的装饰（这正是 `docs/development/scope.md` F1 描述的失效在 L4 层的版本）。
 
 ### 12.6 持久化与最小实现
 
@@ -541,14 +541,14 @@ stateDiagram-v2
 解锁动作： 确认 a1 是否为真 —— 这决定下一步是修 lockfile 还是查代码
 ```
 
-**这四行是 L4 层的全部产出。** 它替换的不是 Dashboard，而是"用户需要回读 800 行对话才能接上"这件事本身（`docs/05` §6.2 的第 1、7、10 问）。
+**这四行是 L4 层的全部产出。** 它替换的不是 Dashboard，而是"用户需要回读 800 行对话才能接上"这件事本身（`docs/specifications/state-and-evidence.md` §6.2 的第 1、7、10 问）。
 
 ### 12.8 为什么不是更多状态
 
 | 候选状态 | 为什么不加 |
 |---|---|
-| `PLANNING` 规划中 | 规划不是 WAM 的产物类型（`docs/03` §4.3）。若它是 Move，它就是 `ACTING`；若不是，它属于 `DECIDING` 内部 |
-| `REFLECTING` 反思中 | 自动反思/摘要有无正确性保证未知（`docs/06` §5.3 刻意不设 `ReflectionService`）。加了它等于给一个未验证的机制发许可证 |
+| `PLANNING` 规划中 | 规划不是 WAM 的产物类型（`docs/vision.md` §4.3）。若它是 Move，它就是 `ACTING`；若不是，它属于 `DECIDING` 内部 |
+| `REFLECTING` 反思中 | 自动反思/摘要有无正确性保证未知（`docs/development/mvp-plan.md` §5.3 刻意不设 `ReflectionService`）。加了它等于给一个未验证的机制发许可证 |
 | `LEARNING` 学习中 | 同上，且 WAM 没有自己的渴望（C-04），"学习"没有对应的目标 |
 | `IDLE` 空闲 | 空闲是**没有运行**，不是一种状态。把它做成状态会让"系统没在跑"看起来像"系统在工作" |
 | `ERROR` 出错 | 错误不是注意力状态。它是 Move 的 `Failed` 或 `Blocked`，而系统此刻通常仍处于 `VERIFYING` 或 `ASKING` |
@@ -557,12 +557,12 @@ stateDiagram-v2
 
 ### 12.9 与 Human Absent Mode 的关系
 
-`docs/04` §10 要求 WAM 在人不在场时能推进并在无可靠路径时暂停。状态机是这条要求的**可观测形式**：
+`docs/architecture.md` §10 要求 WAM 在人不在场时能推进并在无可靠路径时暂停。状态机是这条要求的**可观测形式**：
 
 - 人在场时，`ASKING` 是正常出口。
 - 人不在场时，`ASKING` 必须有 `expires_at`；过期后系统**不得**自行回答自己的问题，只能降级为 `WAITING` 或 `STOPPED`。
 
-这条规则现在是设计约束，不是能力（Human Absent Mode 仍记为不具备，`docs/07` C-10）。
+这条规则现在是设计约束，不是能力（Human Absent Mode 仍记为不具备，`docs/decisions/register.md` C-10）。
 
 ---
 
@@ -570,8 +570,8 @@ stateDiagram-v2
 
 | 需要 | 去看 |
 |---|---|
-| 概念定义与为什么 | `docs/03-vision-and-concepts.md` |
-| 数据结构职责与更新规则 | `docs/05-state-move-evidence.md` |
-| 实现顺序与阶段门 | `docs/06-development-plan.md` |
-| 决策四态与开放问题 | `docs/07-decision-register.md` |
-| 场景验收 | `docs/08-scenarios-and-acceptance.md` |
+| 概念定义与为什么 | `docs/vision.md` |
+| 数据结构职责与更新规则 | `docs/specifications/state-and-evidence.md` |
+| 实现顺序与阶段门 | `docs/development/mvp-plan.md` |
+| 决策四态与开放问题 | `docs/decisions/register.md` |
+| 场景验收 | `docs/specifications/acceptance.md` |

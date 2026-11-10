@@ -51,13 +51,13 @@ Whether the underlying system is one agent or many is an implementation detail. 
 
 As of 2026-10-09 this repository contains **no executable implementation** — 29 tracked files, all Markdown / HTML / CSS / YAML. What exists is a converged design baseline, a governance mechanism, and a set of explicitly-marked open questions.
 
-**As of 2026-10-28** the implementation count is still zero, and that is now the project's main risk rather than a state to be described. Four things were added: a **goal taxonomy** ([`docs/09`](docs/09-goal-taxonomy.md), which derives the MVP scope from typed cells instead of discussion), a **nine-week roadmap to 2027-01-01** ([`docs/10`](docs/10-rd-roadmap-2027.md), with per-week exit conditions and a fixed cut order), an **external-assets review** ([`docs/11`](docs/11-external-assets.md), every claim graded A/B/C by how much of the source was actually read), and a fifth direction ([`directions/shared-context/`](directions/shared-context/README.md), the author's layered-shared-context / single-global-agent thesis). One previously load-bearing technical choice was **falsified by probing**: codex-cli is logged in but `api.openai.com` is geo-blocked from this network, so it cannot be the first executor (`docs/07` X-10 → B-15).
+**As of 2026-10-28** the implementation count is still zero, and that is now the project's main risk rather than a state to be described. Four things were added: a **goal taxonomy** ([`docs/development/scope.md`](docs/development/scope.md), which derives the MVP scope from typed cells instead of discussion), a **nine-week roadmap to 2027-01-01** ([`docs/development/roadmap.md`](docs/development/roadmap.md), with per-week exit conditions and a fixed cut order), an **external-assets review** ([`research/external-assets.md`](research/external-assets.md), every claim graded A/B/C by how much of the source was actually read), and a fifth direction ([`directions/shared-context/`](directions/shared-context/README.md), the author's layered-shared-context / single-global-agent thesis). One previously load-bearing technical choice was **falsified by probing**: codex-cli is logged in but `api.openai.com` is geo-blocked from this network, so it cannot be the first executor (`docs/decisions/register.md` X-10 → B-15).
 
 | Stage | What exists | Evidence |
 |---|---|---|
-| **M0 — Foundation** (complete) | Shared state model + collaboration protocol | [docs/01-foundation.md](docs/01-foundation.md) · [`workspace/`](workspace/) |
-| **M1 — Design convergence** (current) | Five core concepts, core loop, MVP plan, decision register, acceptance criteria | [docs/03](docs/03-vision-and-concepts.md) · [docs/04](docs/04-architecture.md) · [docs/05](docs/05-state-move-evidence.md) · [docs/06](docs/06-development-plan.md) · [docs/07](docs/07-decision-register.md) · [docs/08](docs/08-scenarios-and-acceptance.md) |
-| **Implementation** | Not started. The MVP's verifiable core is defined but not built. | [docs/06-development-plan.md](docs/06-development-plan.md) |
+| **M0 — Foundation** (complete) | Shared state model + collaboration protocol | [docs/foundation.md](docs/foundation.md) · [`workspace/`](workspace) |
+| **M1 — Design convergence** (current) | Five core concepts, core loop, MVP plan, decision register, acceptance criteria | [docs/vision.md](docs/vision.md) · [docs/architecture.md](docs/architecture.md) · [docs/specifications/state-and-evidence.md](docs/specifications/state-and-evidence.md) · [docs/development/mvp-plan.md](docs/development/mvp-plan.md) · [docs/decisions/register.md](docs/decisions/register.md) · [docs/specifications/acceptance.md](docs/specifications/acceptance.md) |
+| **Implementation** | Not started. The MVP's verifiable core is defined but not built. | [docs/development/mvp-plan.md](docs/development/mvp-plan.md) |
 
 **Nothing in `docs/` describes a working system.** Those documents state design intent and are explicit about which parts have no carrier yet.
 
@@ -66,26 +66,26 @@ As of 2026-10-09 this repository contains **no executable implementation** — 2
 | Document | Answers | Read it when |
 |---|---|---|
 | [`idea.md`](idea.md) | Why this project exists (philosophy, original wording) | You want the source of truth on intent |
-| [`docs/01-foundation.md`](docs/01-foundation.md) | The M0 state model + six-step protocol + governance tiers | You need the currently-in-force rules |
-| [`docs/02-dashboard-plan.md`](docs/02-dashboard-plan.md) | The dashboard effort's plan (staged P1–P4) | You're touching dashboard work |
-| [`docs/03-vision-and-concepts.md`](docs/03-vision-and-concepts.md) | What problem WAM solves; Intent / Situation / Judgment / Move / Evidence; the seven principles | You're new to WAM, or need the vocabulary |
-| [`docs/04-architecture.md`](docs/04-architecture.md) | The core loop, component responsibilities, persistent record, execution boundary, Human Absent Mode | You want the shape of the system |
-| [`docs/05-state-move-evidence.md`](docs/05-state-move-evidence.md) | What Situation must express; fact vs assumption vs unknown; Move lifecycle; evidence ladder | You're designing data structures or validation |
-| [`docs/06-development-plan.md`](docs/06-development-plan.md) | **The engineering plan** — MVP scope (must / minimal / deferred), the three implementation choices with their evidence, 6 interfaces, `.wam/state.json` schema, Move lifecycle, 15 tasks, **7 execution batches with exit conditions**, 12 acceptance cases, and the decisions awaiting your review | You're about to write code — **start here** |
-| [`docs/07-decision-register.md`](docs/07-decision-register.md) | Which decisions are established / baseline / hypothesis / open | You need to know how settled something is |
-| [`docs/08-scenarios-and-acceptance.md`](docs/08-scenarios-and-acceptance.md) | Four design-validation scenarios + 10 acceptance criteria | You want to test whether WAM holds up |
-| [`docs/09-goal-taxonomy.md`](docs/09-goal-taxonomy.md) | **What we promise vs what we hope** — three axes (responsibility layer × commitment type × evidence form), 35 cells, the MVP cut derived from cells | You are about to add, defer, or argue about a scope item |
-| [`docs/10-rd-roadmap-2027.md`](docs/10-rd-roadmap-2027.md) | **The nine weeks to 2027-01-01** — per-week exit conditions, three blocking decisions, a fixed cut order, and what counts as success | You want to know what to do this week |
-| [`docs/11-external-assets.md`](docs/11-external-assets.md) | Outside work that may help, graded A/B/C by how much was actually read, each with an adopt/adapt/defer/reject verdict and its cost | You are considering borrowing an idea |
-| [`directions/`](directions/) | Five competing directions (unverified proposals) | You want to know what's being considered |
-| [`experiments/`](experiments/) | Executable verification tracks, staged via DSH agent presets | You're running a verification |
-| [`reference/`](reference/) | Weighted library of borrowed papers + the borrow-to-R&D workflow | You're considering adopting an idea from outside |
+| [`docs/foundation.md`](docs/foundation.md) | The M0 state model + six-step protocol + governance tiers | You need the currently-in-force rules |
+| [`docs/development/dashboard-plan.md`](docs/development/dashboard-plan.md) | The dashboard effort's plan (staged P1–P4) | You're touching dashboard work |
+| [`docs/vision.md`](docs/vision.md) | What problem WAM solves; Intent / Situation / Judgment / Move / Evidence; the seven principles | You're new to WAM, or need the vocabulary |
+| [`docs/architecture.md`](docs/architecture.md) | The core loop, component responsibilities, persistent record, execution boundary, Human Absent Mode | You want the shape of the system |
+| [`docs/specifications/state-and-evidence.md`](docs/specifications/state-and-evidence.md) | What Situation must express; fact vs assumption vs unknown; Move lifecycle; evidence ladder | You're designing data structures or validation |
+| [`docs/development/mvp-plan.md`](docs/development/mvp-plan.md) | **The engineering plan** — MVP scope (must / minimal / deferred), the three implementation choices with their evidence, 6 interfaces, `.wam/state.json` schema, Move lifecycle, 15 tasks, **7 execution batches with exit conditions**, 12 acceptance cases, and the decisions awaiting your review | You're about to write code — **start here** |
+| [`docs/decisions/register.md`](docs/decisions/register.md) | Which decisions are established / baseline / hypothesis / open | You need to know how settled something is |
+| [`docs/specifications/acceptance.md`](docs/specifications/acceptance.md) | Four design-validation scenarios + 10 acceptance criteria | You want to test whether WAM holds up |
+| [`docs/development/scope.md`](docs/development/scope.md) | **What we promise vs what we hope** — three axes (responsibility layer × commitment type × evidence form), 35 cells, the MVP cut derived from cells | You are about to add, defer, or argue about a scope item |
+| [`docs/development/roadmap.md`](docs/development/roadmap.md) | **The nine weeks to 2027-01-01** — per-week exit conditions, three blocking decisions, a fixed cut order, and what counts as success | You want to know what to do this week |
+| [`research/external-assets.md`](research/external-assets.md) | Outside work that may help, graded A/B/C by how much was actually read, each with an adopt/adapt/defer/reject verdict and its cost | You are considering borrowing an idea |
+| [`directions/`](directions) | Five competing directions (unverified proposals) | You want to know what's being considered |
+| [`experiments/`](experiments) | Executable verification tracks, staged via DSH agent presets | You're running a verification |
+| [`reference/`](reference) | Weighted library of borrowed papers + the borrow-to-R&D workflow | You're considering adopting an idea from outside |
 
-**Start here if you are a new contributor:** `docs/03` → `docs/07` → `docs/06`.
+**Start here if you are a new contributor:** `docs/vision.md` → `docs/decisions/register.md` → `docs/development/mvp-plan.md`.
 
-**Start here if you are about to implement:** `docs/06` + `docs/10`. `docs/06` is self-contained — it carries the interface contracts, the data schema, the task list with dependencies, and the phase gates. `docs/10` turns it into nine weeks with exit conditions and a fixed cut order. Read `docs/03` §3 for why the design is shaped this way, and `docs/09` §4 before adding anything to the scope.
+**Start here if you are about to implement:** `docs/development/mvp-plan.md` + `docs/development/roadmap.md`. `docs/development/mvp-plan.md` is self-contained — it carries the interface contracts, the data schema, the task list with dependencies, and the phase gates. `docs/development/roadmap.md` turns it into nine weeks with exit conditions and a fixed cut order. Read `docs/vision.md` §3 for why the design is shaped this way, and `docs/development/scope.md` §4 before adding anything to the scope.
 
-**Public site** (bilingual, atompunk): <https://zbbsdsb.github.io/WAM-Framework/> · source: [`site/`](site/)
+**Public site** (bilingual, atompunk): <https://zbbsdsb.github.io/WAM-Framework/> · source: [`site/`](site)
 
 ---
 

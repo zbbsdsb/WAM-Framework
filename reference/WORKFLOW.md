@@ -70,7 +70,7 @@ Things the library has already marked as NOT to adopt, with reasons:
 
 | Mechanism | Why rejected (so far) |
 |---|---|
-| Vector retrieval as the primary state store | Retrieval misses / staleness failure modes (docs/research/02); human-readable direct read wins until evidence says otherwise (state-v2 question) |
+| Vector retrieval as the primary state store | Retrieval misses / staleness failure modes (research/briefs/02); human-readable direct read wins until evidence says otherwise (state-v2 question) |
 | RL-driven memory management (survey 7.3) | Minimizes human-engineered priors — WAM's human-curated files are a deliberate counter-position; revisit only if substrate fails at scale |
 | Multi-agent coordinator machinery (BMAM) as WAM's core | idea.md: agent count is an implementation detail; BMAM's value for WAM is its memory structure, not its coordinator (assess that, not this) |
 | Raw-trajectory dumps into context (Synapse-style) | ADAMEM's verbosity pathology (52.1→47.8 at larger k); log.md must answer in one line, not one page |

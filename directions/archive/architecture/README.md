@@ -12,9 +12,9 @@ The first vertical slice cannot be demoed without inventing components beyond th
 
 ## Inputs (evidence)
 
-- `docs/research/01-ecosystem-survey.md` — no framework offers human-readable shared state; verification gap is industry-wide
-- `docs/research/02-memory-and-state.md` — layering is consensus; human-shared state is unresearched
-- `docs/research/03-unknown-and-weight.md` — CPM-in-agents is unresearched; unknown-unknown detection unsolved
+- `research/briefs/01-ecosystem-survey.md` — no framework offers human-readable shared state; verification gap is industry-wide
+- `research/briefs/02-memory-and-state.md` — layering is consensus; human-shared state is unresearched
+- `research/briefs/03-unknown-and-weight.md` — CPM-in-agents is unresearched; unknown-unknown detection unsolved
 
 ## Work log
 

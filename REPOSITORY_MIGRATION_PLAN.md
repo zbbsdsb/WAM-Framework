@@ -136,7 +136,7 @@ raw-archive.md                → research/archive/raw-archive.md
 
 | 形式 | 例 | 处理 |
 |---|---|---|
-| Markdown 相对链接 | `[docs/06](docs/06-development-plan.md)`、`[../docs/07](../docs/07-decision-register.md)` | 改路径；**相对层级变化的要重算 `../`**（如 `directions/*/README.md` 引用 `../docs/06`，目标没深层变化；`research/briefs/*` 引用 `../../docs/…`） |
+| Markdown 相对链接 | ``[docs/06](docs/06-development-plan.md)``、``[../docs/07](../docs/07-decision-register.md)`` | 改路径；**相对层级变化的要重算 `../`**（如 `directions/*/README.md` 引用 `../docs/06`，目标没深层变化；`research/briefs/*` 引用 `../../docs/…`） |
 | 行内反引号路径 | `` `docs/06 §5.2` `` | 只换路径，节号保留 |
 | `文件:行号` | `rawnote.md` 的 49 处 `docs/04:538` | **只换路径前缀**，行号不动（本次迁移不重排任何文件内容，行号在纯移动下不变） |
 

@@ -13,8 +13,8 @@ WAM's minimal useful form is a **state substrate**: a small library + CLI that i
 
 ## Inputs (evidence)
 
-- docs/research/01-ecosystem-survey.md: human-readable shared state is a blue ocean; the verification gap is industry-wide.
-- docs/research/02-memory-and-state.md: layering is consensus; "human-shared state" is unresearched — this is the blank space.
+- research/briefs/01-ecosystem-survey.md: human-readable shared state is a blue ocean; the verification gap is industry-wide.
+- research/briefs/02-memory-and-state.md: layering is consensus; "human-shared state" is unresearched — this is the blank space.
 - M0 experience: the four files + six-step protocol have already carried WAM through 4 sessions without any runtime.
 
 ## Architecture
